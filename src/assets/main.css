@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-green: #005b41;
+  --color-primary-lightgreen: #008170;
+  --color-primary-blue: #232d3f;
+  --color-accent-red: #ca2e55;
+  --color-neutral-gray: rgba(35, 35, 40, 1);
+  --color-neutral-black: rgba(10, 10, 10, 1);
+
+  --font-base: "JetBrains Mono", monospace;
+  --font-fun: "Doto", monospace;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* ─── Base ─────────────────────────────────────────── */
+body {
+  @apply bg-neutral-black text-white min-h-screen font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Learn-page prose styles ───────────────────────── */
+.learn-content pre {
+  @apply bg-[#232328]/40 p-4 rounded-md overflow-x-auto my-4 border border-neutral-gray;
+}
+
+.learn-content code {
+  font-family: var(--font-base);
+  @apply text-sm text-emerald-300;
+}
+
+.learn-content pre code {
+  @apply text-neutral-200;
+}
+
+.learn-content h2 {
+  @apply text-xl font-bold mt-10 mb-3 text-primary-lightgreen font-sans;
+}
+
+.learn-content section {
+  @apply scroll-mt-24 pb-2;
+}
+
+.learn-content p {
+  @apply mb-4 leading-relaxed text-neutral-300 text-sm;
+}
+
+/* ─── Sidebar scrollbar ─────────────────────────────── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Border utilities ──────────────────────────────── */
+@layer utilities {
+  .line {
+    @apply border border-neutral-gray;
+  }
+  .block-line {
+    @apply border-y border-neutral-gray;
+  }
+  .inline-line {
+    @apply border-x border-neutral-gray;
+  }
+  .top-line {
+    @apply border-t border-neutral-gray;
+  }
+  .bot-line {
+    @apply border-b border-neutral-gray;
+  }
+  .left-line {
+    @apply border-l border-neutral-gray;
+  }
+  .right-line {
+    @apply border-r border-neutral-gray;
+  }
+  .active-border {
+    @apply border-b border-dashed border-primary-lightgreen;
+  }
+}
+
+/* ─── Glow animation (home hero) ────────────────────── */
+@keyframes lights {
+  0% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+  30% {
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  40% {
+    color: hsl(230, 100%, 95%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 90%, 0.5),
+      -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+  }
+  70% {
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  100% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+}
+
+.glow-text {
+  animation: lights 5s 750ms linear infinite;
+}
+
+/* ─── Card hover glow ───────────────────────────────── */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 24px 0 rgba(0, 129, 112, 0.18);
+  border-color: rgba(0, 129, 112, 0.6);
+  transform: translateY(-2px);
+}
