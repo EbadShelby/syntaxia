@@ -296,16 +296,16 @@ const languages = [
               </div>
 
               <span
-                class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-[var(--theme-color)]"
+                class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-(--theme-color)"
               >
                 {{ item.badge }}
               </span>
             </div>
 
             <!-- Title & Description -->
-            <div class="mb-8 flex-grow">
+            <div class="grow">
               <h3
-                class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--theme-color)]"
+                class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-(--theme-color)"
               >
                 {{ item.label }}
               </h3>
@@ -314,28 +314,6 @@ const languages = [
               >
                 {{ item.desc }}
               </p>
-            </div>
-
-            <!-- Bottom Arrow -->
-            <div
-              class="flex items-center gap-2 text-sm text-neutral-500 group-hover:text-white transition-colors font-medium mt-auto"
-            >
-              <span>Explore reference</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="2.5"
-                stroke="currentColor"
-                class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"
-                :style="{ color: 'var(--theme-color)' }"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                />
-              </svg>
             </div>
           </div>
         </RouterLink>
