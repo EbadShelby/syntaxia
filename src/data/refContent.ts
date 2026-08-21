@@ -6,7 +6,7 @@ export interface Section {
   code: string
 }
 
-export interface LearnTopic {
+export interface RefTopic {
   lang: string
   label: string
   title: string
@@ -15,11 +15,11 @@ export interface LearnTopic {
   sections: Section[]
 }
 
-export const learnTopics: Record<string, LearnTopic> = {
+export const refTopics: Record<string, RefTopic> = {
   html: {
     lang: 'html',
     label: 'HTML',
-    title: 'Learn some HTML',
+    title: 'HTML',
     icon: '/html5.svg',
     color: '#e34c26',
     sections: [
@@ -395,7 +395,7 @@ export const learnTopics: Record<string, LearnTopic> = {
   css: {
     lang: 'css',
     label: 'CSS',
-    title: 'Learn some CSS',
+    title: 'CSS',
     icon: '/css.svg',
     color: '#264de4',
     sections: [
@@ -847,7 +847,7 @@ p::first-letter { font-size: 2em; float: left; }
   js: {
     lang: 'js',
     label: 'JS',
-    title: 'Learn some JavaScript',
+    title: 'JavaScript',
     icon: '/javascript.svg',
     color: '#f7df1e',
     sections: [
@@ -1338,7 +1338,7 @@ console.timeEnd('timer'); // Shows elapsed time`,
   php: {
     lang: 'php',
     label: 'PHP',
-    title: 'Learn some PHP',
+    title: 'PHP',
     icon: '/Php_dark.svg',
     color: '#777bb4',
     sections: [
@@ -1699,7 +1699,7 @@ interface Drawable {
   mysql: {
     lang: 'mysql',
     label: 'MySQL',
-    title: 'Learn some MySQL',
+    title: 'MySQL',
     icon: '/MySQL_dark.svg',
     color: '#00758f',
     sections: [
@@ -2005,7 +2005,7 @@ ON DELETE CASCADE;`,
   },
 }
 
-export const learnNavItems = [
+export const refNavItems = [
   { lang: 'html', label: 'HTML' },
   { lang: 'css', label: 'CSS' },
   { lang: 'js', label: 'JS' },

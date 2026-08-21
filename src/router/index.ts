@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import LearnView from '@/views/LearnView.vue'
+import RefView from '@/views/RefView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/learn/:lang',
-      name: 'learn',
-      component: LearnView,
+      path: '/ref/:lang',
+      name: 'ref',
+      component: RefView,
     },
   ],
   scrollBehavior(to) {

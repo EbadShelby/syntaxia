@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { learnNavItems } from '@/data/learnContent'
+import { refNavItems } from '@/data/refContent'
 
 const route = useRoute()
 const currentLang = computed(() => route.params.lang as string)
@@ -38,9 +38,9 @@ const currentLang = computed(() => route.params.lang as string)
       <!-- Language tabs — desktop -->
       <nav class="hidden md:block">
         <ul class="flex gap-1">
-          <li v-for="item in learnNavItems" :key="item.lang">
+          <li v-for="item in refNavItems" :key="item.lang">
             <RouterLink
-              :to="`/learn/${item.lang}`"
+              :to="`/ref/${item.lang}`"
               class="px-3 py-2 text-sm transition-all block rounded"
               :class="
                 currentLang === item.lang
@@ -65,9 +65,9 @@ const currentLang = computed(() => route.params.lang as string)
       class="md:hidden flex gap-1 overflow-x-auto no-scrollbar px-4 pb-2 border-t border-neutral-gray"
     >
       <RouterLink
-        v-for="item in learnNavItems"
+        v-for="item in refNavItems"
         :key="item.lang"
-        :to="`/learn/${item.lang}`"
+        :to="`/ref/${item.lang}`"
         class="whitespace-nowrap text-xs px-3 py-1.5 rounded transition-colors shrink-0"
         :class="
           currentLang === item.lang

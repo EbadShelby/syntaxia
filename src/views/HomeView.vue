@@ -65,7 +65,7 @@ const languages = [
           <RouterLink
             v-for="item in languages"
             :key="item.lang"
-            :to="`/learn/${item.lang}`"
+            :to="`/ref/${item.lang}`"
             class="hover:text-primary-lightgreen transition-colors"
           >
             {{ item.label }}
@@ -102,7 +102,7 @@ const languages = [
           <RouterLink
             v-for="item in languages"
             :key="item.lang"
-            :to="`/learn/${item.lang}`"
+            :to="`/ref/${item.lang}`"
             @click="menuOpen = false"
             class="flex items-center gap-3 px-4 py-3 text-sm text-neutral-300 hover:text-primary-lightgreen hover:bg-neutral-gray/20 transition-colors border-b border-neutral-gray/40 last:border-b-0"
           >
@@ -176,7 +176,7 @@ const languages = [
         <RouterLink
           v-for="item in languages"
           :key="item.lang"
-          :to="`/learn/${item.lang}`"
+          :to="`/ref/${item.lang}`"
           class="card-glow group relative border border-neutral-gray rounded-lg p-5 bg-neutral-gray/10 hover:bg-neutral-gray/20 block"
         >
           <!-- Top row -->

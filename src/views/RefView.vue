@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { learnTopics } from '@/data/learnContent'
+import { refTopics } from '@/data/refContent'
 import AppHeader from '@/components/AppHeader.vue'
 import AppSidebar from '@/components/AppSidebar.vue'
 import CodeBlock from '@/components/CodeBlock.vue'
@@ -10,7 +10,7 @@ const route = useRoute()
 const router = useRouter()
 
 const lang = computed(() => route.params.lang as string)
-const topic = computed(() => learnTopics[lang.value])
+const topic = computed(() => refTopics[lang.value])
 
 // If lang not found, redirect home
 watch(
@@ -32,6 +32,12 @@ function toggleToc() {
 }
 function closeToc() {
   tocOpen.value = false
+}
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  closeToc()
 }
 </script>
 
@@ -77,7 +83,7 @@ function closeToc() {
           <ul class="p-4 space-y-1">
             <li v-for="section in sections" :key="section.id">
               <button
-                @click="() => { const el = document.getElementById(section.id); if(el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); closeToc(); } }"
+                @click="scrollToSection(section.id)"
                 class="w-full text-left px-3 py-2 text-sm text-neutral-400 hover:text-white hover:bg-neutral-gray/30 rounded transition-colors cursor-pointer"
               >
                 {{ section.title }}
@@ -110,7 +116,7 @@ function closeToc() {
         </div>
 
         <!-- Content sections -->
-        <div class="learn-content">
+        <div class="ref-content">
           <section
             v-for="section in topic.sections"
             :key="section.id"

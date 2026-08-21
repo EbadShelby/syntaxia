@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { createHighlighter } from 'shiki'
 
 const props = defineProps<{
   code: string
@@ -7,6 +8,40 @@ const props = defineProps<{
 }>()
 
 const copied = ref(false)
+const highlighted = ref('')
+
+// Lazily create a single shared highlighter instance
+let highlighterPromise: ReturnType<typeof createHighlighter> | null = null
+
+function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      themes: ['one-dark-pro'],
+      langs: ['html', 'css', 'javascript', 'php', 'sql'],
+    })
+  }
+  return highlighterPromise
+}
+
+async function highlight() {
+  const langRaw = props.language ?? 'text'
+  // mysql has no dedicated Shiki grammar — map it to sql
+  const lang = langRaw === 'mysql' ? 'sql' : langRaw
+  const supported = ['html', 'css', 'javascript', 'php', 'sql']
+
+  if (!supported.includes(lang)) {
+    highlighted.value = `<pre class="shiki-fallback"><code>${props.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
+    return
+  }
+
+  const hl = await getHighlighter()
+  highlighted.value = hl.codeToHtml(props.code, {
+    lang,
+    theme: 'one-dark-pro',
+  })
+}
+
+watch(() => [props.code, props.language], highlight, { immediate: true })
 
 async function copy() {
   try {
@@ -65,9 +100,44 @@ async function copy() {
       </button>
     </div>
 
-    <!-- Code block -->
-    <pre
-      class="bg-[#0d0d0f] border border-t-0 border-neutral-gray rounded-b-md overflow-x-auto p-4 m-0"
-    ><code class="text-sm text-neutral-200 font-base leading-relaxed whitespace-pre">{{ code }}</code></pre>
+    <!-- Highlighted code block -->
+    <div class="shiki-wrapper" v-html="highlighted" />
   </div>
 </template>
+
+<style scoped>
+.shiki-wrapper :deep(pre) {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-neutral-gray, #2a2a2a);
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+/* Ensure shiki's background doesn't override our dark bg */
+.shiki-wrapper :deep(.shiki) {
+  background-color: #0d0d0f !important;
+}
+
+/* Neutralise the global .line border utility — Shiki uses this class for each line span */
+.shiki-wrapper :deep(.line) {
+  border: none;
+}
+
+.shiki-fallback {
+  margin: 0;
+  padding: 1rem;
+  background-color: #0d0d0f;
+  border: 1px solid var(--color-neutral-gray, #2a2a2a);
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: #e5e5e5;
+}
+</style>

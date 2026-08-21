@@ -20,29 +20,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Learn-page prose styles ───────────────────────── */
-.learn-content pre {
+/* ─── Ref-page prose styles ───────────────────────── */
+.ref-content pre {
   @apply bg-[#232328]/40 p-4 rounded-md overflow-x-auto my-4 border border-neutral-gray;
 }
 
-.learn-content code {
+.ref-content code {
   font-family: var(--font-base);
   @apply text-sm text-emerald-300;
 }
 
-.learn-content pre code {
+.ref-content pre code {
   @apply text-neutral-200;
 }
 
-.learn-content h2 {
+.ref-content h2 {
   @apply text-xl font-bold mt-10 mb-3 text-primary-lightgreen font-sans;
 }
 
-.learn-content section {
+.ref-content section {
   @apply scroll-mt-24 pb-2;
 }
 
-.learn-content p {
+.ref-content p {
   @apply mb-4 leading-relaxed text-neutral-300 text-sm;
 }
 
