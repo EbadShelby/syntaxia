@@ -43,6 +43,14 @@ const languages = [
     badge: 'Database',
     desc: 'Store, retrieve, and manage data with structured SQL queries.',
   },
+  {
+    lang: 'tailwind',
+    label: 'Tailwind',
+    icon: '/tailwindcss.svg',
+    color: '#38bdf8',
+    badge: 'CSS Framework',
+    desc: 'Rapidly build modern websites without ever leaving your HTML.',
+  },
 ]
 </script>
 
