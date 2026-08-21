@@ -30,6 +30,7 @@ function getHighlighter() {
         'blade',
         'jsx',
         'tsx',
+        'python',
       ],
     })
   }
@@ -51,6 +52,7 @@ async function highlight() {
     'shell',
     'json',
     'blade',
+    'python',
   ]
 
   if (!supported.includes(lang)) {

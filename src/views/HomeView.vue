@@ -91,6 +91,30 @@ const languages = [
     badge: 'Animation Library',
     desc: 'A production-ready motion library for React.',
   },
+  {
+    lang: 'bootstrap',
+    label: 'Bootstrap',
+    icon: '/bootstrap.svg',
+    color: '#7952B3',
+    badge: 'CSS Framework',
+    desc: 'Powerful, extensible, and feature-packed frontend toolkit.',
+  },
+  {
+    lang: 'nodejs',
+    label: 'Node.js',
+    icon: '/nodejs.svg',
+    color: '#339933',
+    badge: 'JavaScript Runtime',
+    desc: 'An asynchronous event-driven JavaScript runtime.',
+  },
+  {
+    lang: 'python',
+    label: 'Python',
+    icon: '/python.svg',
+    color: '#3776AB',
+    badge: 'Programming Language',
+    desc: 'A versatile, high-level programming language.',
+  },
 ]
 </script>
 
@@ -228,20 +252,20 @@ const languages = [
           :style="{ '--theme-color': item.color }"
         >
           <!-- Dynamic Glow Shadow -->
-          <div 
+          <div
             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
             :style="{ boxShadow: `0 12px 40px -12px ${item.color}60` }"
           ></div>
-          
+
           <!-- Top Right Gradient Glow -->
-          <div 
-            class="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full blur-3xl pointer-events-none -mr-10 -mt-10" 
+          <div
+            class="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full blur-3xl pointer-events-none -mr-10 -mt-10"
             :style="{ backgroundColor: 'var(--theme-color)' }"
           ></div>
-          
+
           <!-- Border Highlight -->
-          <div 
-            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border pointer-events-none" 
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border pointer-events-none"
             :style="{ borderColor: 'var(--theme-color)' }"
           ></div>
 
@@ -252,11 +276,17 @@ const languages = [
                 class="w-14 h-14 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shadow-md relative"
               >
                 <!-- Subtle icon glow -->
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"
-                     :style="{ backgroundColor: 'var(--theme-color)' }"></div>
-                <img :src="item.icon" :alt="item.label" class="w-8 h-8 object-contain relative z-10" />
+                <div
+                  class="absolute inset-0 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"
+                  :style="{ backgroundColor: 'var(--theme-color)' }"
+                ></div>
+                <img
+                  :src="item.icon"
+                  :alt="item.label"
+                  class="w-8 h-8 object-contain relative z-10"
+                />
               </div>
-              
+
               <span
                 class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-[var(--theme-color)]"
               >
@@ -266,10 +296,14 @@ const languages = [
 
             <!-- Title & Description -->
             <div class="mb-8 flex-grow">
-              <h3 class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--theme-color)]">
+              <h3
+                class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--theme-color)]"
+              >
                 {{ item.label }}
               </h3>
-              <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3 group-hover:text-neutral-300 transition-colors">
+              <p
+                class="text-sm text-neutral-400 leading-relaxed line-clamp-3 group-hover:text-neutral-300 transition-colors"
+              >
                 {{ item.desc }}
               </p>
             </div>
