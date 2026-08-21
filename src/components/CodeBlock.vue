@@ -40,6 +40,8 @@ async function highlight() {
     'blade',
     'python',
     'typescript',
+    'csharp',
+    'java',
   ]
 
   if (!supported.includes(lang)) {
@@ -48,7 +50,7 @@ async function highlight() {
   }
 
   const hl = await getHighlighter()
-  
+
   // Dynamically load the language if it hasn't been loaded yet
   if (!hl.getLoadedLanguages().includes(lang)) {
     await hl.loadLanguage(lang as any)

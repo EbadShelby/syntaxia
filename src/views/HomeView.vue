@@ -283,7 +283,14 @@ const scrollRight = () => {
           @click="scrollLeft"
           class="absolute left-0 z-10 w-12 h-full flex items-center justify-start bg-gradient-to-r from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 ml-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            stroke="currentColor"
+            class="w-5 h-5 ml-1"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
         </button>
@@ -301,7 +308,7 @@ const scrollRight = () => {
             :class="[
               selectedCategory === cat
                 ? 'bg-primary-lightgreen text-white border-primary-lightgreen shadow-[0_0_15px_rgba(0,129,112,0.4)]'
-                : 'bg-neutral-gray/10 text-neutral-400 border-neutral-gray/50 hover:bg-neutral-gray/30 hover:text-neutral-200'
+                : 'bg-neutral-gray/10 text-neutral-400 border-neutral-gray/50 hover:bg-neutral-gray/30 hover:text-neutral-200',
             ]"
           >
             {{ cat }}
@@ -313,7 +320,14 @@ const scrollRight = () => {
           @click="scrollRight"
           class="absolute right-0 z-10 w-12 h-full flex items-center justify-end bg-gradient-to-l from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            stroke="currentColor"
+            class="w-5 h-5 mr-1"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
         </button>
