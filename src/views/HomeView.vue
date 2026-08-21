@@ -51,6 +51,14 @@ const languages = [
     badge: 'CSS Framework',
     desc: 'Rapidly build modern websites without ever leaving your HTML.',
   },
+  {
+    lang: 'vue',
+    label: 'Vue',
+    icon: '/vue.svg',
+    color: '#41b883',
+    badge: 'JavaScript Framework',
+    desc: 'The Progressive JavaScript Framework for building user interfaces.',
+  },
 ]
 </script>
 

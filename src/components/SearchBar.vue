@@ -43,7 +43,7 @@ const navigateTo = (lang: string) => {
 }
 
 const handleEnter = () => {
-  if (searchResults.value.length > 0) {
+  if (searchResults.value.length > 0 && searchResults.value[0]) {
     navigateTo(searchResults.value[0].lang)
   }
 }

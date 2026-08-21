@@ -2146,6 +2146,197 @@ ON DELETE CASCADE;`,
       },
     ],
   },
+  vue: {
+  "lang": "vue",
+  "label": "Vue.js",
+  "title": "Vue.js",
+  "icon": "/vue.svg",
+  "color": "#41b883",
+  "sections": [
+    {
+      "id": "setup",
+      "title": "Setup",
+      "description": "Add Vue to your project:",
+      "language": "bash",
+      "code": "<!-- CDN (quick start) -->\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n\n<!-- Or via npm -->\n\nnpm create vue@latest\nnpm install vue"
+    },
+    {
+      "id": "basic-app-structure",
+      "title": "Basic App Structure",
+      "description": "Create a Vue application:",
+      "language": "vue",
+      "code": "<!-- HTML -->\n<div id=\"app\">{{ message }}</div>\n\n<script>\n  const { createApp } = Vue\n\n  createApp({\n    data() {\n      return {\n        message: 'Hello Vue!',\n      }\n    },\n  }).mount('#app')\n</script>\n\n<!-- Single File Component (.vue file) -->\n<template>\n  <div>{{ message }}</div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      message: 'Hello Vue!',\n    }\n  },\n}\n</script>\n\n<style>\n/* Component styles */\n</style>"
+    },
+    {
+      "id": "template-syntax-interpolation",
+      "title": "Template Syntax (Interpolation)",
+      "description": "Display data in templates:",
+      "language": "vue",
+      "code": "<template>\n  <!-- Text interpolation -->\n  <p>{{ message }}</p>\n\n  <!-- Expressions -->\n  <p>{{ number + 1 }}</p>\n  <p>{{ isActive ? 'Yes' : 'No' }}</p>\n  <p>{{ message.toUpperCase() }}</p>\n\n  <!-- Raw HTML (use carefully) -->\n  <div v-html=\"rawHtml\"></div>\n</template>"
+    },
+    {
+      "id": "directives",
+      "title": "Directives",
+      "description": "Special attributes that add functionality:",
+      "language": "vue",
+      "code": "<template>\n  <!-- v-bind (short: :) - bind attribute -->\n  <img v-bind:src=\"imageUrl\" />\n  <img :src=\"imageUrl\" />\n  <div :class=\"className\"></div>\n  <div :style=\"{ color: textColor }\"></div>\n\n  <!-- v-if / v-else-if / v-else - conditional rendering -->\n  <p v-if=\"score >= 90\">Grade A</p>\n  <p v-else-if=\"score >= 80\">Grade B</p>\n  <p v-else>Grade F</p>\n\n  <!-- v-show - toggle visibility (display: none) -->\n  <p v-show=\"isVisible\">This can be hidden</p>\n\n  <!-- v-for - loop through items -->\n  <li v-for=\"item in items\" :key=\"item.id\">\n    {{ item.name }}\n  </li>\n\n  <!-- v-for with index -->\n  <li v-for=\"(item, index) in items\" :key=\"item.id\">{{ index }}: {{ item.name }}</li>\n\n  <!-- v-for with object -->\n  <li v-for=\"(value, key) in object\" :key=\"key\">{{ key }}: {{ value }}</li>\n\n  <!-- v-on (short: @) - event handling -->\n  <button v-on:click=\"handleClick\">Click me</button>\n  <button @click=\"handleClick\">Click me</button>\n  <button @click=\"count++\">Increment</button>\n\n  <!-- v-model - two-way data binding -->\n  <input v-model=\"username\" />\n  <textarea v-model=\"message\"></textarea>\n  <select v-model=\"selected\">\n    <option value=\"a\">A</option>\n    <option value=\"b\">B</option>\n  </select>\n\n  <!-- v-once - render once, never update -->\n  <p v-once>{{ message }}</p>\n\n  <!-- v-pre - skip compilation -->\n  <span v-pre>{{ not compiled }}</span>\n</template>"
+    },
+    {
+      "id": "data-reactivity-options-api",
+      "title": "Data & Reactivity (Options API)",
+      "description": "Manage component state:",
+      "language": "vue",
+      "code": "<script>\nexport default {\n  data() {\n    return {\n      message: 'Hello',\n      count: 0,\n      isActive: true,\n      items: ['apple', 'banana'],\n      user: {\n        name: 'John',\n        age: 30,\n      },\n    }\n  },\n  methods: {\n    increment() {\n      this.count++\n    },\n    updateMessage(newMessage) {\n      this.message = newMessage\n    },\n  },\n}\n</script>"
+    },
+    {
+      "id": "composition-api-modern-way",
+      "title": "Composition API (Modern Way)",
+      "description": "Alternative way to write components:",
+      "language": "vue",
+      "code": "<script setup>\nimport { ref, reactive, computed, onMounted } from 'vue'\n\n// ref - for primitive values\nconst count = ref(0)\nconst message = ref('Hello')\n\n// Access/modify ref value with .value\nconsole.log(count.value)\ncount.value++\n\n// reactive - for objects\nconst user = reactive({\n  name: 'John',\n  age: 30,\n})\n\n// Access reactive properties directly (no .value)\nconsole.log(user.name)\nuser.age++\n\n// Functions\nfunction increment() {\n  count.value++\n}\n\n// Computed properties\nconst doubleCount = computed(() => count.value * 2)\n\n// Lifecycle hooks\nonMounted(() => {\n  console.log('Component mounted')\n})\n</script>\n\n<template>\n  <p>{{ count }}</p>\n  <p>{{ message }}</p>\n  <p>{{ user.name }}</p>\n  <button @click=\"increment\">Increment</button>\n</template>"
+    },
+    {
+      "id": "computed-properties",
+      "title": "Computed Properties",
+      "description": "Cached values based on dependencies:",
+      "language": "vue",
+      "code": "<script>\nexport default {\n  data() {\n    return {\n      firstName: 'John',\n      lastName: 'Doe',\n      items: [1, 2, 3, 4, 5],\n    }\n  },\n  computed: {\n    fullName() {\n      return this.firstName + ' ' + this.lastName\n    },\n    totalItems() {\n      return this.items.length\n    },\n    expensiveItems() {\n      return this.items.filter((item) => item > 2)\n    },\n  },\n}\n</script>\n\n<template>\n  <p>{{ fullName }}</p>\n  <p>Total: {{ totalItems }}</p>\n</template>"
+    },
+    {
+      "id": "watchers",
+      "title": "Watchers",
+      "description": "React to data changes:",
+      "language": "vue",
+      "code": "<script>\nexport default {\n  data() {\n    return {\n      question: '',\n      answer: '',\n    }\n  },\n  watch: {\n    question(newValue, oldValue) {\n      console.log('Question changed from', oldValue, 'to', newValue)\n      this.answer = 'Thinking...'\n    },\n  },\n}\n</script>\n\n<!-- Composition API version -->\n<script setup>\nimport { ref, watch } from 'vue'\n\nconst question = ref('')\nconst answer = ref('')\n\nwatch(question, (newValue, oldValue) => {\n  console.log('Changed:', newValue)\n  answer.value = 'Thinking...'\n})\n\n// Watch multiple sources\nwatch([question, answer], ([newQ, newA]) => {\n  console.log('Either changed')\n})\n</script>"
+    },
+    {
+      "id": "methods",
+      "title": "Methods",
+      "description": "Define functions in components:",
+      "language": "vue",
+      "code": "<script>\nexport default {\n  data() {\n    return {\n      count: 0,\n    }\n  },\n  methods: {\n    increment() {\n      this.count++\n    },\n    greet(name) {\n      alert('Hello ' + name)\n    },\n    handleSubmit(event) {\n      event.preventDefault()\n      console.log('Form submitted')\n    },\n  },\n}\n</script>\n\n<template>\n  <button @click=\"increment\">Add</button>\n  <button @click=\"greet('John')\">Greet</button>\n  <button @click=\"greet($event.target.value)\">Dynamic</button>\n</template>"
+    },
+    {
+      "id": "class-style-binding",
+      "title": "Class & Style Binding",
+      "description": "Dynamically apply classes and styles:",
+      "language": "vue",
+      "code": "<template>\n  <!-- Object syntax for class -->\n  <div :class=\"{ active: isActive, 'text-red': hasError }\">Content</div>\n\n  <!-- Array syntax for class -->\n  <div :class=\"[activeClass, errorClass]\">Content</div>\n\n  <!-- Combining -->\n  <div :class=\"[isActive ? activeClass : '', errorClass]\">Content</div>\n\n  <!-- Object syntax for style -->\n  <div :style=\"{ color: textColor, fontSize: fontSize + 'px' }\">Content</div>\n\n  <!-- Array syntax for style -->\n  <div :style=\"[baseStyles, overridingStyles]\">Content</div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      isActive: true,\n      hasError: false,\n      activeClass: 'active',\n      errorClass: 'text-red',\n      textColor: 'blue',\n      fontSize: 16,\n    }\n  },\n}\n</script>"
+    },
+    {
+      "id": "props",
+      "title": "Props",
+      "description": "Pass data from parent to child components:",
+      "language": "vue",
+      "code": "<!-- Child.vue -->\n<script>\nexport default {\n  props: {\n    title: String,\n    count: {\n      type: Number,\n      required: true,\n      default: 0,\n    },\n    items: Array,\n    isActive: Boolean,\n  },\n}\n</script>\n\n<template>\n  <h2>{{ title }}</h2>\n  <p>{{ count }}</p>\n</template>\n\n<!-- Composition API Child.vue -->\n<script setup>\nconst props = defineProps({\n  title: String,\n  count: {\n    type: Number,\n    default: 0,\n  },\n})\n</script>\n\n<template>\n  <h2>{{ props.title }}</h2>\n</template>\n\n<!-- Parent.vue -->\n<template>\n  <Child title=\"Hello\" :count=\"5\" :items=\"myItems\" />\n</template>"
+    },
+    {
+      "id": "emits-child-to-parent",
+      "title": "Emits (Child to Parent)",
+      "description": "Send events from child to parent:",
+      "language": "vue",
+      "code": "<!-- Child.vue -->\n<script>\nexport default {\n  emits: ['update', 'delete'],\n  methods: {\n    sendUpdate() {\n      this.$emit('update', 'new value')\n    },\n    sendDelete(id) {\n      this.$emit('delete', id)\n    },\n  },\n}\n</script>\n\n<template>\n  <button @click=\"sendUpdate\">Update</button>\n</template>\n\n<!-- Composition API -->\n<script setup>\nconst emit = defineEmits(['update', 'delete'])\n\nfunction sendUpdate() {\n  emit('update', 'new value')\n}\n</script>\n\n<!-- Parent.vue -->\n<template>\n  <Child @update=\"handleUpdate\" @delete=\"handleDelete\" />\n</template>\n\n<script>\nexport default {\n  methods: {\n    handleUpdate(value) {\n      console.log('Updated:', value)\n    },\n    handleDelete(id) {\n      console.log('Delete:', id)\n    },\n  },\n}\n</script>"
+    },
+    {
+      "id": "slots",
+      "title": "Slots",
+      "description": "Pass content into components:",
+      "language": "vue",
+      "code": "<!-- Child.vue -->\n<template>\n  <div class=\"card\">\n    <slot></slot>\n  </div>\n</template>\n\n<!-- Parent.vue -->\n<template>\n  <Child>\n    <p>This content goes into the slot</p>\n  </Child>\n</template>\n\n<!-- Named slots -->\n<!-- Child.vue -->\n<template>\n  <div>\n    <header><slot name=\"header\"></slot></header>\n    <main><slot></slot></main>\n    <footer><slot name=\"footer\"></slot></footer>\n  </div>\n</template>\n\n<!-- Parent.vue -->\n<template>\n  <Child>\n    <template #header>\n      <h1>Title</h1>\n    </template>\n\n    <p>Main content</p>\n\n    <template #footer>\n      <p>Footer content</p>\n    </template>\n  </Child>\n</template>"
+    },
+    {
+      "id": "component-registration",
+      "title": "Component Registration",
+      "description": "Register and use components:",
+      "language": "vue",
+      "code": "<!-- Local registration (Options API) -->\n<script>\nimport ChildComponent from './ChildComponent.vue'\n\nexport default {\n  components: {\n    ChildComponent,\n  },\n}\n</script>\n\n<template>\n  <ChildComponent />\n</template>\n\n<!-- Composition API (auto-imported in script setup) -->\n<script setup>\nimport ChildComponent from './ChildComponent.vue'\n</script>\n\n<template>\n  <ChildComponent />\n</template>"
+    },
+    {
+      "id": "lifecycle-hooks",
+      "title": "Lifecycle Hooks",
+      "description": "Run code at specific component stages:",
+      "language": "vue",
+      "code": "<!-- Options API -->\n<script>\nexport default {\n  beforeCreate() {\n    console.log('Before create')\n  },\n  created() {\n    console.log('Created - data is reactive')\n  },\n  beforeMount() {\n    console.log('Before mount')\n  },\n  mounted() {\n    console.log('Mounted - DOM is ready')\n    // Good place for API calls, DOM manipulation\n  },\n  beforeUpdate() {\n    console.log('Before update')\n  },\n  updated() {\n    console.log('Updated')\n  },\n  beforeUnmount() {\n    console.log('Before unmount')\n  },\n  unmounted() {\n    console.log('Unmounted - cleanup here')\n  },\n}\n</script>\n\n<!-- Composition API -->\n<script setup>\nimport { onMounted, onUpdated, onUnmounted, onBeforeMount } from 'vue'\n\nonBeforeMount(() => {\n  console.log('Before mount')\n})\n\nonMounted(() => {\n  console.log('Mounted')\n  // API calls, setup here\n})\n\nonUpdated(() => {\n  console.log('Updated')\n})\n\nonUnmounted(() => {\n  console.log('Unmounted - cleanup here')\n})\n</script>"
+    },
+    {
+      "id": "forms-v-model",
+      "title": "Forms & v-model",
+      "description": "Handle form input:",
+      "language": "vue",
+      "code": "<template>\n  <!-- Text input -->\n  <input v-model=\"text\" type=\"text\" />\n\n  <!-- Textarea -->\n  <textarea v-model=\"message\"></textarea>\n\n  <!-- Checkbox (single) -->\n  <input type=\"checkbox\" v-model=\"checked\" />\n\n  <!-- Checkbox (multiple) -->\n  <input type=\"checkbox\" value=\"A\" v-model=\"checkedItems\" />\n  <input type=\"checkbox\" value=\"B\" v-model=\"checkedItems\" />\n\n  <!-- Radio -->\n  <input type=\"radio\" value=\"A\" v-model=\"picked\" />\n  <input type=\"radio\" value=\"B\" v-model=\"picked\" />\n\n  <!-- Select -->\n  <select v-model=\"selected\">\n    <option disabled value=\"\">Please select</option>\n    <option value=\"A\">A</option>\n    <option value=\"B\">B</option>\n  </select>\n\n  <!-- Modifiers -->\n  <input v-model.lazy=\"text\" />\n  <!-- sync on change instead of input -->\n  <input v-model.number=\"age\" />\n  <!-- convert to number -->\n  <input v-model.trim=\"text\" />\n  <!-- trim whitespace -->\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: '',\n      message: '',\n      checked: false,\n      checkedItems: [],\n      picked: '',\n      selected: '',\n      age: 0,\n    }\n  },\n}\n</script>"
+    },
+    {
+      "id": "event-handling",
+      "title": "Event Handling",
+      "description": "Handle user interactions:",
+      "language": "vue",
+      "code": "<template>\n  <!-- Basic event -->\n  <button @click=\"handleClick\">Click</button>\n\n  <!-- Inline handler -->\n  <button @click=\"count++\">Add</button>\n\n  <!-- Method with arguments -->\n  <button @click=\"greet('John')\">Greet</button>\n\n  <!-- Access event object -->\n  <button @click=\"handleClick($event)\">Click</button>\n\n  <!-- Event modifiers -->\n  <form @submit.prevent=\"handleSubmit\">Prevent default</form>\n  <div @click.stop=\"handleClick\">Stop propagation</div>\n  <div @click.once=\"handleClick\">Trigger once</div>\n\n  <!-- Key modifiers -->\n  <input @keyup.enter=\"submit\" />\n  <input @keyup.esc=\"cancel\" />\n  <input @keydown.tab=\"handleTab\" />\n\n  <!-- Mouse button modifiers -->\n  <button @click.left=\"handleLeft\">Left click</button>\n  <button @click.right=\"handleRight\">Right click</button>\n</template>"
+    },
+    {
+      "id": "conditional-rendering",
+      "title": "Conditional Rendering",
+      "description": "Show/hide elements based on conditions:",
+      "language": "vue",
+      "code": "<template>\n  <!-- v-if / v-else-if / v-else -->\n  <div v-if=\"type === 'A'\">Type A</div>\n  <div v-else-if=\"type === 'B'\">Type B</div>\n  <div v-else>Other</div>\n\n  <!-- v-if with template (no wrapper element) -->\n  <template v-if=\"showAll\">\n    <h1>Title</h1>\n    <p>Content</p>\n  </template>\n\n  <!-- v-show (toggles display CSS) -->\n  <p v-show=\"isVisible\">Toggle visibility</p>\n</template>"
+    },
+    {
+      "id": "list-rendering",
+      "title": "List Rendering",
+      "description": "Loop through arrays and objects:",
+      "language": "vue",
+      "code": "<template>\n  <!-- Simple array -->\n  <li v-for=\"item in items\" :key=\"item.id\">\n    {{ item.name }}\n  </li>\n\n  <!-- With index -->\n  <li v-for=\"(item, index) in items\" :key=\"item.id\">{{ index }} - {{ item.name }}</li>\n\n  <!-- Range -->\n  <span v-for=\"n in 10\" :key=\"n\">{{ n }}</span>\n\n  <!-- Object iteration -->\n  <li v-for=\"(value, key, index) in object\" :key=\"key\">{{ index }}. {{ key }}: {{ value }}</li>\n\n  <!-- Filtered list -->\n  <li v-for=\"item in filteredItems\" :key=\"item.id\">\n    {{ item.name }}\n  </li>\n</template>\n\n<script>\nexport default {\n  computed: {\n    filteredItems() {\n      return this.items.filter((item) => item.active)\n    },\n  },\n}\n</script>"
+    },
+    {
+      "id": "vue-router-navigation",
+      "title": "Vue Router (Navigation)",
+      "description": "Handle routing in single-page apps:",
+      "language": "vue",
+      "code": "// router/index.js\nimport { createRouter, createWebHistory } from 'vue-router'\nimport Home from '../views/Home.vue'\nimport About from '../views/About.vue'\n\nconst routes = [\n  { path: '/', name: 'Home', component: Home },\n  { path: '/about', name: 'About', component: About },\n  { path: '/user/:id', name: 'User', component: User },\n]\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n})\n\nexport default router\n\n<!-- App.vue -->\n<template>\n  <nav>\n    <router-link to=\"/\">Home</router-link>\n    <router-link to=\"/about\">About</router-link>\n  </nav>\n  <router-view></router-view>\n</template>\n\n<!-- Using route params -->\n<script setup>\nimport { useRoute, useRouter } from 'vue-router'\n\nconst route = useRoute()\nconst router = useRouter()\n\nconsole.log(route.params.id)\n\nfunction goBack() {\n  router.push('/')\n  router.push({ name: 'Home' })\n}\n</script>"
+    },
+    {
+      "id": "pinia-state-management",
+      "title": "Pinia (State Management)",
+      "description": "Manage global state:",
+      "language": "vue",
+      "code": "// stores/counter.js\nimport { defineStore } from 'pinia'\n\nexport const useCounterStore = defineStore('counter', {\n  state: () => ({\n    count: 0,\n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2,\n  },\n  actions: {\n    increment() {\n      this.count++\n    },\n  },\n})\n\n<!-- Component.vue -->\n<script setup>\nimport { useCounterStore } from '@/stores/counter'\n\nconst counter = useCounterStore()\n</script>\n\n<template>\n  <p>{{ counter.count }}</p>\n  <button @click=\"counter.increment\">Add</button>\n</template>"
+    },
+    {
+      "id": "fetching-data-api-calls",
+      "title": "Fetching Data (API Calls)",
+      "description": "Get data from APIs:",
+      "language": "vue",
+      "code": "<script setup>\nimport { ref, onMounted } from 'vue'\n\nconst data = ref(null)\nconst loading = ref(true)\nconst error = ref(null)\n\nasync function fetchData() {\n  try {\n    const response = await fetch('https://api.example.com/data')\n    data.value = await response.json()\n  } catch (err) {\n    error.value = err.message\n  } finally {\n    loading.value = false\n  }\n}\n\nonMounted(() => {\n  fetchData()\n})\n</script>\n\n<template>\n  <div v-if=\"loading\">Loading...</div>\n  <div v-else-if=\"error\">Error: {{ error }}</div>\n  <div v-else>{{ data }}</div>\n</template>"
+    },
+    {
+      "id": "refs-dom-access",
+      "title": "Refs (DOM Access)",
+      "description": "Access DOM elements directly:",
+      "language": "vue",
+      "code": "<template>\n  <input ref=\"inputRef\" />\n  <button @click=\"focusInput\">Focus Input</button>\n</template>\n\n<script setup>\nimport { ref, onMounted } from 'vue'\n\nconst inputRef = ref(null)\n\nfunction focusInput() {\n  inputRef.value.focus()\n}\n\nonMounted(() => {\n  console.log(inputRef.value)\n})\n</script>"
+    },
+    {
+      "id": "provide-inject",
+      "title": "Provide/Inject",
+      "description": "Share data across component tree:",
+      "language": "vue",
+      "code": "<!-- Parent.vue -->\n<script setup>\nimport { provide, ref } from 'vue'\n\nconst theme = ref('dark')\nprovide('theme', theme)\n</script>\n\n<!-- Deeply nested Child.vue -->\n<script setup>\nimport { inject } from 'vue'\n\nconst theme = inject('theme')\n</script>\n\n<template>\n  <p>Theme: {{ theme }}</p>\n</template>"
+    },
+    {
+      "id": "transitions",
+      "title": "Transitions",
+      "description": "Animate elements entering/leaving:",
+      "language": "vue",
+      "code": "<template>\n  <Transition name=\"fade\">\n    <p v-if=\"show\">Hello</p>\n  </Transition>\n</template>\n\n<style>\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.5s ease;\n}\n.fade-enter-from,\n.fade-leave-to {\n  opacity: 0;\n}\n</style>"
+    },
+    {
+      "id": "common-patterns",
+      "title": "Common Patterns",
+      "description": "Frequently used patterns:",
+      "language": "vue",
+      "code": "<script setup>\nimport { ref, computed } from 'vue'\n\n// Toggle boolean\nconst isOpen = ref(false)\nfunction toggle() {\n  isOpen.value = !isOpen.value\n}\n\n// Form handling\nconst form = ref({\n  name: '',\n  email: '',\n})\n\nfunction handleSubmit() {\n  console.log(form.value)\n}\n\n// List with add/remove\nconst items = ref([])\nfunction addItem(item) {\n  items.value.push(item)\n}\nfunction removeItem(index) {\n  items.value.splice(index, 1)\n}\n\n// Search/filter\nconst searchQuery = ref('')\nconst filteredList = computed(() => {\n  return items.value.filter((item) =>\n    item.name.toLowerCase().includes(searchQuery.value.toLowerCase()),\n  )\n})\n</script>\n\n<template>\n  <button @click=\"toggle\">{{ isOpen ? 'Close' : 'Open' }}</button>\n\n  <form @submit.prevent=\"handleSubmit\">\n    <input v-model=\"form.name\" placeholder=\"Name\" />\n    <input v-model=\"form.email\" placeholder=\"Email\" />\n    <button type=\"submit\">Submit</button>\n  </form>\n\n  <input v-model=\"searchQuery\" placeholder=\"Search...\" />\n  <li v-for=\"item in filteredList\" :key=\"item.id\">\n    {{ item.name }}\n  </li>\n</template>"
+    }
+  ]
+}
 }
 
 export const refNavItems = [
@@ -2155,4 +2346,5 @@ export const refNavItems = [
   { lang: 'php', label: 'PHP' },
   { lang: 'mysql', label: 'MySQL' },
   { lang: 'tailwind', label: 'Tailwind' },
+  { lang: 'vue', label: 'Vue' },
 ]
