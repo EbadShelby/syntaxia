@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import SearchBar from '@/components/SearchBar.vue'
 
@@ -124,6 +125,30 @@ const languages = [
     desc: "The modern web developer's platform.",
   },
 ]
+
+const categories = ['All', ...new Set(languages.map((l) => l.badge))]
+const selectedCategory = ref('All')
+
+const filteredLanguages = computed(() => {
+  if (selectedCategory.value === 'All') return languages
+  return languages.filter((l) => l.badge === selectedCategory.value)
+})
+
+const scrollContainer = ref<HTMLElement | null>(null)
+
+const scrollLeft = () => {
+  if (scrollContainer.value) {
+    const scrollAmount = scrollContainer.value.clientWidth * 0.8
+    scrollContainer.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+  }
+}
+
+const scrollRight = () => {
+  if (scrollContainer.value) {
+    const scrollAmount = scrollContainer.value.clientWidth * 0.8
+    scrollContainer.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -244,16 +269,59 @@ const languages = [
 
     <!-- ─── Language Cards ─────────────────── -->
     <section id="topics" class="max-w-6xl mx-auto px-4 py-10 md:py-20">
-      <div class="text-center mb-10 md:mb-16">
+      <div class="text-center mb-10 md:mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Topics</h2>
         <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
           Dive into our comprehensive references and master your favorite tools and languages.
         </p>
       </div>
 
+      <!-- Filter Categories -->
+      <div class="relative max-w-full mx-auto mb-10 flex items-center">
+        <!-- Left Arrow -->
+        <button
+          @click="scrollLeft"
+          class="absolute left-0 z-10 w-12 h-full flex items-center justify-start bg-gradient-to-r from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 ml-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+
+        <!-- Categories Container -->
+        <div
+          ref="scrollContainer"
+          class="flex overflow-x-auto no-scrollbar gap-3 px-10 py-2 scroll-smooth w-full"
+        >
+          <button
+            v-for="cat in categories"
+            :key="cat"
+            @click="selectedCategory = cat"
+            class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border cursor-pointer select-none"
+            :class="[
+              selectedCategory === cat
+                ? 'bg-primary-lightgreen text-white border-primary-lightgreen shadow-[0_0_15px_rgba(0,129,112,0.4)]'
+                : 'bg-neutral-gray/10 text-neutral-400 border-neutral-gray/50 hover:bg-neutral-gray/30 hover:text-neutral-200'
+            ]"
+          >
+            {{ cat }}
+          </button>
+        </div>
+
+        <!-- Right Arrow -->
+        <button
+          @click="scrollRight"
+          class="absolute right-0 z-10 w-12 h-full flex items-center justify-end bg-gradient-to-l from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <RouterLink
-          v-for="item in languages"
+          v-for="item in filteredLanguages"
           :key="item.lang"
           :to="`/ref/${item.lang}`"
           class="group relative rounded-2xl p-6 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden transition-all duration-300 hover:-translate-y-1"
