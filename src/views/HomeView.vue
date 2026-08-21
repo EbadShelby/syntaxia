@@ -211,47 +211,82 @@ const languages = [
     </section>
 
     <!-- ─── Language Cards ─────────────────── -->
-    <section id="topics" class="max-w-6xl mx-auto px-4 py-10 md:py-16">
-      <div class="text-center mb-8 md:mb-12">
-        <h2 class="text-xl md:text-2xl font-bold text-white mb-1">Pick a Topic</h2>
-        <p class="text-neutral-500 text-sm">Browse all available references below</p>
+    <section id="topics" class="max-w-6xl mx-auto px-4 py-10 md:py-20">
+      <div class="text-center mb-10 md:mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Topics</h2>
+        <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
+          Dive into our comprehensive references and master your favorite tools and languages.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <RouterLink
           v-for="item in languages"
           :key="item.lang"
           :to="`/ref/${item.lang}`"
-          class="card-glow group relative border border-neutral-gray rounded-lg p-5 bg-neutral-gray/10 hover:bg-neutral-gray/20 block"
+          class="group relative rounded-2xl p-6 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden transition-all duration-300 hover:-translate-y-1"
+          :style="{ '--theme-color': item.color }"
         >
-          <!-- Icon -->
-          <div
-            class="w-11 h-11 flex items-center justify-center rounded-lg border border-neutral-gray bg-neutral-gray/20 group-hover:scale-110 transition-transform duration-300 mb-4"
-          >
-            <img :src="item.icon" :alt="item.label" class="w-6 h-6 object-contain" />
-          </div>
+          <!-- Dynamic Glow Shadow -->
+          <div 
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+            :style="{ boxShadow: `0 12px 40px -12px ${item.color}60` }"
+          ></div>
+          
+          <!-- Top Right Gradient Glow -->
+          <div 
+            class="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full blur-3xl pointer-events-none -mr-10 -mt-10" 
+            :style="{ backgroundColor: 'var(--theme-color)' }"
+          ></div>
+          
+          <!-- Border Highlight -->
+          <div 
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border pointer-events-none" 
+            :style="{ borderColor: 'var(--theme-color)' }"
+          ></div>
 
-          <!-- Bottom row: Title + Arrow -->
-          <div class="flex items-center justify-between">
-            <!-- Title -->
-            <h3
-              class="text-base font-bold text-white group-hover:text-primary-lightgreen transition-colors m-0"
-            >
-              {{ item.label }}
-            </h3>
+          <div class="relative z-10 flex flex-col h-full">
+            <!-- Top row: Icon + Badge -->
+            <div class="flex items-start justify-between mb-6">
+              <div
+                class="w-14 h-14 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shadow-md relative"
+              >
+                <!-- Subtle icon glow -->
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"
+                     :style="{ backgroundColor: 'var(--theme-color)' }"></div>
+                <img :src="item.icon" :alt="item.label" class="w-8 h-8 object-contain relative z-10" />
+              </div>
+              
+              <span
+                class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-[var(--theme-color)]"
+              >
+                {{ item.badge }}
+              </span>
+            </div>
 
-            <!-- Arrow -->
+            <!-- Title & Description -->
+            <div class="mb-8 flex-grow">
+              <h3 class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--theme-color)]">
+                {{ item.label }}
+              </h3>
+              <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3 group-hover:text-neutral-300 transition-colors">
+                {{ item.desc }}
+              </p>
+            </div>
+
+            <!-- Bottom Arrow -->
             <div
-              class="flex items-center gap-1 text-xs text-neutral-600 group-hover:text-primary-lightgreen transition-colors font-base"
+              class="flex items-center gap-2 text-sm text-neutral-500 group-hover:text-white transition-colors font-medium mt-auto"
             >
-              <span>Open reference</span>
+              <span>Explore reference</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                stroke-width="2.5"
                 stroke="currentColor"
-                class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
+                class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"
+                :style="{ color: 'var(--theme-color)' }"
               >
                 <path
                   stroke-linecap="round"
