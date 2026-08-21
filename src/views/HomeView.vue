@@ -165,7 +165,7 @@ const scrollRight = () => {
             <img src="/syntaxia.png" alt="Syntaxia" class="w-6 h-6 object-contain" />
           </div>
           <span
-            class="text-primary-lightgreen font-fun text-lg tracking-widest group-hover:glow-text transition-all"
+            class="text-white font-fun text-lg tracking-widest group-hover:glow-text transition-all"
           >
             SYNTAXIA
           </span>
@@ -393,7 +393,7 @@ const scrollRight = () => {
       <div
         class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-500"
       >
-        <span class="font-fun text-primary-lightgreen tracking-widest text-base">SYNTAXIA</span>
+        <span class="font-fun text-white tracking-widest text-base">SYNTAXIA</span>
         <p class="text-xs text-center sm:text-right">
           &copy; 2025 Ebad Yasser. All Rights Reserved.
         </p>

@@ -17,7 +17,7 @@ import SearchBar from '@/components/SearchBar.vue'
           <img src="/syntaxia.png" alt="Syntaxia" class="w-6 h-6 object-contain" />
         </div>
         <span
-          class="text-primary-lightgreen font-fun text-lg tracking-widest group-hover:glow-text transition-all hidden sm:block"
+          class="text-white font-fun text-lg tracking-widest group-hover:glow-text transition-all hidden sm:block"
         >
           SYNTAXIA
         </span>
