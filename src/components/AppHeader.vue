@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-import { refNavItems } from '@/data/refContent'
-
-const route = useRoute()
-const currentLang = computed(() => route.params.lang as string)
+import { RouterLink } from 'vue-router'
+import SearchBar from '@/components/SearchBar.vue'
 </script>
 
 <template>
@@ -12,43 +8,27 @@ const currentLang = computed(() => route.params.lang as string)
   <header
     class="sticky top-0 z-50 border-b border-neutral-gray bg-neutral-black/90 backdrop-blur-sm"
   >
-    <div class="flex items-center justify-between px-4 py-3">
-      <!-- Home icon -->
-      <RouterLink
-        to="/"
-        class="flex items-center justify-center w-9 h-9 border border-neutral-gray rounded-md hover:border-primary-lightgreen transition-colors bg-neutral-black"
-        title="Back to Home"
-      >
-        <img src="/syntaxia.png" alt="Syntaxia" class="w-6 h-6 object-contain" />
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <!-- Home icon & Wordmark -->
+      <RouterLink to="/" class="flex items-center gap-2.5 group">
+        <div class="flex items-center justify-center w-9 h-9 border border-neutral-gray rounded-md group-hover:border-primary-lightgreen transition-colors bg-neutral-black">
+          <img src="/syntaxia.png" alt="Syntaxia" class="w-6 h-6 object-contain" />
+        </div>
+        <span class="text-primary-lightgreen font-fun text-lg tracking-widest group-hover:glow-text transition-all hidden sm:block">
+          SYNTAXIA
+        </span>
       </RouterLink>
 
-      <!-- Right section: Language tabs + GitHub -->
-      <div class="flex items-center gap-4">
-        <!-- Language tabs — desktop -->
-        <nav class="hidden md:block">
-          <ul class="flex gap-1">
-            <li v-for="item in refNavItems" :key="item.lang">
-              <RouterLink
-                :to="`/ref/${item.lang}`"
-                class="px-3 py-2 text-sm transition-all block rounded border-b-2 border-dashed"
-                :class="
-                  currentLang === item.lang
-                    ? 'text-primary-lightgreen border-primary-lightgreen'
-                    : 'text-neutral-400 hover:text-white border-transparent'
-                "
-              >
-                {{ item.label }}
-              </RouterLink>
-            </li>
-          </ul>
-        </nav>
-
+      <!-- Right section: Search + GitHub -->
+      <div class="flex items-center gap-4 md:gap-6">
+        <SearchBar />
+        
         <!-- GitHub Star -->
         <a
           href="https://github.com/EbadShelby/syntaxia"
           target="_blank"
           rel="noopener noreferrer"
-          class="hidden md:flex items-center gap-1.5 px-2.5 py-1 text-xs font-base text-neutral-400 hover:text-white border border-neutral-gray rounded-md hover:border-neutral-500 transition-colors bg-neutral-black"
+          class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-base text-neutral-400 hover:text-white border border-neutral-gray rounded-md hover:border-neutral-500 transition-colors bg-neutral-black"
         >
           <img src="/github_dark.svg" alt="GitHub" class="w-4 h-4 opacity-80" />
           <span>Star</span>
@@ -57,30 +37,6 @@ const currentLang = computed(() => route.params.lang as string)
           </svg>
         </a>
       </div>
-
-      <!-- Current page label (mobile) -->
-      <span class="md:hidden text-sm font-bold font-base text-primary-lightgreen uppercase">
-        {{ currentLang }}
-      </span>
-    </div>
-
-    <!-- Mobile nav — horizontal scroll tabs -->
-    <div
-      class="md:hidden flex gap-1 overflow-x-auto no-scrollbar px-4 pb-2 border-t border-neutral-gray"
-    >
-      <RouterLink
-        v-for="item in refNavItems"
-        :key="item.lang"
-        :to="`/ref/${item.lang}`"
-        class="whitespace-nowrap text-xs px-3 py-1.5 rounded transition-colors shrink-0"
-        :class="
-          currentLang === item.lang
-            ? 'text-primary-lightgreen bg-neutral-gray/40 border border-primary-lightgreen/40'
-            : 'text-neutral-400 hover:text-white'
-        "
-      >
-        {{ item.label }}
-      </RouterLink>
     </div>
   </header>
 </template>

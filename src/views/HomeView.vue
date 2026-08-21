@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-
-const menuOpen = ref(false)
+import SearchBar from '@/components/SearchBar.vue'
 
 const languages = [
   {
@@ -68,18 +66,9 @@ const languages = [
           </span>
         </RouterLink>
 
-        <!-- Right section: Desktop nav links + GitHub -->
-        <div class="hidden md:flex items-center gap-6">
-          <nav class="flex items-center gap-5 text-sm text-neutral-400">
-            <RouterLink
-              v-for="item in languages"
-              :key="item.lang"
-              :to="`/ref/${item.lang}`"
-              class="hover:text-primary-lightgreen transition-colors"
-            >
-              {{ item.label }}
-            </RouterLink>
-          </nav>
+        <!-- Right section: Search + GitHub -->
+        <div class="flex items-center gap-4 md:gap-6">
+          <SearchBar />
 
           <!-- GitHub Star -->
           <a
@@ -104,76 +93,7 @@ const languages = [
             </svg>
           </a>
         </div>
-
-        <!-- Mobile hamburger -->
-        <button
-          @click="menuOpen = !menuOpen"
-          class="md:hidden text-neutral-400 hover:text-white transition-colors cursor-pointer p-1"
-          :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
-        >
-          <!-- Hamburger icon -->
-          <svg
-            v-if="!menuOpen"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-          <!-- Close icon -->
-          <svg
-            v-else
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>
-        </button>
       </div>
-
-      <!-- Mobile dropdown menu -->
-      <Transition
-        enter-active-class="transition-all duration-200 ease-out"
-        enter-from-class="opacity-0 -translate-y-2"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-150 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 -translate-y-2"
-      >
-        <nav v-if="menuOpen" class="md:hidden border-t border-neutral-gray">
-          <RouterLink
-            v-for="item in languages"
-            :key="item.lang"
-            :to="`/ref/${item.lang}`"
-            @click="menuOpen = false"
-            class="flex items-center gap-3 px-4 py-3 text-sm text-neutral-300 hover:text-primary-lightgreen hover:bg-neutral-gray/20 transition-colors border-b border-neutral-gray/40 last:border-b-0"
-          >
-            <img :src="item.icon" :alt="item.label" class="w-4 h-4 object-contain opacity-80" />
-            <span>{{ item.label }}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-4 h-4 ml-auto text-neutral-600"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-          </RouterLink>
-        </nav>
-      </Transition>
     </header>
 
     <!-- ─── Hero ─────────────────────────────────────────── -->
@@ -256,51 +176,42 @@ const languages = [
           :to="`/ref/${item.lang}`"
           class="card-glow group relative border border-neutral-gray rounded-lg p-5 bg-neutral-gray/10 hover:bg-neutral-gray/20 block"
         >
-          <!-- Top row -->
-          <div class="flex items-start justify-between mb-3">
-            <!-- Icon -->
-            <div
-              class="w-11 h-11 flex items-center justify-center rounded-lg border border-neutral-gray bg-neutral-gray/20 group-hover:scale-110 transition-transform duration-300"
-            >
-              <img :src="item.icon" :alt="item.label" class="w-6 h-6 object-contain" />
-            </div>
-            <span
-              class="text-[10px] font-base uppercase tracking-widest px-2 py-0.5 rounded border"
-              :style="{ color: item.color, borderColor: item.color + '40' }"
-            >
-              {{ item.badge }}
-            </span>
+          <!-- Icon -->
+          <div
+            class="w-11 h-11 flex items-center justify-center rounded-lg border border-neutral-gray bg-neutral-gray/20 group-hover:scale-110 transition-transform duration-300 mb-4"
+          >
+            <img :src="item.icon" :alt="item.label" class="w-6 h-6 object-contain" />
           </div>
 
-          <!-- Title -->
-          <h3
-            class="text-base font-bold text-white mb-1.5 group-hover:text-primary-lightgreen transition-colors"
-          >
-            {{ item.label }}
-          </h3>
-
-          <!-- Description -->
-          <p class="text-neutral-500 text-sm leading-relaxed mb-4">{{ item.desc }}</p>
-
-          <!-- Arrow -->
-          <div
-            class="flex items-center gap-1 text-xs text-neutral-600 group-hover:text-primary-lightgreen transition-colors font-base"
-          >
-            <span>Open reference</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
+          <!-- Bottom row: Title + Arrow -->
+          <div class="flex items-center justify-between">
+            <!-- Title -->
+            <h3
+              class="text-base font-bold text-white group-hover:text-primary-lightgreen transition-colors m-0"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
+              {{ item.label }}
+            </h3>
+
+            <!-- Arrow -->
+            <div
+              class="flex items-center gap-1 text-xs text-neutral-600 group-hover:text-primary-lightgreen transition-colors font-base"
+            >
+              <span>Open reference</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </div>
           </div>
         </RouterLink>
       </div>
