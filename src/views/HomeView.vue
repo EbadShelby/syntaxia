@@ -59,6 +59,22 @@ const languages = [
     badge: 'JavaScript Framework',
     desc: 'The Progressive JavaScript Framework for building user interfaces.',
   },
+  {
+    lang: 'git',
+    label: 'Git',
+    icon: '/git.svg',
+    color: '#f14e32',
+    badge: 'Version Control',
+    desc: 'Track changes, collaborate, and manage your code history efficiently.',
+  },
+  {
+    lang: 'laravel',
+    label: 'Laravel',
+    icon: '/laravel.svg',
+    color: '#ff2d20',
+    badge: 'PHP Framework',
+    desc: 'The PHP framework for web artisans with expressive, elegant syntax.',
+  },
 ]
 </script>
 

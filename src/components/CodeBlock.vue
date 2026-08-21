@@ -17,7 +17,7 @@ function getHighlighter() {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
       themes: ['one-dark-pro'],
-      langs: ['html', 'css', 'javascript', 'php', 'sql', 'vue'],
+      langs: ['html', 'css', 'javascript', 'php', 'sql', 'vue', 'bash', 'shell', 'json', 'blade'],
     })
   }
   return highlighterPromise
@@ -27,7 +27,18 @@ async function highlight() {
   const langRaw = props.language ?? 'text'
   // mysql has no dedicated Shiki grammar — map it to sql
   const lang = langRaw === 'mysql' ? 'sql' : langRaw
-  const supported = ['html', 'css', 'javascript', 'php', 'sql', 'vue']
+  const supported = [
+    'html',
+    'css',
+    'javascript',
+    'php',
+    'sql',
+    'vue',
+    'bash',
+    'shell',
+    'json',
+    'blade',
+  ]
 
   if (!supported.includes(lang)) {
     highlighted.value = `<pre class="shiki-fallback"><code>${props.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`

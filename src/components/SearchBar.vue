@@ -10,9 +10,7 @@ const router = useRouter()
 
 const searchResults = computed(() => {
   if (!query.value.trim()) return refNavItems
-  return refNavItems.filter((item) =>
-    item.label.toLowerCase().includes(query.value.toLowerCase())
-  )
+  return refNavItems.filter((item) => item.label.toLowerCase().includes(query.value.toLowerCase()))
 })
 
 const handleKeydown = (e: KeyboardEvent) => {
@@ -61,7 +59,11 @@ const handleBlur = () => {
   <div class="relative group">
     <div
       class="flex items-center rounded-md transition-all duration-300 overflow-hidden"
-      :class="isFocused ? 'bg-neutral-black border border-primary-lightgreen px-3 py-1.5 cursor-text' : 'bg-transparent border border-transparent md:bg-neutral-black md:border-neutral-gray p-2 md:px-3 md:py-1.5 cursor-pointer md:cursor-text'"
+      :class="
+        isFocused
+          ? 'bg-neutral-black border border-primary-lightgreen px-3 py-1.5 cursor-text'
+          : 'bg-transparent border border-transparent md:bg-neutral-black md:border-neutral-gray p-2 md:px-3 md:py-1.5 cursor-pointer md:cursor-text'
+      "
       @click="searchInput?.focus()"
     >
       <svg
@@ -71,7 +73,11 @@ const handleBlur = () => {
         stroke-width="2"
         stroke="currentColor"
         class="w-5 h-5 md:w-4 md:h-4 transition-colors"
-        :class="isFocused ? 'text-primary-lightgreen mr-2' : 'text-neutral-400 hover:text-white md:hover:text-neutral-400 md:mr-2'"
+        :class="
+          isFocused
+            ? 'text-primary-lightgreen mr-2'
+            : 'text-neutral-400 hover:text-white md:hover:text-neutral-400 md:mr-2'
+        "
       >
         <path
           stroke-linecap="round"
@@ -85,7 +91,11 @@ const handleBlur = () => {
         type="text"
         placeholder="Search topics..."
         class="bg-transparent text-sm text-white placeholder-neutral-500 outline-none transition-all duration-300"
-        :class="isFocused ? 'w-32 md:w-48 lg:w-64 opacity-100' : 'w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100'"
+        :class="
+          isFocused
+            ? 'w-32 md:w-48 lg:w-64 opacity-100'
+            : 'w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100'
+        "
         @focus="isFocused = true"
         @blur="handleBlur"
         @keydown.enter="handleEnter"
@@ -122,9 +132,7 @@ const handleBlur = () => {
             </button>
           </li>
         </ul>
-        <div v-else class="px-4 py-3 text-sm text-neutral-500 text-center">
-          No topics found.
-        </div>
+        <div v-else class="px-4 py-3 text-sm text-neutral-500 text-center">No topics found.</div>
       </div>
     </Transition>
   </div>
