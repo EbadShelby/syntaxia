@@ -75,6 +75,22 @@ const languages = [
     badge: 'PHP Framework',
     desc: 'The PHP framework for web artisans with expressive, elegant syntax.',
   },
+  {
+    lang: 'react',
+    label: 'React',
+    icon: '/react_dark.svg',
+    color: '#61DAFB',
+    badge: 'JavaScript Library',
+    desc: 'The library for web and native user interfaces.',
+  },
+  {
+    lang: 'motion',
+    label: 'Motion',
+    icon: '/motion_dark.svg',
+    color: '#FF00A2',
+    badge: 'Animation Library',
+    desc: 'A production-ready motion library for React.',
+  },
 ]
 </script>
 
