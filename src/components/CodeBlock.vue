@@ -31,6 +31,7 @@ function getHighlighter() {
         'jsx',
         'tsx',
         'python',
+        'typescript',
       ],
     })
   }
@@ -53,6 +54,7 @@ async function highlight() {
     'json',
     'blade',
     'python',
+    'typescript',
   ]
 
   if (!supported.includes(lang)) {

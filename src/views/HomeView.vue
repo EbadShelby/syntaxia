@@ -115,6 +115,14 @@ const languages = [
     badge: 'Programming Language',
     desc: 'A versatile, high-level programming language.',
   },
+  {
+    lang: 'angular',
+    label: 'Angular',
+    icon: '/angular.svg',
+    color: '#DD0031',
+    badge: 'Web Framework',
+    desc: "The modern web developer's platform.",
+  },
 ]
 </script>
 
