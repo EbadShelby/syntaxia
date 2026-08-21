@@ -17,22 +17,7 @@ function getHighlighter() {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
       themes: ['one-dark-pro'],
-      langs: [
-        'html',
-        'css',
-        'javascript',
-        'php',
-        'sql',
-        'vue',
-        'bash',
-        'shell',
-        'json',
-        'blade',
-        'jsx',
-        'tsx',
-        'python',
-        'typescript',
-      ],
+      langs: [], // Load languages dynamically on demand
     })
   }
   return highlighterPromise
@@ -63,6 +48,12 @@ async function highlight() {
   }
 
   const hl = await getHighlighter()
+  
+  // Dynamically load the language if it hasn't been loaded yet
+  if (!hl.getLoadedLanguages().includes(lang)) {
+    await hl.loadLanguage(lang as any)
+  }
+
   highlighted.value = hl.codeToHtml(props.code, {
     lang,
     theme: 'one-dark-pro',
@@ -128,12 +119,31 @@ async function copy() {
       </button>
     </div>
 
+    <!-- Loading skeleton -->
+    <div v-if="!highlighted" class="shiki-skeleton">
+      <div class="animate-pulse flex flex-col gap-3">
+        <div class="h-3.5 bg-neutral-gray/30 rounded-full w-3/4"></div>
+        <div class="h-3.5 bg-neutral-gray/30 rounded-full w-1/2"></div>
+        <div class="h-3.5 bg-neutral-gray/30 rounded-full w-5/6"></div>
+        <div class="h-3.5 bg-neutral-gray/30 rounded-full w-2/3"></div>
+      </div>
+    </div>
+
     <!-- Highlighted code block -->
-    <div class="shiki-wrapper" v-html="highlighted" />
+    <div v-else class="shiki-wrapper" v-html="highlighted" />
   </div>
 </template>
 
 <style scoped>
+.shiki-skeleton {
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+  background-color: #0d0d0f;
+  border: 1px solid var(--color-neutral-gray, #2a2a2a);
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  min-height: 8rem;
+}
 .shiki-wrapper :deep(pre) {
   margin: 0;
   padding: 1rem;

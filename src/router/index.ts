@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import RefView from '@/views/RefView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +12,7 @@ const router = createRouter({
     {
       path: '/ref/:lang',
       name: 'ref',
-      component: RefView,
+      component: () => import('@/views/RefView.vue'),
     },
   ],
   scrollBehavior(to) {
