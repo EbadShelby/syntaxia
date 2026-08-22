@@ -172,6 +172,22 @@ const languages = [
     badge: 'Library',
     desc: 'A fast, small, and feature-rich JavaScript library.',
   },
+  {
+    lang: 'docker',
+    label: 'Docker',
+    icon: '/docker.svg',
+    color: '#2496ED',
+    badge: 'DevOps',
+    desc: 'An open platform for developing, shipping, and running applications.',
+  },
+  {
+    lang: 'c',
+    label: 'C',
+    icon: '/c.svg',
+    color: '#A8B9CC',
+    badge: 'Programming Language',
+    desc: 'A general-purpose, procedural computer programming language.',
+  },
 ]
 
 const categories = ['All', ...new Set(languages.map((l) => l.badge))]
@@ -422,9 +438,7 @@ const scrollRight = () => {
               >
                 {{ item.label }}
               </h3>
-              <p
-                class="text-sm text-neutral-400 leading-relaxed line-clamp-3"
-              >
+              <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3">
                 {{ item.desc }}
               </p>
             </div>

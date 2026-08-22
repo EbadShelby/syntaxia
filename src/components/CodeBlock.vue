@@ -44,6 +44,10 @@ async function highlight() {
     'csharp',
     'java',
     'cpp',
+    'yaml',
+    'dockerfile',
+    'docker',
+    'c',
   ]
 
   if (!supported.includes(lang)) {
