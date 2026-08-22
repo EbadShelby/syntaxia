@@ -13,10 +13,13 @@ const props = defineProps<{
 const activeId = ref<string>(props.sections[0]?.id ?? '')
 
 let observer: IntersectionObserver | null = null
+let isScrolling = false
+let scrollTimeout: ReturnType<typeof setTimeout> | null = null
 
 onMounted(() => {
   observer = new IntersectionObserver(
     (entries) => {
+      if (isScrolling) return
       for (const entry of entries) {
         if (entry.isIntersecting) {
           activeId.value = entry.target.id
@@ -34,13 +37,20 @@ onMounted(() => {
 
 onUnmounted(() => {
   observer?.disconnect()
+  if (scrollTimeout) clearTimeout(scrollTimeout)
 })
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
   if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    isScrolling = true
     activeId.value = id
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+    if (scrollTimeout) clearTimeout(scrollTimeout)
+    scrollTimeout = setTimeout(() => {
+      isScrolling = false
+    }, 1000) // 1 second should be enough for smooth scroll to finish
   }
 }
 </script>
