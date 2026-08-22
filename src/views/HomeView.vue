@@ -124,6 +124,38 @@ const languages = [
     badge: 'Web Framework',
     desc: "The modern web developer's platform.",
   },
+  {
+    lang: 'csharp',
+    label: 'C#',
+    icon: '/csharp.svg',
+    color: '#68217A',
+    badge: 'Programming Language',
+    desc: 'A modern, object-oriented, and type-safe programming language.',
+  },
+  {
+    lang: 'java',
+    label: 'Java',
+    icon: '/java.svg',
+    color: '#5382A1',
+    badge: 'Programming Language',
+    desc: 'A class-based, object-oriented programming language.',
+  },
+  {
+    lang: 'postgresql',
+    label: 'PostgreSQL',
+    icon: '/postgresql.svg',
+    color: '#336791',
+    badge: 'Database',
+    desc: 'A powerful, open source object-relational database system.',
+  },
+  {
+    lang: 'mongodb',
+    label: 'MongoDB',
+    icon: '/mongodb-icon-dark.svg',
+    color: '#47A248',
+    badge: 'Database',
+    desc: 'The application data platform for modern applications.',
+  },
 ]
 
 const categories = ['All', ...new Set(languages.map((l) => l.badge))]

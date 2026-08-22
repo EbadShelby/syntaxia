@@ -25,8 +25,8 @@ function getHighlighter() {
 
 async function highlight() {
   const langRaw = props.language ?? 'text'
-  // mysql has no dedicated Shiki grammar — map it to sql
-  const lang = langRaw === 'mysql' ? 'sql' : langRaw
+  // map databases to sql
+  const lang = ['mysql', 'postgresql', 'postgres'].includes(langRaw) ? 'sql' : langRaw
   const supported = [
     'html',
     'css',
