@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { refNavItems } from '@/data/refContent'
 
@@ -12,6 +12,43 @@ const searchResults = computed(() => {
   if (!query.value.trim()) return []
   return refNavItems.filter((item) => item.label.toLowerCase().includes(query.value.toLowerCase()))
 })
+
+const selectedIndex = ref(0)
+const resultsListRef = ref<HTMLElement | null>(null)
+
+watch(searchResults, () => {
+  selectedIndex.value = 0
+})
+
+const scrollToSelected = async () => {
+  await nextTick()
+  if (resultsListRef.value && resultsListRef.value.children[selectedIndex.value]) {
+    const el = resultsListRef.value.children[selectedIndex.value] as HTMLElement
+    el.scrollIntoView({ block: 'nearest' })
+  }
+}
+
+const handleArrowDown = (e: KeyboardEvent) => {
+  if (!isFocused.value || searchResults.value.length === 0) return
+  e.preventDefault()
+  if (selectedIndex.value < searchResults.value.length - 1) {
+    selectedIndex.value++
+  } else {
+    selectedIndex.value = 0
+  }
+  scrollToSelected()
+}
+
+const handleArrowUp = (e: KeyboardEvent) => {
+  if (!isFocused.value || searchResults.value.length === 0) return
+  e.preventDefault()
+  if (selectedIndex.value > 0) {
+    selectedIndex.value--
+  } else {
+    selectedIndex.value = searchResults.value.length - 1
+  }
+  scrollToSelected()
+}
 
 const handleKeydown = (e: KeyboardEvent) => {
   // Focus on '/' press, unless they are already in an input/textarea
@@ -41,8 +78,9 @@ const navigateTo = (lang: string) => {
 }
 
 const handleEnter = () => {
-  if (searchResults.value.length > 0 && searchResults.value[0]) {
-    navigateTo(searchResults.value[0].lang)
+  const selectedItem = searchResults.value[selectedIndex.value]
+  if (selectedItem) {
+    navigateTo(selectedItem.lang)
   }
 }
 
@@ -99,6 +137,8 @@ const handleBlur = () => {
         @focus="isFocused = true"
         @blur="handleBlur"
         @keydown.enter="handleEnter"
+        @keydown.down="handleArrowDown"
+        @keydown.up="handleArrowUp"
         @keydown.esc="searchInput?.blur()"
       />
       <div
@@ -122,11 +162,17 @@ const handleBlur = () => {
         v-if="isFocused && query.trim().length > 0"
         class="absolute top-full left-0 mt-2 w-full bg-neutral-black border border-neutral-gray rounded-md shadow-lg overflow-hidden z-50"
       >
-        <ul v-if="searchResults.length > 0" class="max-h-60 overflow-y-auto no-scrollbar">
-          <li v-for="item in searchResults" :key="item.lang">
+        <ul ref="resultsListRef" v-if="searchResults.length > 0" class="max-h-60 overflow-y-auto no-scrollbar">
+          <li v-for="(item, index) in searchResults" :key="item.lang">
             <button
               @click="navigateTo(item.lang)"
-              class="w-full text-left px-4 py-2 text-sm text-neutral-300 hover:text-primary-lightgreen hover:bg-neutral-gray/20 transition-colors focus:bg-neutral-gray/20 outline-none block"
+              @mousemove="selectedIndex = index"
+              class="w-full text-left px-4 py-2 text-sm transition-colors focus:outline-none block"
+              :class="
+                selectedIndex === index
+                  ? 'text-primary-lightgreen bg-neutral-gray/20'
+                  : 'text-neutral-300 hover:text-primary-lightgreen hover:bg-neutral-gray/20'
+              "
             >
               {{ item.label }}
             </button>
