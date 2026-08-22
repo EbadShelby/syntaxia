@@ -9,7 +9,7 @@ const languages = [
     label: 'HTML',
     icon: '/html5.svg',
     color: '#e34c26',
-    badge: 'Markup',
+    badge: 'Language',
     desc: 'The backbone of every webpage. Structure your content with semantic elements.',
   },
   {
@@ -17,7 +17,7 @@ const languages = [
     label: 'CSS',
     icon: '/css.svg',
     color: '#264de4',
-    badge: 'Styling',
+    badge: 'Language',
     desc: 'Style, animate, and layout your pages with modern CSS features.',
   },
   {
@@ -25,7 +25,7 @@ const languages = [
     label: 'JavaScript',
     icon: '/javascript.svg',
     color: '#f7df1e',
-    badge: 'Scripting',
+    badge: 'Language',
     desc: 'Add interactivity, fetch data, and build dynamic user interfaces.',
   },
   {
@@ -33,7 +33,7 @@ const languages = [
     label: 'PHP',
     icon: '/Php_dark.svg',
     color: '#777bb4',
-    badge: 'Backend',
+    badge: 'Language',
     desc: 'Server-side scripting to handle forms, sessions, and databases.',
   },
   {
@@ -49,7 +49,7 @@ const languages = [
     label: 'Tailwind',
     icon: '/tailwindcss.svg',
     color: '#38bdf8',
-    badge: 'CSS Framework',
+    badge: 'Framework',
     desc: 'Rapidly build modern websites without ever leaving your HTML.',
   },
   {
@@ -57,7 +57,7 @@ const languages = [
     label: 'Vue',
     icon: '/vue.svg',
     color: '#41b883',
-    badge: 'JavaScript Framework',
+    badge: 'Framework',
     desc: 'The Progressive JavaScript Framework for building user interfaces.',
   },
   {
@@ -65,7 +65,7 @@ const languages = [
     label: 'Git',
     icon: '/git.svg',
     color: '#f14e32',
-    badge: 'Version Control',
+    badge: 'Tool',
     desc: 'Track changes, collaborate, and manage your code history efficiently.',
   },
   {
@@ -73,7 +73,7 @@ const languages = [
     label: 'Laravel',
     icon: '/laravel.svg',
     color: '#ff2d20',
-    badge: 'PHP Framework',
+    badge: 'Framework',
     desc: 'The PHP framework for web artisans with expressive, elegant syntax.',
   },
   {
@@ -81,7 +81,7 @@ const languages = [
     label: 'React',
     icon: '/react_dark.svg',
     color: '#61DAFB',
-    badge: 'JavaScript Library',
+    badge: 'Library',
     desc: 'The library for web and native user interfaces.',
   },
   {
@@ -89,7 +89,7 @@ const languages = [
     label: 'Motion',
     icon: '/motion_dark.svg',
     color: '#FF00A2',
-    badge: 'Animation Library',
+    badge: 'Library',
     desc: 'A production-ready motion library for React.',
   },
   {
@@ -97,7 +97,7 @@ const languages = [
     label: 'Bootstrap',
     icon: '/bootstrap.svg',
     color: '#7952B3',
-    badge: 'CSS Framework',
+    badge: 'Framework',
     desc: 'Powerful, extensible, and feature-packed frontend toolkit.',
   },
   {
@@ -105,7 +105,7 @@ const languages = [
     label: 'Node.js',
     icon: '/nodejs.svg',
     color: '#339933',
-    badge: 'JavaScript Runtime',
+    badge: 'Runtime',
     desc: 'An asynchronous event-driven JavaScript runtime.',
   },
   {
@@ -113,7 +113,7 @@ const languages = [
     label: 'Python',
     icon: '/python.svg',
     color: '#3776AB',
-    badge: 'Programming Language',
+    badge: 'Language',
     desc: 'A versatile, high-level programming language.',
   },
   {
@@ -121,7 +121,7 @@ const languages = [
     label: 'Angular',
     icon: '/angular.svg',
     color: '#DD0031',
-    badge: 'Web Framework',
+    badge: 'Framework',
     desc: "The modern web developer's platform.",
   },
   {
@@ -129,7 +129,7 @@ const languages = [
     label: 'C#',
     icon: '/csharp.svg',
     color: '#68217A',
-    badge: 'Programming Language',
+    badge: 'Language',
     desc: 'A modern, object-oriented, and type-safe programming language.',
   },
   {
@@ -137,7 +137,7 @@ const languages = [
     label: 'Java',
     icon: '/java.svg',
     color: '#5382A1',
-    badge: 'Programming Language',
+    badge: 'Language',
     desc: 'A class-based, object-oriented programming language.',
   },
   {
@@ -161,7 +161,7 @@ const languages = [
     label: 'C++',
     icon: '/c-plusplus.svg',
     color: '#00599C',
-    badge: 'Programming Language',
+    badge: 'Language',
     desc: 'A powerful, high-performance programming language.',
   },
   {
@@ -177,7 +177,7 @@ const languages = [
     label: 'Docker',
     icon: '/docker.svg',
     color: '#2496ED',
-    badge: 'DevOps',
+    badge: 'Tool',
     desc: 'An open platform for developing, shipping, and running applications.',
   },
   {
@@ -185,18 +185,37 @@ const languages = [
     label: 'C',
     icon: '/c.svg',
     color: '#A8B9CC',
-    badge: 'Programming Language',
+    badge: 'Language',
     desc: 'A general-purpose, procedural computer programming language.',
+  },
+  {
+    lang: 'go',
+    label: 'Go',
+    icon: '/golang_dark.svg',
+    color: '#00ADD8',
+    badge: 'Language',
+    desc: 'An open source programming language supported by Google.',
+  },
+  {
+    lang: 'kotlin',
+    label: 'Kotlin',
+    icon: '/kotlin.svg',
+    color: '#7F52FF',
+    badge: 'Language',
+    desc: 'A modern programming language that makes developers happier.',
   },
 ]
 
-const categoryCounts = languages.reduce((acc, lang) => {
-  acc[lang.badge] = (acc[lang.badge] || 0) + 1
-  return acc
-}, {} as Record<string, number>)
+const categoryCounts = languages.reduce(
+  (acc, lang) => {
+    acc[lang.badge] = (acc[lang.badge] || 0) + 1
+    return acc
+  },
+  {} as Record<string, number>,
+)
 
 const sortedCategories = Object.keys(categoryCounts).sort(
-  (a, b) => (categoryCounts[b] || 0) - (categoryCounts[a] || 0)
+  (a, b) => (categoryCounts[b] || 0) - (categoryCounts[a] || 0),
 )
 
 const categories = [
@@ -411,7 +430,7 @@ const scrollRight = () => {
         </button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         <RouterLink
           v-for="item in filteredLanguages"
           :key="item.lang"

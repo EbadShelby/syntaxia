@@ -48,6 +48,8 @@ async function highlight() {
     'dockerfile',
     'docker',
     'c',
+    'go',
+    'kotlin',
   ]
 
   if (!supported.includes(lang)) {
