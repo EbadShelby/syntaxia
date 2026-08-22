@@ -846,495 +846,167 @@ p::first-letter { font-size: 2em; float: left; }
 
   js: {
     lang: 'js',
-    label: 'JS',
+    label: 'JavaScript',
     title: 'JavaScript',
     icon: '/javascript.svg',
     color: '#f7df1e',
     sections: [
       {
+        id: 'setup',
+        title: 'Setup',
+        description: 'Run JavaScript code:',
+        language: 'html',
+        code: '# Check Node.js version\nnode -v\n\n# Run a JavaScript file\nnode script.js\n\n<!-- In browser -->\n<script src="script.js"></script>\n<script>\n  console.log(\'Hello World\')\n</script>',
+      },
+      {
+        id: 'basic-syntax',
+        title: 'Basic Syntax',
+        description: 'JavaScript code structure:',
+        language: 'javascript',
+        code: "// Single line comment\n/* Multi-line\n   comment */\n\nconsole.log('Hello World')\nconsole.log('Multiple', 'values', 42)",
+      },
+      {
         id: 'variables',
         title: 'Variables',
-        description: 'Store and reuse values:',
+        description: 'Store and use data:',
         language: 'javascript',
-        code: `// Three ways to declare variables
-let name = 'John';      // Can be changed, block scoped
-const age = 25;         // Cannot be changed, block scoped
-var oldWay = 'avoid';   // Old way, function scoped (avoid)
-
-// Examples
-let x = 5;
-x = 10;  // Can change
-
-const PI = 3.14159;
-// PI = 3.14;  // Error! Cannot change
-
-// Multiple variables
-let a = 1, b = 2, c = 3;`,
+        code: '// let (block-scoped, can change)\nlet age = 25\nage = 26\n\n// const (block-scoped, cannot be reassigned)\nconst name = \'John\'\n\n// var (function-scoped, avoid using)\nvar oldWay = \'legacy\'\n\n// Multiple declarations\nlet a = 1,\n  b = 2,\n  c = 3\n\n// Check type\ntypeof age // "number"\ntypeof name // "string"',
       },
       {
         id: 'data-types',
         title: 'Data Types',
-        description: 'Different types of values:',
+        description: 'Common data types in JavaScript:',
         language: 'javascript',
-        code: `// String (text)
-let text = "Hello World";
-let text2 = 'Single quotes work too';
-let text3 = \`Template literal with \${text}\`;
-
-// Number
-let num = 42;
-let decimal = 3.14;
-
-// Boolean (true/false)
-let isActive = true;
-
-// Array (list of items)
-let fruits = ['apple', 'banana', 'orange'];
-
-// Object (key-value pairs)
-let person = {
-  name: 'John',
-  age: 30,
-  isStudent: false
-};
-
-// Null and Undefined
-let empty = null;       // Intentionally empty
-let notDefined;         // Undefined (not set yet)`,
+        code: "// Primitives\nlet text = 'Hello World' // String\nlet num = 42 // Number\nlet decimal = 3.14\nlet big = 123456789012345678901234n // BigInt\nlet isActive = true // Boolean\nlet empty = null // Null\nlet notDefined // Undefined\nlet sym = Symbol('id') // Symbol\n\n// Reference types\nlet fruits = ['apple', 'banana'] // Array\nlet person = { name: 'John', age: 30 } // Object\nlet greet = function () {} // Function\n\n// Type checking\ntypeof 'hello' // \"string\"\ntypeof 42 // \"number\"\ntypeof true // \"boolean\"\ntypeof undefined // \"undefined\"\ntypeof null // \"object\" (known quirk)\ntypeof [] // \"object\"\ntypeof {} // \"object\"\nArray.isArray([]) // true\n\n// Type conversion\nString(42) // \"42\"\nNumber('42') // 42\nBoolean(1) // true\nparseInt('42px') // 42\nparseFloat('3.14m') // 3.14",
       },
       {
         id: 'strings',
         title: 'Strings',
         description: 'Working with text:',
         language: 'javascript',
-        code: `let text = "Hello World";
-
-text.length;                    // 11 (length)
-text.toLowerCase();             // "hello world"
-text.toUpperCase();             // "HELLO WORLD"
-text.trim();                    // Remove spaces from both ends
-text.includes('World');         // true
-text.startsWith('Hello');       // true
-text.endsWith('World');         // true
-text.replace('World', 'JS');    // "Hello JS"
-text.split(' ');                // ['Hello', 'World']
-text.slice(0, 5);               // "Hello"
-text.substring(6, 11);         // "World"
-text.indexOf('o');              // 4 (first occurrence)
-text.charAt(0);                 // "H"
-
-// Template literals
-let name = 'John';
-let greeting = \`Hello, \${name}! You are \${2025 - 2000} years old.\`;`,
+        code: "let text = 'Hello World'\n\n// Properties and methods\ntext.length // 11\ntext.toUpperCase() // \"HELLO WORLD\"\ntext.toLowerCase() // \"hello world\"\ntext.trim() // Remove whitespace\ntext.includes('World') // true\ntext.startsWith('Hello') // true\ntext.endsWith('World') // true\ntext.indexOf('World') // 6\ntext.slice(0, 5) // \"Hello\"\ntext.substring(6, 11) // \"World\"\ntext.replace('World', 'JS') // \"Hello JS\"\ntext.replaceAll('o', '0') // Replace all\ntext.split(' ') // [\"Hello\", \"World\"]\ntext.repeat(2) // \"Hello WorldHello World\"\ntext.padStart(15, '*') // Pad start\ntext.padEnd(15, '*') // Pad end\ntext.charAt(0) // \"H\"\ntext.at(-1) // \"d\" (last char)\n\n// Template literals\nlet name = 'John'\nlet greeting = `Hello, ${name}!`\nlet multi = `Line 1\nLine 2`\n\n// Tagged templates\nfunction tag(strings, ...values) {\n  return strings.raw.join('') + values.join(',')\n}",
+      },
+      {
+        id: 'numbers',
+        title: 'Numbers',
+        description: 'Working with numbers:',
+        language: 'javascript',
+        code: '// Math operations\n5 + 3\n5 - 3\n5 * 3\n6 / 3\n7 % 3\n2 ** 3\n\n// Increment/decrement\nlet count = 0\ncount++\ncount--\ncount += 5\ncount -= 2\n\n// Number methods\n;(3.14159).toFixed(2) // "3.14"\nNumber.isInteger(42) // true\nNumber.isNaN(NaN) // true\nNumber.parseFloat(\'3.14\') // 3.14\n\n// Math object\nMath.round(4.7)\nMath.floor(4.7)\nMath.ceil(4.3)\nMath.abs(-5)\nMath.max(1, 5, 3)\nMath.min(1, 5, 3)\nMath.random()\nMath.sqrt(16)\nMath.pow(2, 3)\nMath.trunc(4.7) // 4 (removes decimal)',
       },
       {
         id: 'arrays',
         title: 'Arrays',
-        description: 'Working with lists of data:',
+        description: 'Working with lists:',
         language: 'javascript',
-        code: `let fruits = ['apple', 'banana', 'orange'];
-
-// Access elements
-fruits[0];            // 'apple' (first)
-fruits[fruits.length - 1]; // 'orange' (last)
-
-// Add / Remove
-fruits.push('grape');     // Add to end
-fruits.pop();             // Remove from end
-fruits.unshift('mango');  // Add to beginning
-fruits.shift();           // Remove from beginning
-
-// Find
-fruits.indexOf('banana'); // 1
-fruits.includes('apple'); // true
-fruits.find(f => f.length > 5); // 'banana'
-
-// Transform
-fruits.map(f => f.toUpperCase()); // ['APPLE', 'BANANA', ...]
-fruits.filter(f => f.length > 5); // ['banana', 'orange']
-fruits.reduce((acc, f) => acc + f, ''); // 'applebananaorange'
-
-// Sort / Reverse
-fruits.sort();
-fruits.reverse();
-
-// Spread
-let all = [...fruits, 'kiwi'];`,
+        code: "let fruits = ['apple', 'banana', 'orange']\n\n// Access and modify\nfruits[0]\nfruits.length\nfruits.push('grape') // Add to end\nfruits.unshift('mango') // Add to start\nfruits.pop() // Remove from end\nfruits.shift() // Remove from start\nfruits.splice(1, 1, 'kiwi') // Remove/insert at index\n\n// Search\nfruits.includes('banana')\nfruits.indexOf('banana')\nfruits.find((f) => f.length > 5)\nfruits.findIndex((f) => f.length > 5)\nfruits.findLast((f) => f.length > 5)\nfruits.some((f) => f.startsWith('a'))\nfruits.every((f) => f.length > 3)\n\n// Transform\nfruits.join(', ')\nfruits.slice(1, 3)\nfruits.reverse()\nfruits.sort()\nfruits.sort((a, b) => a.length - b.length)\nfruits.flat() // Flatten nested arrays\nfruits.flatMap((f) => [f, f.toUpperCase()])\n\n// Iterate\nfruits.forEach((f) => console.log(f))\nfruits.map((f) => f.toUpperCase())\nfruits.filter((f) => f.length > 5)\nfruits.reduce((acc, f) => acc + f.length, 0)\nfruits.reduceRight((acc, f) => acc + f, '')\n\n// Create arrays\nArray.from({ length: 5 }, (_, i) => i) // [0,1,2,3,4]\nArray.of(1, 2, 3)\nnew Array(5).fill(0)\n\n// Spread and destructuring\nlet moreFruits = [...fruits, 'kiwi']\nlet [first, second, ...rest] = fruits\n\n// Check empty\nfruits.length === 0",
       },
       {
         id: 'objects',
         title: 'Objects',
         description: 'Working with key-value pairs:',
         language: 'javascript',
-        code: `let person = {
-  name: 'John',
-  age: 30,
-  greet() {
-    return \`Hi, I'm \${this.name}\`;
-  }
-};
-
-// Access properties
-person.name;        // 'John'
-person['age'];      // 30
-
-// Add / Update / Delete
-person.email = 'john@example.com'; // Add
-person.age = 31;                   // Update
-delete person.email;               // Delete
-
-// Check existence
-'name' in person;       // true
-person.hasOwnProperty('age'); // true
-
-// Destructuring
-const { name, age } = person;
-
-// Spread
-const copy = { ...person, role: 'admin' };
-
-// Object methods
-Object.keys(person);    // ['name', 'age']
-Object.values(person);  // ['John', 30]
-Object.entries(person); // [['name','John'],['age',30]]`,
+        code: "let person = {\n  name: 'John',\n  age: 30,\n  greet() {\n    return 'Hello, ' + this.name\n  },\n}\n\n// Access\nperson.name\nperson['age']\n\n// Add/modify/delete\nperson.email = 'john@example.com'\ndelete person.age\n\n// Check property\n'name' in person\nperson.hasOwnProperty('name')\nObject.hasOwn(person, 'name') // Modern way\n\n// Get keys/values/entries\nObject.keys(person)\nObject.values(person)\nObject.entries(person)\n\n// Loop\nfor (let key in person) {\n  console.log(key, person[key])\n}\n\n// Copy/merge\nlet copy = { ...person }\nlet merged = Object.assign({}, person, { city: 'NYC' })\n\n// Freeze/seal (immutability)\nObject.freeze(person) // No changes at all\nObject.seal(person) // Can modify, not add/remove\n\n// Destructuring\nlet { name, age } = person\nlet { name: n, age: a = 25 } = person // Rename and default\n\n// Computed property names\nlet key = 'dynamic'\nlet obj = { [key]: 'value' }\n\n// Optional chaining and nullish coalescing\nperson?.address?.city\nlet city = person.city ?? 'Unknown'",
       },
       {
-        id: 'functions',
-        title: 'Functions',
-        description: 'Reusable blocks of code:',
+        id: 'maps-sets',
+        title: 'Maps & Sets',
+        description: 'Modern collection types:',
         language: 'javascript',
-        code: `// Function declaration
-function greet(name) {
-  return \`Hello, \${name}!\`;
-}
-
-// Function expression
-const greet = function(name) {
-  return \`Hello, \${name}!\`;
-};
-
-// Arrow function (modern)
-const greet = (name) => \`Hello, \${name}!\`;
-const square = n => n * n; // Single param, no parens needed
-
-// Default parameters
-function greet(name = 'World') {
-  return \`Hello, \${name}!\`;
-}
-
-// Rest parameters
-function sum(...numbers) {
-  return numbers.reduce((total, n) => total + n, 0);
-}
-sum(1, 2, 3, 4); // 10
-
-// Immediately Invoked Function Expression (IIFE)
-(function() {
-  console.log('Runs immediately!');
-})();`,
+        code: "// Map (key-value, any type of key)\nlet map = new Map()\nmap.set('name', 'John')\nmap.set(1, 'one')\nmap.get('name')\nmap.has('name')\nmap.delete('name')\nmap.size\n\nfor (let [key, value] of map) {\n  console.log(key, value)\n}\n\n// Convert Map to/from object/array\nlet obj = Object.fromEntries(map)\nlet arr = Array.from(map)\n\n// Set (unique values)\nlet set = new Set([1, 2, 2, 3])\nset.add(4)\nset.has(2)\nset.delete(2)\nset.size\n\nlet uniqueArr = [...set] // Convert to array\n\n// WeakMap/WeakSet (garbage-collectable keys)\nlet weakMap = new WeakMap()",
       },
       {
         id: 'conditionals',
         title: 'Conditionals',
-        description: 'Make decisions in your code:',
+        description: 'Make decisions in code:',
         language: 'javascript',
-        code: `// If / else if / else
-if (age >= 18) {
-  console.log('Adult');
-} else if (age >= 13) {
-  console.log('Teenager');
-} else {
-  console.log('Child');
-}
-
-// Ternary operator (one-liner)
-let status = age >= 18 ? 'Adult' : 'Minor';
-
-// Nullish coalescing
-let name = userName ?? 'Anonymous';
-
-// Optional chaining
-let city = user?.address?.city;
-
-// Switch statement
-switch (day) {
-  case 'Monday':
-    console.log('Start of week');
-    break;
-  case 'Friday':
-    console.log('End of week');
-    break;
-  default:
-    console.log('Midweek');
-}`,
+        code: "// If-else\nlet age = 18\nif (age >= 18) {\n  console.log('Adult')\n} else if (age >= 13) {\n  console.log('Teen')\n} else {\n  console.log('Child')\n}\n\n// Comparison operators\n5 == '5' // true (loose)\n5 === '5' // false (strict)\n5 != '5'\n5 !== '5'\n5 > 3\n5 < 3\n5 >= 5\n5 <= 3\n\n// Logical operators\nage >= 18 && age < 65\nage >= 18 || isCitizen\n!isStudent\n\n// Ternary\nlet status = age >= 18 ? 'Adult' : 'Minor'\n\n// Nullish coalescing\nlet name = userName ?? 'Guest'\n\n// Switch\nswitch (day) {\n  case 1:\n    console.log('Monday')\n    break\n  case 2:\n  case 3:\n    console.log('Tue or Wed')\n    break\n  default:\n    console.log('Other')\n}",
       },
       {
         id: 'loops',
         title: 'Loops',
         description: 'Repeat code multiple times:',
         language: 'javascript',
-        code: `// for loop
-for (let i = 0; i < 5; i++) {
-  console.log(i); // 0, 1, 2, 3, 4
-}
-
-// while loop
-let i = 0;
-while (i < 5) {
-  console.log(i);
-  i++;
-}
-
-// do...while (runs at least once)
-do {
-  console.log(i);
-  i++;
-} while (i < 5);
-
-// for...of (arrays, strings)
-for (const fruit of fruits) {
-  console.log(fruit);
-}
-
-// for...in (objects)
-for (const key in person) {
-  console.log(key, person[key]);
-}
-
-// Array methods as loops
-fruits.forEach(fruit => console.log(fruit));`,
+        code: '// For loop\nfor (let i = 0; i < 5; i++) {\n  console.log(i)\n}\n\n// While/do-while\nlet count = 0\nwhile (count < 5) {\n  console.log(count)\n  count++\n}\n\ndo {\n  console.log(count)\n  count++\n} while (count < 10)\n\n// For...of (arrays, strings, iterables)\nfor (let fruit of fruits) {\n  console.log(fruit)\n}\n\n// For...in (object keys)\nfor (let key in person) {\n  console.log(key)\n}\n\n// Break/continue\nfor (let i = 0; i < 10; i++) {\n  if (i === 5) break\n  if (i === 2) continue\n  console.log(i)\n}\n\n// Labeled loops\nouter: for (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 3; j++) {\n    if (j === 1) continue outer\n    console.log(i, j)\n  }\n}',
       },
       {
-        id: 'dom-manipulation',
-        title: 'DOM Manipulation',
-        description: 'Control HTML elements from JavaScript:',
+        id: 'functions',
+        title: 'Functions',
+        description: 'Reusable blocks of code:',
         language: 'javascript',
-        code: `// Select elements
-const el = document.getElementById('myId');
-const els = document.querySelectorAll('.myClass');
-const el2 = document.querySelector('h1');
-
-// Modify content
-el.textContent = 'New text';     // Text only
-el.innerHTML = '<b>Bold</b>';    // HTML content
-
-// Modify styles
-el.style.color = 'red';
-el.style.fontSize = '20px';
-
-// Modify classes
-el.classList.add('active');
-el.classList.remove('hidden');
-el.classList.toggle('dark');
-el.classList.contains('active'); // true/false
-
-// Attributes
-el.setAttribute('href', '/new-url');
-el.getAttribute('href');
-el.removeAttribute('disabled');
-
-// Create & append elements
-const div = document.createElement('div');
-div.textContent = 'New element';
-document.body.appendChild(div);
-div.remove(); // Remove element`,
+        code: "// Function declaration\nfunction greet(name) {\n  return 'Hello, ' + name\n}\n\n// Function expression\nconst greet2 = function (name) {\n  return 'Hello, ' + name\n}\n\n// Arrow functions\nconst square = (x) => x * x\nconst add = (a, b) => a + b\nconst multiply = (a, b) => {\n  return a * b\n}\n\n// Default parameters\nfunction greetUser(name = 'Guest') {\n  return 'Hello, ' + name\n}\n\n// Rest parameters\nfunction sum(...numbers) {\n  return numbers.reduce((a, b) => a + b, 0)\n}\n\n// Immediately Invoked Function Expression (IIFE)\n;(function () {\n  console.log('Runs immediately')\n})()\n\n// Higher-order functions\nfunction multiplyBy(factor) {\n  return function (x) {\n    return x * factor\n  }\n}\nconst double = multiplyBy(2)\n\n// Generator functions\nfunction* generateNumbers() {\n  yield 1\n  yield 2\n  yield 3\n}\nfor (let num of generateNumbers()) {\n  console.log(num)\n}\n\n// Function.prototype methods\nfunction greetFn() {\n  return `Hi, ${this.name}`\n}\ngreetFn.call({ name: 'John' })\ngreetFn.apply({ name: 'Jane' })\nconst bound = greetFn.bind({ name: 'Bob' })",
       },
       {
-        id: 'events',
-        title: 'Events',
-        description: 'Respond to user interactions:',
+        id: 'classes',
+        title: 'Classes',
+        description: 'Object-oriented programming:',
         language: 'javascript',
-        code: `// Add event listener
-el.addEventListener('click', function(event) {
-  console.log('Clicked!', event.target);
-});
-
-// Arrow function shorthand
-el.addEventListener('click', (e) => console.log(e));
-
-// Remove event listener
-el.removeEventListener('click', handler);
-
-// Common events
-el.addEventListener('click', handler);       // Click
-el.addEventListener('dblclick', handler);    // Double click
-el.addEventListener('mouseover', handler);   // Mouse enter
-el.addEventListener('mouseout', handler);    // Mouse leave
-el.addEventListener('keydown', handler);     // Key pressed
-el.addEventListener('keyup', handler);       // Key released
-el.addEventListener('submit', handler);      // Form submit
-el.addEventListener('change', handler);      // Input change
-el.addEventListener('input', handler);       // Input value change
-window.addEventListener('load', handler);    // Page loaded
-window.addEventListener('scroll', handler);  // Page scroll
-window.addEventListener('resize', handler);  // Window resize
-
-// Prevent default behavior
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-});`,
-      },
-      {
-        id: 'json',
-        title: 'JSON',
-        description: 'Work with JSON data format:',
-        language: 'javascript',
-        code: `// Convert object to JSON string
-const user = { name: 'John', age: 30 };
-const jsonString = JSON.stringify(user);
-// '{"name":"John","age":30}'
-
-// Pretty print
-JSON.stringify(user, null, 2);
-
-// Convert JSON string to object
-const parsed = JSON.parse(jsonString);
-parsed.name; // 'John'
-
-// Deep clone an object
-const clone = JSON.parse(JSON.stringify(original));`,
-      },
-      {
-        id: 'local-storage',
-        title: 'Local Storage',
-        description: 'Store data in the browser:',
-        language: 'javascript',
-        code: `// Save data
-localStorage.setItem('username', 'John');
-localStorage.setItem('age', '30');
-
-// Get data
-let username = localStorage.getItem('username'); // "John"
-
-// Remove one item
-localStorage.removeItem('username');
-
-// Clear all data
-localStorage.clear();
-
-// Store objects (convert to JSON first)
-let user = { name: 'John', age: 30 };
-localStorage.setItem('user', JSON.stringify(user));
-
-// Retrieve objects
-let storedUser = JSON.parse(localStorage.getItem('user'));
-console.log(storedUser.name); // "John"`,
-      },
-      {
-        id: 'fetch-api',
-        title: 'Fetch API',
-        description: 'Get data from servers:',
-        language: 'javascript',
-        code: `// Simple GET request
-fetch('https://api.example.com/data')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
-
-// Async/await version (modern way)
-async function getData() {
-  try {
-    const response = await fetch('https://api.example.com/data');
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-// POST request (send data)
-fetch('https://api.example.com/users', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name: 'John', age: 30 })
-})
-  .then(res => res.json())
-  .then(data => console.log(data));`,
+        code: "class Person {\n  // Fields\n  #privateField = 0 // Private field (modern)\n  static count = 0\n\n  constructor(name, age) {\n    this.name = name\n    this.age = age\n    Person.count++\n  }\n\n  // Method\n  greet() {\n    return `Hello, my name is ${this.name}`\n  }\n\n  // Getter/setter\n  get info() {\n    return `${this.name}, ${this.age}`\n  }\n  set info(value) {\n    ;[this.name, this.age] = value.split(',')\n  }\n\n  // Static method\n  static create(name, age) {\n    return new Person(name, age)\n  }\n\n  // Private method\n  #privateMethod() {\n    return 'private'\n  }\n}\n\nconst person = new Person('John', 30)\nconsole.log(person.greet())\n\n// Inheritance\nclass Student extends Person {\n  constructor(name, age, school) {\n    super(name, age)\n    this.school = school\n  }\n\n  study() {\n    return `${this.name} is studying at ${this.school}`\n  }\n\n  // Override\n  greet() {\n    return super.greet() + ', a student'\n  }\n}\n\n// instanceof check\nperson instanceof Person",
       },
       {
         id: 'error-handling',
         title: 'Error Handling',
         description: 'Handle errors gracefully:',
         language: 'javascript',
-        code: `// Try-catch
-try {
-  const result = riskyOperation();
-} catch (error) {
-  console.error('An error occurred:', error);
-} finally {
-  console.log('Cleanup code — always runs');
-}
-
-// Throw custom errors
-function divide(a, b) {
-  if (b === 0) {
-    throw new Error('Cannot divide by zero');
-  }
-  return a / b;
-}
-
-try {
-  divide(10, 0);
-} catch (error) {
-  console.error(error.message); // "Cannot divide by zero"
-}`,
+        code: "try {\n  let result = riskyOperation()\n} catch (error) {\n  console.error('Error:', error.message)\n} finally {\n  console.log('Cleanup')\n}\n\n// Throw custom errors\nfunction divide(a, b) {\n  if (b === 0) {\n    throw new Error('Cannot divide by zero')\n  }\n  return a / b\n}\n\n// Custom error classes\nclass CustomError extends Error {\n  constructor(message) {\n    super(message)\n    this.name = 'CustomError'\n  }\n}\n\ntry {\n  throw new CustomError('Something failed')\n} catch (e) {\n  console.log(e.name, e.message)\n}",
+      },
+      {
+        id: 'promises-async-await',
+        title: 'Promises & Async/Await',
+        description: 'Handle asynchronous operations:',
+        language: 'javascript',
+        code: "// Creating a promise\nconst myPromise = new Promise((resolve, reject) => {\n  setTimeout(() => {\n    resolve('Success!')\n    // or reject(new Error(\"Failed\"));\n  }, 1000)\n})\n\n// Using .then/.catch\nmyPromise\n  .then((result) => console.log(result))\n  .catch((error) => console.error(error))\n  .finally(() => console.log('Done'))\n\n// Async/await (modern, preferred)\nasync function getData() {\n  try {\n    const result = await myPromise\n    console.log(result)\n  } catch (error) {\n    console.error(error)\n  }\n}\n\n// Multiple promises\nasync function getMultiple() {\n  const [result1, result2] = await Promise.all([promise1, promise2])\n}\n\n// Promise.race, Promise.allSettled, Promise.any\nPromise.race([promise1, promise2]) // First to complete\nPromise.allSettled([promise1, promise2]) // All results (success/fail)\nPromise.any([promise1, promise2]) // First to succeed\n\n// Fetch API\nasync function fetchData() {\n  const response = await fetch('https://api.example.com/data')\n  const data = await response.json()\n  return data\n}",
+      },
+      {
+        id: 'modules',
+        title: 'Modules',
+        description: 'Organize code across files:',
+        language: 'javascript',
+        code: "// math.js - named exports\nexport function add(a, b) {\n  return a + b\n}\nexport const PI = 3.14159\n\n// Default export\nexport default function multiply(a, b) {\n  return a * b\n}\n\n// app.js - import\nimport multiply, { add, PI } from './math.js'\nimport * as math from './math.js'\n\n// Dynamic import\nconst module = await import('./math.js')",
+      },
+      {
+        id: 'regular-expressions',
+        title: 'Regular Expressions',
+        description: 'Pattern matching:',
+        language: 'javascript',
+        code: "const pattern = /\\d+/\nconst text = 'I have 5 apples'\n\n// Test and match\npattern.test(text) // true\ntext.match(pattern) // [\"5\"]\ntext.match(/\\d+/g) // All matches\n\n// Replace with regex\ntext.replace(/\\d+/, 'many')\ntext.replace(/(\\d+)/, '[$1]')\n\n// Common patterns\n;/^\\d+$/ // Only digits\n;/^[a-zA-Z]+$/ // Only letters\n;/\\S+@\\S+\\.\\S+/ // Basic email\n;/^https?:\\/\\// // URL\n\n// Named groups\nconst re = /(?<year>\\d{4})-(?<month>\\d{2})/\nconst match = '2024-12'.match(re)\nconsole.log(match.groups.year)",
+      },
+      {
+        id: 'dom-manipulation',
+        title: 'DOM Manipulation',
+        description: 'Interact with HTML elements:',
+        language: 'javascript',
+        code: "// Select elements\ndocument.getElementById('myId')\ndocument.querySelector('.myClass')\ndocument.querySelectorAll('.myClass')\n\n// Modify content\nelement.textContent = 'New text'\nelement.innerHTML = '<b>Bold</b>'\nelement.value = 'New value'\n\n// Modify attributes/styles\nelement.setAttribute('src', 'image.jpg')\nelement.classList.add('active')\nelement.classList.toggle('show')\nelement.style.color = 'red'\n\n// Create/insert/remove elements\nconst div = document.createElement('div')\ndocument.body.appendChild(div)\nelement.remove()\n\n// Events\nelement.addEventListener('click', (e) => {\n  e.preventDefault()\n  console.log('Clicked', e.target)\n})",
+      },
+      {
+        id: 'timing-functions',
+        title: 'Timing Functions',
+        description: 'Execute code after delays:',
+        language: 'javascript',
+        code: "// setTimeout / clearTimeout\nconst timer = setTimeout(() => console.log('Delayed'), 1000)\nclearTimeout(timer)\n\n// setInterval / clearInterval\nconst interval = setInterval(() => console.log('Tick'), 1000)\nclearInterval(interval)",
+      },
+      {
+        id: 'json',
+        title: 'JSON',
+        description: 'Work with JSON data:',
+        language: 'javascript',
+        code: "const obj = { name: 'John', age: 30 }\n\n// Object to JSON string\nconst json = JSON.stringify(obj)\nconst prettyJson = JSON.stringify(obj, null, 2)\n\n// JSON string to object\nconst parsed = JSON.parse(json)",
       },
       {
         id: 'common-patterns',
         title: 'Common Patterns',
-        description: "Useful patterns you'll use often:",
+        description: "Useful code patterns you'll use often:",
         language: 'javascript',
-        code: `// Destructuring arrays
-const [first, second] = ['apple', 'banana', 'orange'];
-
-// Destructuring objects
-const { name, age } = { name: 'John', age: 30 };
-
-// Default value with OR operator
-const username = inputValue || 'Guest';
-
-// Nullish coalescing (only null/undefined)
-const name = userName ?? 'Anonymous';
-
-// Optional chaining
-const city = user?.address?.city;
-
-// Spread operator
-const all = [...arr1, ...arr2];
-const merged = { ...obj1, ...obj2 };
-
-// Random number in range
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// Convert to boolean
-const bool = Boolean(value);
-const bool2 = !!value;`,
+        code: "// Optional chaining and nullish coalescing\nconst city = user?.address?.city ?? 'Unknown'\n\n// Destructuring with defaults\nfunction greet({ name = 'Guest', age = 0 } = {}) {\n  console.log(name, age)\n}\n\n// Array/object spread\nconst combined = [...arr1, ...arr2]\nconst mergedObj = { ...obj1, ...obj2 }\n\n// Conditional (short-circuit) rendering\nvalue && doSomething()\n\n// Debounce pattern\nfunction debounce(fn, delay) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), delay)\n  }\n}\n\n// Memoization\nfunction memoize(fn) {\n  const cache = new Map()\n  return (...args) => {\n    const key = JSON.stringify(args)\n    if (cache.has(key)) return cache.get(key)\n    const result = fn(...args)\n    cache.set(key, result)\n    return result\n  }\n}\n\n// Currying\nconst curry = (a) => (b) => (c) => a + b + c\ncurry(1)(2)(3) // 6\n\n// Chaining array methods\nconst result = [1, 2, 3, 4, 5]\n  .filter((n) => n % 2 === 0)\n  .map((n) => n * 2)\n  .reduce((a, b) => a + b, 0)",
       },
       {
         id: 'console-methods',
         title: 'Console Methods',
         description: 'Debug your code:',
         language: 'javascript',
-        code: `console.log('Normal message');
-console.error('Error message');
-console.warn('Warning message');
-console.info('Info message');
-console.table([
-  { name: 'John', age: 30 },
-  { name: 'Jane', age: 25 }
-]);
-console.group('Group');
-console.log('Inside group');
-console.groupEnd();
-console.time('timer');
-// ... some code
-console.timeEnd('timer'); // Shows elapsed time`,
+        code: "console.log('Normal message')\nconsole.error('Error message')\nconsole.warn('Warning message')\nconsole.table([{ name: 'John', age: 30 }])\nconsole.group('Group name')\nconsole.groupEnd()\nconsole.time('Timer')\nconsole.timeEnd('Timer')\nconsole.assert(false, 'Assertion message')\nconsole.count('counter')",
       },
     ],
   },
-
   php: {
     lang: 'php',
     label: 'PHP',
@@ -1343,359 +1015,161 @@ console.timeEnd('timer'); // Shows elapsed time`,
     color: '#777bb4',
     sections: [
       {
+        id: 'setup',
+        title: 'Setup',
+        description: 'Run PHP code:',
+        language: 'php',
+        code: '# Check PHP version\nphp -v\n\n# Run a PHP file\nphp script.php\n\n# Start built-in development server\nphp -S localhost:8000\n\n<?php\n// PHP code goes here\necho "Hello World";\n?>',
+      },
+      {
         id: 'basic-syntax',
         title: 'Basic Syntax',
         description: 'PHP code structure:',
         language: 'php',
-        code: `<?php
-// Single line comment
-
-/* Multi-line
-   comment */
-
-// Echo (output to screen)
-echo "Hello World";
-echo "Hello", " ", "World"; // Multiple items
-
-// Print (similar to echo)
-print "Hello World";
-
-// Variables start with $
-$name = "John";
-echo $name;
-?>`,
+        code: '<?php\n// Single line comment\n# Also a single line comment\n\n/* Multi-line\n   comment */\n\n// Echo (output to screen)\necho "Hello World";\necho "Hello", " ", "World";  // Multiple items, comma separated\nprint "Hello World";          // Similar to echo, returns 1\n\n// PHP tags\n?>\n<h1>HTML content</h1>\n<?php\necho "Back in PHP";\n\n// Short echo tag\n?>\n<p><?= "Shorthand for echo" ?></p>\n<?php',
       },
       {
         id: 'variables',
         title: 'Variables',
         description: 'Store and use data:',
         language: 'php',
-        code: `<?php
-// Variable declaration
-$text = "Hello";
-$number = 42;
-$decimal = 3.14;
-$isTrue = true;
-$isEmpty = null;
-
-// Variable names are case-sensitive
-$name = "John";
-$Name = "Jane"; // Different variable
-
-// Check if variable exists
-isset($name);     // true if exists and not null
-empty($name);     // true if empty or null
-unset($name);     // Delete variable
-
-// Constants (cannot be changed)
-define("SITE_NAME", "My Website");
-echo SITE_NAME;
-
-// Modern constant syntax
-const PI = 3.14159;
-?>`,
+        code: '<?php\n// Variables start with $\n$text = "Hello";\n$number = 42;\n$decimal = 3.14;\n$isTrue = true;\n$isEmpty = null;\n\n// Case-sensitive\n$name = "John";\n$Name = "Jane";  // Different variable\n\n// Multiple assignment\n$a = $b = $c = 0;\n\n// Variable variables\n$varName = "hello";\n$$varName = "world";  // Creates $hello = "world"\n\n// Check/manage variables\nisset($name);        // true if exists and not null\nempty($name);         // true if empty/falsy\nunset($name);          // Delete variable\nis_null($name);          // true if null\n\n// Constants\ndefine("SITE_NAME", "My Website");\nconst PI = 3.14159;      // Modern syntax\necho SITE_NAME;\n\n// Superglobals (built-in)\n$_GET, $_POST, $_SESSION, $_COOKIE, $_SERVER, $_FILES, $_ENV, $GLOBALS',
       },
       {
         id: 'data-types',
         title: 'Data Types',
-        description: 'PHP data types:',
+        description: 'Different types of values:',
         language: 'php',
-        code: `<?php
-$str    = "Hello World";   // String
-$int    = 42;              // Integer
-$float  = 3.14;            // Float
-$bool   = true;            // Boolean
-$null   = null;            // Null
-$arr    = [1, 2, 3];       // Array
-$obj    = new stdClass();  // Object
-
-// Check types
-gettype($str);     // "string"
-is_string($str);   // true
-is_int($int);      // true
-is_float($float);  // true
-is_bool($bool);    // true
-is_null($null);    // true
-is_array($arr);    // true
-
-// Type casting
-(int)"42";         // 42
-(float)"3.14";     // 3.14
-(string)42;        // "42"
-(bool)1;           // true
-?>`,
+        code: '<?php\n// String\n$text = "Hello World";\n$text2 = \'Single quotes (no variable interpolation)\';\n\n// Integer\n$age = 25;\n$negative = -10;\n$hex = 0x1A;\n$octal = 0o17;      // PHP 8.1+\n$binary = 0b1010;\n\n// Float\n$price = 9.99;\n\n// Boolean\n$isActive = true;\n$isDeleted = false;\n\n// Array (indexed)\n$fruits = ["apple", "banana", "orange"];\n$numbers = array(1, 2, 3);\n\n// Array (associative)\n$person = ["name" => "John", "age" => 30];\n\n// Null\n$empty = null;\n\n// Object\nclass Person {}\n$obj = new Person();\n\n// Type checking\nvar_dump($age);           // Type and value\ngettype($age);              // "integer"\nis_string($text);\nis_int($age);\nis_float($price);\nis_bool($isActive);\nis_array($fruits);\nis_object($obj);\nis_null($empty);\nis_numeric($age);\nis_callable($func);\n\n// Type conversion\n(int) "42";                 // 42\n(float) "3.14";\n(string) 42;\n(bool) 1;\n(array) $obj;\n\nsettype($age, "string");    // Modify variable\'s type',
       },
       {
         id: 'strings',
         title: 'Strings',
-        description: 'Working with text in PHP:',
+        description: 'Working with text:',
         language: 'php',
-        code: `<?php
-$text = "Hello World";
-
-// String functions
-strlen($text);              // 11 (length)
-strtolower($text);          // "hello world"
-strtoupper($text);          // "HELLO WORLD"
-trim($text);                // Remove whitespace
-str_replace("World","PHP",$text); // "Hello PHP"
-strpos($text, "World");     // 6 (position, or false)
-substr($text, 0, 5);        // "Hello"
-str_repeat("abc", 3);       // "abcabcabc"
-str_pad("5", 3, "0", STR_PAD_LEFT); // "005"
-explode(" ", $text);        // ["Hello", "World"]
-implode(", ", ["a","b"]);   // "a, b"
-sprintf("Name: %s, Age: %d", "John", 30);
-
-// Heredoc (multiline string)
-$html = <<<EOT
-<div>
-  <p>Hello $text</p>
-</div>
-EOT;
-?>`,
+        code: '<?php\n$text = "Hello World";\n\n// Length\nstrlen($text);                     // 11\n\n// Case\nstrtoupper($text);                  // "HELLO WORLD"\nstrtolower($text);                   // "hello world"\nucfirst("hello");                     // "Hello"\nucwords("hello world");                // "Hello World"\nlcfirst("Hello");                       // "hello"\n\n// Search\nstrpos($text, "World");                  // 6\nstrrpos($text, "o");                      // Last occurrence\nstr_contains($text, "World");              // true (PHP 8+)\nstr_starts_with($text, "Hello");            // true (PHP 8+)\nstr_ends_with($text, "World");               // true (PHP 8+)\n\n// Replace\nstr_replace("World", "PHP", $text);           // "Hello PHP"\nstr_ireplace("world", "PHP", $text);           // Case-insensitive\n\n// Extract\nsubstr($text, 0, 5);                             // "Hello"\nsubstr($text, 6);                                 // "World"\nsubstr($text, -5);                                 // "World"\n\n// Trim\ntrim("  hello  ");                                  // "hello"\nltrim("  hello");\nrtrim("hello  ");\n\n// Split/join\nexplode(" ", $text);                                  // ["Hello", "World"]\nimplode(" ", ["Hello", "World"]);                       // "Hello World"\njoin(", ", ["a", "b", "c"]);                              // "a, b, c"\n\n// Repeat/reverse\nstr_repeat("Ha", 3);                                        // "HaHaHa"\nstrrev($text);                                                // "dlroW olleH"\n\n// Format\nsprintf("Name: %s, Age: %d", "John", 30);\nnumber_format(1234.5678, 2);                                    // "1,234.57"\n\n// Padding\nstr_pad("5", 3, "0", STR_PAD_LEFT);                                // "005"\n\n// Comparison\nstrcmp("abc", "abd");                                                // Negative\nstrcasecmp("ABC", "abc");                                             // 0\n\n// Multi-byte functions (for unicode)\nmb_strlen($text);\nmb_strtoupper($text);\n\n// Heredoc/Nowdoc syntax\n$name = "John";\n$heredoc = <<<EOT\nHello, $name!\nThis is a heredoc string.\nEOT;\n\n$nowdoc = <<<\'EOT\'\nHello, $name! (not interpolated)\nEOT;',
+      },
+      {
+        id: 'numbers',
+        title: 'Numbers',
+        description: 'Working with numbers:',
+        language: 'php',
+        code: '<?php\n// Math operations\n$sum = 5 + 3;\n$diff = 5 - 3;\n$product = 5 * 3;\n$quotient = 6 / 3;\n$remainder = 7 % 3;\n$power = 2 ** 3;              // 8\n\n// Increment/decrement\n$count = 0;\n$count++;\n$count--;\n$count += 5;\n$count -= 2;\n$count *= 2;\n$count /= 3;\n\n// Math functions\nabs(-5);\nround(3.7);\nround(3.14159, 2);\nceil(3.3);\nfloor(3.7);\nmax(1, 5, 3);\nmin(1, 5, 3);\nsqrt(16);\npow(2, 3);\nintdiv(7, 2);              // 3 (integer division)\n\n// Random\nrand();\nrand(1, 10);\nmt_rand(1, 100);           // Faster\nrandom_int(1, 100);         // Cryptographically secure\n\n// Formatting\nnumber_format(1234.567, 2);      // "1,234.57"\n\n// Type conversion\nintval("42");\nfloatval("3.14");\nstrval(42);',
       },
       {
         id: 'arrays',
         title: 'Arrays',
-        description: 'Working with arrays in PHP:',
+        description: 'Working with lists and key-value data:',
         language: 'php',
-        code: `<?php
-// Indexed array
-$fruits = ["apple", "banana", "orange"];
-$fruits[] = "grape"; // Add to end
-
-// Associative array (like an object)
-$person = [
-  "name" => "John",
-  "age"  => 30,
-  "city" => "Manila"
-];
-
-// Access
-echo $fruits[0];        // "apple"
-echo $person["name"];   // "John"
-
-// Array functions
-count($fruits);         // 4
-array_push($fruits, "mango"); // Add to end
-array_pop($fruits);           // Remove from end
-array_shift($fruits);         // Remove from beginning
-array_unshift($fruits, "kiwi"); // Add to beginning
-in_array("apple", $fruits);   // true
-array_search("banana", $fruits); // 1 (index)
-sort($fruits);                // Sort ascending
-rsort($fruits);               // Sort descending
-ksort($person);               // Sort by key
-array_merge($arr1, $arr2);    // Merge arrays
-array_slice($fruits, 1, 2);   // Get slice
-array_map(fn($f) => strtoupper($f), $fruits); // Map
-array_filter($fruits, fn($f) => strlen($f) > 5); // Filter
-?>`,
-      },
-      {
-        id: 'functions',
-        title: 'Functions',
-        description: 'Define and use functions:',
-        language: 'php',
-        code: `<?php
-// Basic function
-function greet($name) {
-  return "Hello, $name!";
-}
-echo greet("John"); // "Hello, John!"
-
-// Default parameters
-function greet($name = "World") {
-  return "Hello, $name!";
-}
-
-// Type hints (PHP 7+)
-function add(int $a, int $b): int {
-  return $a + $b;
-}
-
-// Variable number of arguments
-function sum(...$numbers) {
-  return array_sum($numbers);
-}
-echo sum(1, 2, 3, 4); // 10
-
-// Anonymous function (closure)
-$multiply = function($a, $b) {
-  return $a * $b;
-};
-
-// Arrow function (PHP 7.4+)
-$double = fn($n) => $n * 2;
-echo $double(5); // 10
-?>`,
+        code: '<?php\n// Indexed array\n$fruits = ["apple", "banana", "orange"];\n\n// Associative array\n$person = ["name" => "John", "age" => 30];\n\n// Access elements\n$fruits[0];                       // "apple"\n$person["name"];                    // "John"\n\n// Length\ncount($fruits);\nsizeof($fruits);\n\n// Add elements\n$fruits[] = "grape";\narray_push($fruits, "mango", "kiwi");\narray_unshift($fruits, "pear");     // Add to beginning\n\n// Remove elements\narray_pop($fruits);                    // Remove last\narray_shift($fruits);                   // Remove first\nunset($fruits[0]);                       // Remove by key\n\n// Search\nin_array("banana", $fruits);\narray_search("banana", $fruits);\narray_key_exists("name", $person);\nisset($person["name"]);\n\n// Merge and combine\narray_merge($arr1, $arr2);\narray_combine(["a", "b"], [1, 2]);      // ["a" => 1, "b" => 2]\n\n// Slice and splice\narray_slice($fruits, 1, 2);\narray_splice($fruits, 1, 1, ["new"]);\n\n// Sorting\nsort($fruits);                            // Sort ascending, reindex\nrsort($fruits);                            // Sort descending\nasort($person);                             // Sort by value, keep keys\nksort($person);                              // Sort by key\nusort($fruits, function($a, $b) {\n    return strlen($a) - strlen($b);\n});\n\n// Unique/reverse\narray_unique([1, 2, 2, 3]);\narray_reverse($fruits);\n\n// Keys and values\narray_keys($person);\narray_values($person);\n\n// Functional operations\narray_map(fn($x) => $x * 2, [1, 2, 3]);\narray_filter([1, 2, 3, 4], fn($x) => $x > 2);\narray_reduce([1, 2, 3], fn($carry, $item) => $carry + $item, 0);\n\n// Sum/count\narray_sum([1, 2, 3]);\narray_product([1, 2, 3]);\n\n// Check empty\nempty($fruits);\n\n// Loop through arrays\nforeach ($fruits as $fruit) {\n    echo $fruit;\n}\n\nforeach ($person as $key => $value) {\n    echo "$key: $value";\n}\n\n// Multidimensional arrays\n$users = [\n    ["name" => "John", "age" => 30],\n    ["name" => "Jane", "age" => 25]\n];\n\nforeach ($users as $user) {\n    echo $user["name"];\n}\n\n// Spread operator (PHP 7.4+)\n$arr1 = [1, 2, 3];\n$arr2 = [...$arr1, 4, 5];\n\n// Array destructuring\n[$a, $b, $c] = [1, 2, 3];\n["name" => $name, "age" => $age] = $person;',
       },
       {
         id: 'conditionals',
         title: 'Conditionals',
-        description: 'Make decisions in PHP:',
+        description: 'Make decisions in code:',
         language: 'php',
-        code: `<?php
-// If / else if / else
-if ($age >= 18) {
-  echo "Adult";
-} elseif ($age >= 13) {
-  echo "Teenager";
-} else {
-  echo "Child";
-}
-
-// Ternary operator
-$status = $age >= 18 ? "Adult" : "Minor";
-
-// Null coalescing operator
-$name = $username ?? "Anonymous";
-
-// Switch statement
-switch ($day) {
-  case "Monday":
-    echo "Start of week";
-    break;
-  case "Friday":
-    echo "End of week";
-    break;
-  default:
-    echo "Midweek";
-}
-
-// Match expression (PHP 8+)
-$result = match($status) {
-  1 => "Active",
-  2 => "Inactive",
-  default => "Unknown"
-};
-?>`,
+        code: '<?php\n// If statement\n$age = 18;\nif ($age >= 18) {\n    echo "Adult";\n}\n\n// If-else\nif ($age >= 18) {\n    echo "Adult";\n} else {\n    echo "Minor";\n}\n\n// If-elseif-else\n$score = 85;\nif ($score >= 90) {\n    echo "A";\n} elseif ($score >= 80) {\n    echo "B";\n} else {\n    echo "F";\n}\n\n// Comparison operators\n5 == "5";       // true (loose)\n5 === "5";      // false (strict)\n5 != "5";       // false (loose)\n5 !== "5";      // true (strict)\n5 > 3; 5 < 3; 5 >= 5; 5 <= 3;\n5 <=> 3;        // Spaceship: -1, 0, or 1\n\n// Logical operators\n$isAdult = $age >= 18 && $age < 65;\n$canVote = $age >= 18 || $isCitizen;\n$isNotStudent = !$isStudent;\n\n// Ternary operator\n$status = $age >= 18 ? "Adult" : "Minor";\n\n// Null coalescing\n$name = $_GET[\'name\'] ?? "Guest";\n$name ??= "Default";     // Assign if null\n\n// Switch statement\n$day = 2;\nswitch ($day) {\n    case 1:\n        echo "Monday";\n        break;\n    case 2:\n        echo "Tuesday";\n        break;\n    default:\n        echo "Other day";\n}\n\n// Match expression (PHP 8+, strict comparison, no break needed)\n$result = match($day) {\n    1 => "Monday",\n    2 => "Tuesday",\n    3, 4 => "Wed or Thu",\n    default => "Other day"\n};',
       },
       {
         id: 'loops',
         title: 'Loops',
-        description: 'Repeat code in PHP:',
+        description: 'Repeat code multiple times:',
         language: 'php',
-        code: `<?php
-// for loop
-for ($i = 0; $i < 5; $i++) {
-  echo $i; // 0, 1, 2, 3, 4
-}
-
-// while loop
-$i = 0;
-while ($i < 5) {
-  echo $i;
-  $i++;
-}
-
-// do...while (runs at least once)
-$i = 0;
-do {
-  echo $i;
-  $i++;
-} while ($i < 5);
-
-// foreach (arrays)
-$fruits = ["apple", "banana", "orange"];
-foreach ($fruits as $fruit) {
-  echo $fruit;
-}
-
-// foreach with key
-$person = ["name" => "John", "age" => 30];
-foreach ($person as $key => $value) {
-  echo "$key: $value";
-}
-?>`,
+        code: '<?php\n// For loop\nfor ($i = 0; $i < 5; $i++) {\n    echo $i;\n}\n\n// While loop\n$count = 0;\nwhile ($count < 5) {\n    echo $count;\n    $count++;\n}\n\n// Do-while loop\n$num = 0;\ndo {\n    echo $num;\n    $num++;\n} while ($num < 5);\n\n// Foreach loop\n$fruits = ["apple", "banana"];\nforeach ($fruits as $fruit) {\n    echo $fruit;\n}\n\nforeach ($fruits as $index => $fruit) {\n    echo "$index: $fruit";\n}\n\n// Break/continue\nfor ($i = 0; $i < 10; $i++) {\n    if ($i === 5) break;\n    if ($i === 2) continue;\n    echo $i;\n}\n\n// Alternative syntax (useful in templates)\nfor ($i = 0; $i < 5; $i++):\n    echo $i;\nendfor;\n\nif ($age >= 18):\n    echo "Adult";\nelse:\n    echo "Minor";\nendif;',
+      },
+      {
+        id: 'functions',
+        title: 'Functions',
+        description: 'Reusable blocks of code:',
+        language: 'php',
+        code: '<?php\n// Basic function\nfunction greet() {\n    echo "Hello!";\n}\n\n// With parameters\nfunction sayHello($name) {\n    echo "Hello, $name!";\n}\n\n// With return value\nfunction add($a, $b) {\n    return $a + $b;\n}\n$result = add(5, 3);\n\n// Default parameters\nfunction greetUser($name = "Guest") {\n    return "Hello, $name!";\n}\n\n// Type hints and return types (PHP 7+)\nfunction sum(int $a, int $b): int {\n    return $a + $b;\n}\n\n// Nullable types\nfunction findUser(?int $id): ?string {\n    return $id ? "User$id" : null;\n}\n\n// Union types (PHP 8+)\nfunction process(int|string $value): string {\n    return (string) $value;\n}\n\n// Variadic functions\nfunction addAll(...$numbers) {\n    return array_sum($numbers);\n}\naddAll(1, 2, 3, 4);\n\n// Named arguments (PHP 8+)\nfunction createUser(string $name, int $age, string $city = "Unknown") {}\ncreateUser(name: "John", city: "NYC", age: 30);\n\n// Anonymous functions (closures)\n$multiply = function($a, $b) {\n    return $a * $b;\n};\n\n// Closures with "use" (capture outer variables)\n$factor = 2;\n$multiplyBy = function($x) use ($factor) {\n    return $x * $factor;\n};\n\n// Arrow functions (PHP 7.4+, auto-captures outer scope)\n$square = fn($x) => $x * $x;\n\n// Pass by reference\nfunction increment(&$value) {\n    $value++;\n}\n$num = 5;\nincrement($num);  // $num is now 6\n\n// First-class callable syntax (PHP 8.1+)\n$fn = strlen(...);',
       },
       {
         id: 'superglobals',
         title: 'Superglobals',
-        description: 'Built-in global variables in PHP:',
+        description: 'Built-in global variables:',
         language: 'php',
-        code: `<?php
-// $_GET — URL query string parameters
-// URL: page.php?name=John&age=30
-$name = $_GET['name']; // "John"
-
-// $_POST — Form POST data
-$username = $_POST['username'];
-
-// $_REQUEST — Both GET and POST
-$data = $_REQUEST['field'];
-
-// $_SERVER — Server and environment info
-$_SERVER['PHP_SELF'];       // Current script path
-$_SERVER['REQUEST_METHOD']; // "GET" or "POST"
-$_SERVER['HTTP_HOST'];      // "example.com"
-
-// $_SESSION — Session data
-session_start();
-$_SESSION['user'] = 'John';
-echo $_SESSION['user'];
-session_destroy(); // End session
-
-// $_COOKIE — Cookie data
-setcookie("user", "John", time() + 86400);
-echo $_COOKIE['user'];
-
-// $_FILES — File uploads
-$_FILES['file']['name'];
-$_FILES['file']['tmp_name'];
-$_FILES['file']['size'];
-?>`,
+        code: "<?php\n// $_GET - URL parameters (?name=John)\n$name = $_GET['name'] ?? '';\n\n// $_POST - Form data\n$username = $_POST['username'] ?? '';\n\n// $_REQUEST - GET, POST, and COOKIE combined\n$value = $_REQUEST['key'];\n\n// $_SERVER - Server info\n$_SERVER['HTTP_HOST'];\n$_SERVER['REQUEST_METHOD'];\n$_SERVER['REMOTE_ADDR'];\n$_SERVER['REQUEST_URI'];\n\n// $_SESSION - Session variables\nsession_start();\n$_SESSION['user_id'] = 123;\n\n// $_COOKIE\nsetcookie(\"username\", \"John\", time() + 3600);\n$username = $_COOKIE['username'] ?? '';\n\n// $_FILES - Uploaded files\n$fileName = $_FILES['upload']['name'];\n$fileTemp = $_FILES['upload']['tmp_name'];\n\n// $_ENV - Environment variables\n$dbPassword = $_ENV['DB_PASSWORD'] ?? '';",
       },
       {
-        id: 'oop',
-        title: 'Object-Oriented PHP',
-        description: 'Classes and objects in PHP:',
+        id: 'forms-validation',
+        title: 'Forms & Validation',
+        description: 'Handle and validate form data:',
         language: 'php',
-        code: `<?php
-class Animal {
-  // Properties
-  public string $name;
-  protected int $age;
-  private string $secret = "shh";
-
-  // Constructor
-  public function __construct(string $name, int $age) {
-    $this->name = $name;
-    $this->age  = $age;
-  }
-
-  // Method
-  public function speak(): string {
-    return "I am {$this->name}";
-  }
-
-  // Static method
-  public static function create(string $name): self {
-    return new self($name, 0);
-  }
-}
-
-// Inheritance
-class Dog extends Animal {
-  public function speak(): string {
-    return parent::speak() . " and I bark!";
-  }
-}
-
-// Usage
-$dog = new Dog("Buddy", 3);
-echo $dog->speak();
-
-// Interface
-interface Drawable {
-  public function draw(): string;
-}
-?>`,
+        code: "<?php\n// Check request method\nif ($_SERVER['REQUEST_METHOD'] === 'POST') {\n    $username = $_POST['username'] ?? '';\n    $email = $_POST['email'] ?? '';\n}\n\n// Validate not empty\nif (empty($_POST['username'])) {\n    echo \"Username is required\";\n}\n\n// Validate email\nif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {\n    echo \"Invalid email\";\n}\n\n// Validate URL / int\nfilter_var($url, FILTER_VALIDATE_URL);\nfilter_var($number, FILTER_VALIDATE_INT);\n\n// Sanitize\nhtmlspecialchars($_POST['username']);          // Prevent XSS\nfilter_var($email, FILTER_SANITIZE_EMAIL);\n\n// Redirect after processing\nheader(\"Location: success.php\");\nexit;",
+      },
+      {
+        id: 'object-oriented-php',
+        title: 'Object-Oriented PHP',
+        description: 'Classes and objects:',
+        language: 'php',
+        code: '<?php\nclass User {\n    // Properties\n    public string $name;\n    public int $age;\n    private string $password;\n    protected string $role = "user";\n\n    // Constructor\n    public function __construct(string $name, int $age) {\n        $this->name = $name;\n        $this->age = $age;\n    }\n\n    // Constructor property promotion (PHP 8+)\n    // public function __construct(\n    //     public string $name,\n    //     public int $age\n    // ) {}\n\n    // Method\n    public function greet(): string {\n        return "Hello, " . $this->name;\n    }\n\n    // Getter/setter\n    public function setPassword(string $password): void {\n        $this->password = password_hash($password, PASSWORD_DEFAULT);\n    }\n\n    // Static property/method\n    public static int $count = 0;\n\n    public static function create(string $name, int $age): self {\n        self::$count++;\n        return new self($name, $age);\n    }\n\n    // Magic methods\n    public function __toString(): string {\n        return "User: {$this->name}";\n    }\n}\n\n// Create object\n$user = new User("John", 30);\necho $user->name;\necho $user->greet();\n\n// Inheritance\nclass Admin extends User {\n    public string $role = "admin";\n\n    public function __construct(string $name, int $age) {\n        parent::__construct($name, $age);\n    }\n\n    public function deleteUser(int $userId): void {\n        // Admin-specific method\n    }\n}\n\n// Interfaces\ninterface Shape {\n    public function area(): float;\n}\n\nclass Circle implements Shape {\n    public function __construct(private float $radius) {}\n\n    public function area(): float {\n        return M_PI * $this->radius ** 2;\n    }\n}\n\n// Abstract classes\nabstract class Animal {\n    abstract public function makeSound(): string;\n\n    public function describe(): string {\n        return "Sound: " . $this->makeSound();\n    }\n}\n\nclass Dog extends Animal {\n    public function makeSound(): string {\n        return "Woof";\n    }\n}\n\n// Traits (reusable code across classes)\ntrait Loggable {\n    public function log(string $message): void {\n        echo "[LOG] $message";\n    }\n}\n\nclass Service {\n    use Loggable;\n}\n\n// Enums (PHP 8.1+)\nenum Status: string {\n    case Active = \'active\';\n    case Inactive = \'inactive\';\n\n    public function label(): string {\n        return match($this) {\n            Status::Active => \'Active User\',\n            Status::Inactive => \'Inactive User\',\n        };\n    }\n}\n\n$status = Status::Active;\necho $status->value;\n\n// readonly properties (PHP 8.1+)\nclass Point {\n    public function __construct(\n        public readonly int $x,\n        public readonly int $y\n    ) {}\n}',
+      },
+      {
+        id: 'error-handling',
+        title: 'Error Handling',
+        description: 'Handle errors and exceptions:',
+        language: 'php',
+        code: '<?php\n// Try-catch\ntry {\n    $result = 10 / 0;\n} catch (DivisionByZeroError $e) {\n    echo "Error: " . $e->getMessage();\n} finally {\n    echo "Cleanup";\n}\n\n// Multiple catch types\ntry {\n    // risky code\n} catch (TypeError | ValueError $e) {\n    echo $e->getMessage();\n}\n\n// Throw custom exception\nfunction divide($a, $b) {\n    if ($b === 0) {\n        throw new InvalidArgumentException("Cannot divide by zero");\n    }\n    return $a / $b;\n}\n\n// Custom exception class\nclass CustomException extends Exception {}\n\ntry {\n    throw new CustomException("Custom error");\n} catch (CustomException $e) {\n    echo $e->getMessage();\n}\n\n// Error reporting (development)\nini_set(\'display_errors\', 1);\nerror_reporting(E_ALL);',
+      },
+      {
+        id: 'file-handling',
+        title: 'File Handling',
+        description: 'Read and write files:',
+        language: 'php',
+        code: '<?php\n// Read entire file\n$content = file_get_contents("file.txt");\n\n// Write (overwrite) file\nfile_put_contents("file.txt", "Hello World");\n\n// Append to file\nfile_put_contents("file.txt", "New line\\n", FILE_APPEND);\n\n// Read lines into array\n$lines = file("file.txt");\n\n// Open/read/write/close (lower-level)\n$file = fopen("file.txt", "r");\nwhile (!feof($file)) {\n    echo fgets($file);\n}\nfclose($file);\n\n// Check existence, delete, copy, rename\nfile_exists("file.txt");\nunlink("file.txt");\ncopy("source.txt", "dest.txt");\nrename("old.txt", "new.txt");\n\n// Directories\nmkdir("newfolder");\nrmdir("folder");\nscandir(".");',
+      },
+      {
+        id: 'include-files',
+        title: 'Include Files',
+        description: 'Reuse code across pages:',
+        language: 'php',
+        code: '<?php\ninclude "header.php";        // Continues if not found (warning)\nrequire "config.php";          // Stops if not found (fatal error)\ninclude_once "functions.php";    // Include only once\nrequire_once "database.php";',
+      },
+      {
+        id: 'json',
+        title: 'JSON',
+        description: 'Work with JSON data:',
+        language: 'php',
+        code: '<?php\n// Encode array/object to JSON\n$data = ["name" => "John", "age" => 30];\n$json = json_encode($data);\n$prettyJson = json_encode($data, JSON_PRETTY_PRINT);\n\n// Decode JSON\n$array = json_decode($json, true);   // As associative array\n$obj = json_decode($json);             // As object\n\n// Error checking\nif (json_last_error() !== JSON_ERROR_NONE) {\n    echo json_last_error_msg();\n}',
+      },
+      {
+        id: 'date-and-time',
+        title: 'Date and Time',
+        description: 'Work with dates:',
+        language: 'php',
+        code: '<?php\n// Current date/time\necho date("Y-m-d");                  // 2024-12-10\necho date("Y-m-d H:i:s");\n\n// DateTime class (preferred, object-oriented)\n$date = new DateTime();\necho $date->format("Y-m-d H:i:s");\n\n$date->modify("+1 day");\n$date->modify("-1 week");\n\n// Difference between dates\n$date1 = new DateTime("2024-01-01");\n$date2 = new DateTime("2024-12-31");\n$diff = $date1->diff($date2);\necho $diff->days;\n\n// Timestamp\n$timestamp = time();\n$timestamp2 = strtotime("+1 week");\necho date("Y-m-d", $timestamp);\n\n// Immutable dates\n$immutableDate = new DateTimeImmutable();',
+      },
+      {
+        id: 'database-pdo',
+        title: 'Database (PDO)',
+        description: 'Modern, secure database interaction:',
+        language: 'php',
+        code: '<?php\n// Connect\ntry {\n    $pdo = new PDO("mysql:host=localhost;dbname=mydb;charset=utf8mb4", "root", "");\n    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n} catch (PDOException $e) {\n    die("Connection failed: " . $e->getMessage());\n}\n\n// Select\n$stmt = $pdo->query("SELECT * FROM users");\n$users = $stmt->fetchAll();\n\n// Prepared statements (prevents SQL injection)\n$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");\n$stmt->execute([$id]);\n$user = $stmt->fetch();\n\n// Named parameters\n$stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");\n$stmt->execute([\'name\' => \'John\', \'email\' => \'john@example.com\']);\n\n// Get last inserted ID\n$lastId = $pdo->lastInsertId();\n\n// Transactions\n$pdo->beginTransaction();\ntry {\n    $pdo->exec("UPDATE accounts SET balance = balance - 100 WHERE id = 1");\n    $pdo->exec("UPDATE accounts SET balance = balance + 100 WHERE id = 2");\n    $pdo->commit();\n} catch (Exception $e) {\n    $pdo->rollBack();\n}',
+      },
+      {
+        id: 'sessions-cookies',
+        title: 'Sessions & Cookies',
+        description: 'Persist data across requests:',
+        language: 'php',
+        code: "<?php\n// Sessions\nsession_start();\n$_SESSION['user_id'] = 123;\n$userId = $_SESSION['user_id'] ?? null;\nunset($_SESSION['user_id']);\nsession_destroy();\n\n// Cookies\nsetcookie(\"username\", \"John\", time() + 3600);\n$username = $_COOKIE['username'] ?? '';\nsetcookie(\"username\", \"\", time() - 3600);  // Delete cookie",
+      },
+      {
+        id: 'security',
+        title: 'Security',
+        description: 'Common security practices:',
+        language: 'php',
+        code: '<?php\n// Prevent XSS\necho htmlspecialchars($userInput);\n\n// Prevent SQL injection (use prepared statements, not string concatenation)\n\n// Password hashing\n$hash = password_hash($password, PASSWORD_DEFAULT);\nif (password_verify($password, $hash)) {\n    echo "Password correct";\n}\n\n// CSRF token\nsession_start();\n$_SESSION[\'token\'] = bin2hex(random_bytes(32));\n// In form: <input type="hidden" name="token" value="<?= $_SESSION[\'token\'] ?>">\nif ($_POST[\'token\'] !== $_SESSION[\'token\']) {\n    die("Invalid token");\n}\n\n// Filter input\nfilter_var($email, FILTER_VALIDATE_EMAIL);\nfilter_var($input, FILTER_SANITIZE_STRING);',
+      },
+      {
+        id: 'common-patterns',
+        title: 'Common Patterns',
+        description: 'Frequently used PHP patterns:',
+        language: 'php',
+        code: "<?php\n// Null-safe operator (PHP 8+)\n$city = $user?->address?->city;\n\n// Array unpacking with keys (PHP 8.1+)\n$defaults = ['color' => 'red', 'size' => 'M'];\n$options = [...$defaults, 'size' => 'L'];\n\n// Str_contains and friends (PHP 8+)\nif (str_contains($text, \"search\")) { }\n\n// Match with no arg (like switch true)\n$grade = match(true) {\n    $score >= 90 => 'A',\n    $score >= 80 => 'B',\n    default => 'F'\n};\n\n// Null coalescing assignment\n$config['debug'] ??= false;\n\n// Spread in function calls\nfunction sum($a, $b, $c) { return $a + $b + $c; }\n$numbers = [1, 2, 3];\nsum(...$numbers);",
       },
     ],
   },
-
   mysql: {
     lang: 'mysql',
     label: 'MySQL',
