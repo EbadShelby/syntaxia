@@ -220,6 +220,38 @@ const languages = [
     badge: 'Language',
     desc: 'A powerful, efficient, lightweight, embeddable scripting language.',
   },
+  {
+    lang: 'dart',
+    label: 'Dart',
+    icon: '/dart.svg',
+    color: '#0175C2',
+    badge: 'Language',
+    desc: 'A client-optimized language for fast apps on any platform.',
+  },
+  {
+    lang: 'ruby',
+    label: 'Ruby',
+    icon: '/ruby.svg',
+    color: '#CC342D',
+    badge: 'Language',
+    desc: 'A dynamic, open source programming language with a focus on simplicity and productivity.',
+  },
+  {
+    lang: 'swift',
+    label: 'Swift',
+    icon: '/swift.svg',
+    color: '#F05138',
+    badge: 'Language',
+    desc: 'A powerful and intuitive programming language for iOS, iPadOS, macOS, tvOS, and watchOS.',
+  },
+  {
+    lang: 'react-native',
+    label: 'React Native',
+    icon: '/react_dark.svg',
+    color: '#61DAFB',
+    badge: 'Framework',
+    desc: 'Create native apps for Android, iOS, and more using React.',
+  },
 ]
 
 const categoryCounts = languages.reduce(

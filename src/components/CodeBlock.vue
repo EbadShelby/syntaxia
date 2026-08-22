@@ -52,6 +52,9 @@ async function highlight() {
     'kotlin',
     'rust',
     'lua',
+    'dart',
+    'ruby',
+    'swift',
   ]
 
   if (!supported.includes(lang)) {
