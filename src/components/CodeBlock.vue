@@ -41,10 +41,13 @@ async function highlight() {
     'blade',
     'python',
     'typescript',
+    'tsx',
+    'jsx',
     'csharp',
     'java',
     'cpp',
     'yaml',
+    'properties',
     'dockerfile',
     'docker',
     'c',
@@ -55,6 +58,8 @@ async function highlight() {
     'dart',
     'ruby',
     'swift',
+    'powershell',
+    'cmd',
   ]
 
   if (!supported.includes(lang)) {

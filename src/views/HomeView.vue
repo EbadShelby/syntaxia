@@ -252,6 +252,46 @@ const languages = [
     badge: 'Framework',
     desc: 'Create native apps for Android, iOS, and more using React.',
   },
+  {
+    lang: 'linux-commands',
+    label: 'Linux Commands',
+    icon: '/bash_dark.svg',
+    color: '#4EAA25',
+    badge: 'Tool',
+    desc: 'Master the command line with essential Linux and Bash commands.',
+  },
+  {
+    lang: 'windows-commands',
+    label: 'Windows Commands',
+    icon: '/powershell.svg',
+    color: '#5391FE',
+    badge: 'Tool',
+    desc: 'Master the Windows command line and PowerShell.',
+  },
+  {
+    lang: 'pandas',
+    label: 'Pandas',
+    icon: '/pandas.svg',
+    color: '#150458',
+    badge: 'Library',
+    desc: 'Powerful data structures for data analysis, time series, and statistics.',
+  },
+  {
+    lang: 'springboot',
+    label: 'Spring Boot',
+    icon: '/spring.svg',
+    color: '#6DB33F',
+    badge: 'Framework',
+    desc: 'Create stand-alone, production-grade Spring based Applications.',
+  },
+  {
+    lang: 'next',
+    label: 'Next.js',
+    icon: '/nextjs_icon_dark.svg',
+    color: '#FFFFFF',
+    badge: 'Framework',
+    desc: 'The React Framework for the Web with built-in SSR and routing.',
+  },
 ]
 
 const categoryCounts = languages.reduce(
