@@ -48,7 +48,7 @@ function scrollToSection(id: string) {
 
     <!-- Mobile: sticky TOC toggle bar -->
     <div
-      class="lg:hidden sticky top-[4rem] z-40 flex items-center justify-between px-4 py-2.5 border-b border-neutral-gray bg-neutral-black/95 backdrop-blur-sm"
+      class="lg:hidden sticky top-16 z-40 flex items-center justify-between px-4 py-2.5 border-b border-neutral-gray bg-neutral-black/95 backdrop-blur-sm"
     >
       <span class="text-xs text-neutral-500 font-base uppercase tracking-widest"
         >{{ topic.label }} Cheatsheet</span
@@ -120,7 +120,7 @@ function scrollToSection(id: string) {
     </Transition>
 
     <!-- Page body -->
-    <div class="flex flex-col lg:flex-row max-w-screen-xl mx-auto">
+    <div class="flex flex-col lg:flex-row max-w-7xl mx-auto">
       <!-- ─── Main content ─────────────────────────────── -->
       <main class="flex-1 px-4 py-6 lg:px-8 lg:py-8 min-w-0 lg:border-r border-neutral-gray">
         <!-- Title -->

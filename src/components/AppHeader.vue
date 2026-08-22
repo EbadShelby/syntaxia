@@ -8,7 +8,7 @@ import SearchBar from '@/components/SearchBar.vue'
   <header
     class="sticky top-0 z-50 border-b border-neutral-gray bg-neutral-black/90 backdrop-blur-sm"
   >
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <!-- Home icon & Wordmark -->
       <RouterLink to="/" class="flex items-center gap-2.5 group">
         <div

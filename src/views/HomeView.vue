@@ -301,7 +301,7 @@ const scrollRight = () => {
     <header
       class="sticky top-0 z-50 border-b border-neutral-gray bg-neutral-black/80 backdrop-blur-md"
     >
-      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <RouterLink to="/" class="flex items-center gap-2.5 group">
           <div
             class="flex items-center justify-center w-9 h-9 border border-neutral-gray rounded-md group-hover:border-primary-lightgreen transition-colors bg-neutral-black"
@@ -364,7 +364,7 @@ const scrollRight = () => {
         style="background: radial-gradient(circle, #008170 0%, transparent 70%)"
       ></div>
 
-      <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-28 text-center">
+      <div class="relative max-w-7xl mx-auto px-4 py-16 md:py-28 text-center">
         <!-- Label -->
         <div
           class="inline-flex items-center gap-2 border border-neutral-gray bg-neutral-gray/30 px-3 py-1 rounded-full text-xs text-neutral-400 mb-6 md:mb-8 font-base"
@@ -412,7 +412,7 @@ const scrollRight = () => {
     </section>
 
     <!-- ─── Language Cards ─────────────────── -->
-    <section id="topics" class="max-w-6xl mx-auto px-4 py-10 md:py-20">
+    <section id="topics" class="max-w-7xl mx-auto px-4 py-10 md:py-20">
       <div class="text-center mb-10 md:mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Topics</h2>
         <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -425,7 +425,7 @@ const scrollRight = () => {
         <!-- Left Arrow -->
         <button
           @click="scrollLeft"
-          class="absolute left-0 z-10 w-12 h-full flex items-center justify-start bg-gradient-to-r from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
+          class="absolute left-0 z-10 w-12 h-full flex items-center justify-start bg-linear-to-r from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -463,7 +463,7 @@ const scrollRight = () => {
         <!-- Right Arrow -->
         <button
           @click="scrollRight"
-          class="absolute right-0 z-10 w-12 h-full flex items-center justify-end bg-gradient-to-l from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
+          class="absolute right-0 z-10 w-12 h-full flex items-center justify-end bg-linear-to-l from-neutral-black via-neutral-black/80 to-transparent text-neutral-400 hover:text-white transition-colors cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -525,7 +525,7 @@ const scrollRight = () => {
     <!-- ─── Footer ─────────────────────────────────────── -->
     <footer class="border-t border-neutral-gray mt-4">
       <div
-        class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-500"
+        class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-500"
       >
         <span class="font-fun text-white tracking-widest text-base">SYNTAXIA</span>
         <p class="text-xs text-center sm:text-right">
