@@ -190,7 +190,20 @@ const languages = [
   },
 ]
 
-const categories = ['All', ...new Set(languages.map((l) => l.badge))]
+const categoryCounts = languages.reduce((acc, lang) => {
+  acc[lang.badge] = (acc[lang.badge] || 0) + 1
+  return acc
+}, {} as Record<string, number>)
+
+const sortedCategories = Object.keys(categoryCounts).sort(
+  (a, b) => (categoryCounts[b] || 0) - (categoryCounts[a] || 0)
+)
+
+const categories = [
+  { name: 'All', count: languages.length },
+  ...sortedCategories.map((name) => ({ name, count: categoryCounts[name] })),
+]
+
 const selectedCategory = ref('All')
 
 const filteredLanguages = computed(() => {
@@ -366,16 +379,17 @@ const scrollRight = () => {
         >
           <button
             v-for="cat in categories"
-            :key="cat"
-            @click="selectedCategory = cat"
-            class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border cursor-pointer select-none"
+            :key="cat.name"
+            @click="selectedCategory = cat.name"
+            class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border cursor-pointer select-none flex items-center gap-1.5"
             :class="[
-              selectedCategory === cat
+              selectedCategory === cat.name
                 ? 'bg-primary-lightgreen text-white border-primary-lightgreen shadow-[0_0_15px_rgba(0,129,112,0.4)]'
                 : 'bg-neutral-gray/10 text-neutral-400 border-neutral-gray/50 hover:bg-neutral-gray/30 hover:text-neutral-200',
             ]"
           >
-            {{ cat }}
+            {{ cat.name }}
+            <span class="opacity-70 text-[11px]">({{ cat.count }})</span>
           </button>
         </div>
 
@@ -397,50 +411,44 @@ const scrollRight = () => {
         </button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <RouterLink
           v-for="item in filteredLanguages"
           :key="item.lang"
           :to="`/ref/${item.lang}`"
-          class="group relative rounded-2xl p-6 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
+          class="group relative rounded-xl p-4 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
           :style="{ '--theme-color': item.color }"
         >
           <!-- Border Highlight -->
           <div
-            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border pointer-events-none"
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl border pointer-events-none"
             :style="{ borderColor: 'var(--theme-color)' }"
           ></div>
 
-          <div class="relative z-10 flex flex-col h-full">
-            <!-- Top row: Icon + Badge -->
-            <div class="flex items-start justify-between mb-6">
-              <div
-                class="w-14 h-14 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
-              >
-                <img
-                  :src="item.icon"
-                  :alt="item.label"
-                  class="w-8 h-8 object-contain relative z-10"
-                />
-              </div>
-
-              <span
-                class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-(--theme-color)"
-              >
-                {{ item.badge }}
-              </span>
+          <div class="relative z-10 flex items-center gap-4 h-full">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 shrink-0 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
+            >
+              <img
+                :src="item.icon"
+                :alt="item.label"
+                class="w-6 h-6 object-contain relative z-10"
+              />
             </div>
 
-            <!-- Title & Description -->
-            <div class="grow">
+            <!-- Title & Badge -->
+            <div class="flex flex-col items-start gap-1">
               <h3
-                class="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-(--theme-color)"
+                class="text-lg font-bold text-white transition-colors duration-300 group-hover:text-(--theme-color)"
               >
                 {{ item.label }}
               </h3>
-              <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3">
-                {{ item.desc }}
-              </p>
+              <span
+                class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-(--theme-color)"
+              >
+                {{ item.badge }}
+              </span>
             </div>
           </div>
         </RouterLink>
