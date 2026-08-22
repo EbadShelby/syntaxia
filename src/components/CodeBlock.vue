@@ -26,7 +26,8 @@ function getHighlighter() {
 async function highlight() {
   const langRaw = props.language ?? 'text'
   // map databases to sql
-  const lang = ['mysql', 'postgresql', 'postgres'].includes(langRaw) ? 'sql' : langRaw
+  let lang = ['mysql', 'postgresql', 'postgres'].includes(langRaw) ? 'sql' : langRaw
+  if (lang === 'c++') lang = 'cpp'
   const supported = [
     'html',
     'css',
@@ -42,6 +43,7 @@ async function highlight() {
     'typescript',
     'csharp',
     'java',
+    'cpp',
   ]
 
   if (!supported.includes(lang)) {

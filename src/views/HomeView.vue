@@ -156,6 +156,22 @@ const languages = [
     badge: 'Database',
     desc: 'The application data platform for modern applications.',
   },
+  {
+    lang: 'cpp',
+    label: 'C++',
+    icon: '/c-plusplus.svg',
+    color: '#00599C',
+    badge: 'Programming Language',
+    desc: 'A powerful, high-performance programming language.',
+  },
+  {
+    lang: 'jquery',
+    label: 'jQuery',
+    icon: '/jquery.svg',
+    color: '#0769AD',
+    badge: 'Library',
+    desc: 'A fast, small, and feature-rich JavaScript library.',
+  },
 ]
 
 const categories = ['All', ...new Set(languages.map((l) => l.badge))]
