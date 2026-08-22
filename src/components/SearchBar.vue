@@ -9,7 +9,7 @@ const searchInput = ref<HTMLInputElement | null>(null)
 const router = useRouter()
 
 const searchResults = computed(() => {
-  if (!query.value.trim()) return refNavItems
+  if (!query.value.trim()) return []
   return refNavItems.filter((item) => item.label.toLowerCase().includes(query.value.toLowerCase()))
 })
 
@@ -119,7 +119,7 @@ const handleBlur = () => {
       leave-to-class="transform scale-95 opacity-0"
     >
       <div
-        v-if="isFocused"
+        v-if="isFocused && query.trim().length > 0"
         class="absolute top-full left-0 mt-2 w-full bg-neutral-black border border-neutral-gray rounded-md shadow-lg overflow-hidden z-50"
       >
         <ul v-if="searchResults.length > 0" class="max-h-60 overflow-y-auto no-scrollbar">
