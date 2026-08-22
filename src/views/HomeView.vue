@@ -204,6 +204,22 @@ const languages = [
     badge: 'Language',
     desc: 'A modern programming language that makes developers happier.',
   },
+  {
+    lang: 'rust',
+    label: 'Rust',
+    icon: '/rust_dark.svg',
+    color: '#DEA584',
+    badge: 'Language',
+    desc: 'A language empowering everyone to build reliable and efficient software.',
+  },
+  {
+    lang: 'lua',
+    label: 'Lua',
+    icon: '/lua.svg',
+    color: '#000080',
+    badge: 'Language',
+    desc: 'A powerful, efficient, lightweight, embeddable scripting language.',
+  },
 ]
 
 const categoryCounts = languages.reduce(
@@ -322,7 +338,7 @@ const scrollRight = () => {
           class="inline-flex items-center gap-2 border border-neutral-gray bg-neutral-gray/30 px-3 py-1 rounded-full text-xs text-neutral-400 mb-6 md:mb-8 font-base"
         >
           <span class="w-1.5 h-1.5 rounded-full bg-primary-lightgreen animate-pulse"></span>
-          Your personal coding reference
+          Your personal coding cheatsheet
         </div>
 
         <!-- Main headline -->
@@ -336,7 +352,7 @@ const scrollRight = () => {
         <p
           class="text-neutral-400 text-base md:text-xl max-w-sm md:max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed"
         >
-          A quick reference for the things you always look up.
+          A quick cheatsheet for the things you always look up.
         </p>
 
         <!-- CTA -->
@@ -344,7 +360,7 @@ const scrollRight = () => {
           href="#topics"
           class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-gray text-neutral-300 text-sm rounded hover:border-primary-lightgreen hover:text-primary-lightgreen transition-all active:scale-95"
         >
-          Browse References
+          Browse Cheatsheets
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -368,7 +384,7 @@ const scrollRight = () => {
       <div class="text-center mb-10 md:mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Topics</h2>
         <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
-          Dive into our comprehensive references and master your favorite tools and languages.
+          Dive into our comprehensive cheatsheets and master your favorite tools and languages.
         </p>
       </div>
 

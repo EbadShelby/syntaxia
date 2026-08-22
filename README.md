@@ -1,12 +1,12 @@
 # Syntaxia
 
-**Your personal coding reference for the things you always look up.**
+**Your personal coding cheatsheet for the things you always look up.**
 
-Syntaxia is a sleek, modern web application built with **Vue 3** and **Tailwind CSS**. It serves as a quick, centralized reference for various programming languages, libraries, databases, and frameworks.
+Syntaxia is a sleek, modern web application built with **Vue 3** and **Tailwind CSS**. It serves as a quick, centralized cheatsheet for various programming languages, libraries, databases, and frameworks.
 
 ## Features
 
-- **Comprehensive Topics**: Quick reference guides for HTML, CSS, JavaScript, Vue, React, PHP, Laravel, Python, C++, Java, Node.js, Databases (MySQL, PostgreSQL, MongoDB), and many more.
+- **Comprehensive Topics**: Quick cheatsheets for HTML, CSS, JavaScript, Vue, React, PHP, Laravel, Python, C++, Java, Node.js, Databases (MySQL, PostgreSQL, MongoDB), and many more.
 - **Dynamic Syntax Highlighting**: Powered by [Shiki](https://shiki.style/), code snippets are highlighted accurately with VS Code themes (One Dark Pro), loaded lazily on demand for optimal performance.
 - **Glassmorphic UI**: A beautiful, modern interface with smooth animations, dynamic theme colors, and a dark theme tailored for developers.
 - **Interactive Filtering**: Easily sort through topics on the homepage using the scrollable category pills (Programming Languages, Frameworks, Databases, etc.).
@@ -48,7 +48,7 @@ npm run lint
 
 ## Adding New Topics
 
-To add a new reference topic:
+To add a new cheatsheet topic:
 1. Create a new markdown/content definition.
 2. Add the language metadata to the `languages` array in `src/views/HomeView.vue`.
 3. Add the corresponding icon to the `public/` directory.

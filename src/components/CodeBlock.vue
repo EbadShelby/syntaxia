@@ -50,6 +50,8 @@ async function highlight() {
     'c',
     'go',
     'kotlin',
+    'rust',
+    'lua',
   ]
 
   if (!supported.includes(lang)) {

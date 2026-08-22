@@ -51,7 +51,7 @@ function scrollToSection(id: string) {
       class="lg:hidden sticky top-[4rem] z-40 flex items-center justify-between px-4 py-2.5 border-b border-neutral-gray bg-neutral-black/95 backdrop-blur-sm"
     >
       <span class="text-xs text-neutral-500 font-base uppercase tracking-widest"
-        >{{ topic.label }} Reference</span
+        >{{ topic.label }} Cheatsheet</span
       >
       <button
         @click="toggleToc"
@@ -136,7 +136,7 @@ function scrollToSection(id: string) {
           </div>
           <div>
             <p class="text-xs text-neutral-500 font-base uppercase tracking-widest mb-0.5">
-              Reference
+              Cheatsheet
             </p>
             <h1 class="text-2xl md:text-4xl font-bold font-fun tracking-wide leading-tight">
               {{ topic.title }}
