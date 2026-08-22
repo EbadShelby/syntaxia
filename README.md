@@ -1,29 +1,28 @@
-# syntaxia
+# Syntaxia
 
-This template should help get you started developing with Vue 3 in Vite.
+**Your personal coding reference for the things you always look up.**
 
-## Recommended IDE Setup
+Syntaxia is a sleek, modern web application built with **Vue 3** and **Tailwind CSS**. It serves as a quick, centralized reference for various programming languages, libraries, databases, and frameworks.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Recommended Browser Setup
+- **Comprehensive Topics**: Quick reference guides for HTML, CSS, JavaScript, Vue, React, PHP, Laravel, Python, C++, Java, Node.js, Databases (MySQL, PostgreSQL, MongoDB), and many more.
+- **Dynamic Syntax Highlighting**: Powered by [Shiki](https://shiki.style/), code snippets are highlighted accurately with VS Code themes (One Dark Pro), loaded lazily on demand for optimal performance.
+- **Glassmorphic UI**: A beautiful, modern interface with smooth animations, dynamic theme colors, and a dark theme tailored for developers.
+- **Interactive Filtering**: Easily sort through topics on the homepage using the scrollable category pills (Programming Languages, Frameworks, Databases, etc.).
+- **Responsive Design**: Fully optimized for both desktop and mobile devices, featuring a mobile-friendly table of contents drawer.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Tech Stack
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Framework:** Vue 3 (Composition API)
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS (Vanilla CSS variables for theme customization)
+- **Routing:** Vue Router (with route-level lazy loading)
+- **Syntax Highlighting:** Shiki
 
 ## Project Setup
+
+Make sure you have [Node.js](https://nodejs.org/) installed, then run:
 
 ```sh
 npm install
@@ -41,8 +40,18 @@ npm run dev
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint with ESLint
 
 ```sh
 npm run lint
 ```
+
+## Adding New Topics
+
+To add a new reference topic:
+1. Create a new markdown/content definition.
+2. Add the language metadata to the `languages` array in `src/views/HomeView.vue`.
+3. Add the corresponding icon to the `public/` directory.
+
+---
+&copy; 2025 Ebad Yasser. All Rights Reserved.

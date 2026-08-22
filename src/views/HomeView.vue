@@ -386,21 +386,9 @@ const scrollRight = () => {
           v-for="item in filteredLanguages"
           :key="item.lang"
           :to="`/ref/${item.lang}`"
-          class="group relative rounded-2xl p-6 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden transition-all duration-300 hover:-translate-y-1"
+          class="group relative rounded-2xl p-6 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
           :style="{ '--theme-color': item.color }"
         >
-          <!-- Dynamic Glow Shadow -->
-          <div
-            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
-            :style="{ boxShadow: `0 12px 40px -12px ${item.color}60` }"
-          ></div>
-
-          <!-- Top Right Gradient Glow -->
-          <div
-            class="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full blur-3xl pointer-events-none -mr-10 -mt-10"
-            :style="{ backgroundColor: 'var(--theme-color)' }"
-          ></div>
-
           <!-- Border Highlight -->
           <div
             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border pointer-events-none"
@@ -411,13 +399,8 @@ const scrollRight = () => {
             <!-- Top row: Icon + Badge -->
             <div class="flex items-start justify-between mb-6">
               <div
-                class="w-14 h-14 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shadow-md relative"
+                class="w-14 h-14 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
               >
-                <!-- Subtle icon glow -->
-                <div
-                  class="absolute inset-0 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"
-                  :style="{ backgroundColor: 'var(--theme-color)' }"
-                ></div>
                 <img
                   :src="item.icon"
                   :alt="item.label"
@@ -440,7 +423,7 @@ const scrollRight = () => {
                 {{ item.label }}
               </h3>
               <p
-                class="text-sm text-neutral-400 leading-relaxed line-clamp-3 group-hover:text-neutral-300 transition-colors"
+                class="text-sm text-neutral-400 leading-relaxed line-clamp-3"
               >
                 {{ item.desc }}
               </p>
