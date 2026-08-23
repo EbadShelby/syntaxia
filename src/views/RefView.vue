@@ -171,7 +171,18 @@ function scrollToSection(id: string) {
           <section v-for="section in topic.sections" :key="section.id" :id="section.id">
             <h2>{{ section.title }}</h2>
             <p>{{ section.description }}</p>
-            <CodeBlock :code="section.code" :language="section.language" />
+
+            <template v-if="section.snippets && section.snippets.length > 0">
+              <div v-for="(snippet, index) in section.snippets" :key="index" class="mt-4">
+                <p v-if="snippet.description" class="mb-2 text-sm text-neutral-400">
+                  {{ snippet.description }}
+                </p>
+                <CodeBlock :code="snippet.code" :language="snippet.language" />
+              </div>
+            </template>
+            <template v-else-if="section.code && section.language">
+              <CodeBlock :code="section.code" :language="section.language" />
+            </template>
           </section>
         </div>
 
