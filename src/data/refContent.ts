@@ -1793,7 +1793,11 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'bash',
-            code: '# Install via Composer\ncomposer create-project laravel/laravel my-project\n\n# Install via Laravel installer\nlaravel new my-project\n\n# Start development server\nphp artisan serve\n\n# Generate application key\nphp artisan key:generate',
+            code: '# Install via Composer (Recommended)\ncomposer create-project laravel/laravel example-app\n\ncd example-app\n\n# Start development server\nphp artisan serve',
+          },
+          {
+            language: 'bash',
+            code: '# Or via Laravel Global Installer\nlaravel new example-app\n\ncd example-app\n\n# Start development server\nphp artisan serve',
           },
         ],
       },
@@ -2039,11 +2043,11 @@ export const refTopics: Record<string, RefTopic> = {
       {
         id: 'setup',
         title: 'Setup',
-        description: 'Create a new React project:',
+        description: 'React recommends using a framework for new projects (or Vite for a simple SPA):',
         snippets: [
           {
             language: 'bash',
-            code: '# Using Vite (recommended, faster)\nnpm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm run dev\n\n# Using Create React App\nnpx create-react-app my-app\ncd my-app\nnpm start',
+            code: '# Next.js (Full-stack web app)\nnpx create-next-app@latest\n\n# Remix (Full-stack web app)\nnpx create-remix@latest\n\n# Expo (React Native for mobile & web)\nnpx create-expo-app@latest\n\n# Vite (Client-side SPA only)\nnpm create vite@latest my-react-app -- --template react\ncd my-react-app\nnpm install\nnpm run dev',
           },
         ],
       },
