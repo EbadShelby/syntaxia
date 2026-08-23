@@ -915,16 +915,24 @@ export const refTopics: Record<string, RefTopic> = {
       {
         id: '-setup',
         title: '## Setup',
-        description: 'Add Tailwind to your project:',
+        description: 'Add Tailwind to your project (Vite):',
         snippets: [
           {
-            language: 'html',
-            code: '<!-- CDN (quick start) -->\n<script src="https://cdn.tailwindcss.com"></script>\n\n<!-- Or via npm -->',
+            language: 'bash',
+            code: 'npm install tailwindcss @tailwindcss/vite',
           },
           {
-            language: 'bash',
-            code: 'npm install -D tailwindcss\nnpx tailwindcss init',
+            language: 'javascript',
+            code: '// vite.config.ts\nimport { defineConfig } from "vite";\nimport tailwindcss from "@tailwindcss/vite";\n\nexport default defineConfig({\n  plugins: [tailwindcss()],\n});',
           },
+          {
+            language: 'css',
+            code: '/* src/style.css */\n@import "tailwindcss";',
+          },
+          {
+            language: 'html',
+            code: '<!-- CDN (quick start without build tool) -->\n<script src="https://unpkg.com/@tailwindcss/browser@4"></script>',
+          }
         ],
       },
       {
@@ -1137,16 +1145,16 @@ export const refTopics: Record<string, RefTopic> = {
       {
         id: 'setup',
         title: 'Setup',
-        description: 'Add Vue to your project:',
+        description: 'Create a new Vue project or use it via CDN:',
         snippets: [
           {
-            language: 'html',
-            code: '<!-- CDN (quick start) -->\n<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>\n\n<!-- Or via npm -->',
+            language: 'bash',
+            code: '# With Build Tools (Vite)\nnpm create vue@latest\ncd <your-project-name>\nnpm install\nnpm run dev',
           },
           {
-            language: 'bash',
-            code: 'npm create vue@latest\nnpm install vue',
-          },
+            language: 'html',
+            code: '<!-- Without Build Tools (CDN via Import Maps) -->\n<script type="importmap">\n  {\n    "imports": {\n      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"\n    }\n  }\n</script>\n\n<div id="app">{{ message }}</div>\n\n<script type="module">\n  import { createApp } from \'vue\'\n\n  createApp({\n    data() {\n      return {\n        message: \'Hello Vue!\'\n      }\n    }\n  }).mount(\'#app\')\n</script>',
+          }
         ],
       },
       {

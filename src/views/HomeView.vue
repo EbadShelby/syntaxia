@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import SearchBar from '@/components/SearchBar.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
 const languages = [
   {
@@ -603,15 +604,8 @@ const scrollRight = () => {
     </section>
 
     <!-- ─── Footer ─────────────────────────────────────── -->
-    <footer class="border-t border-neutral-gray mt-4">
-      <div
-        class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-500"
-      >
-        <span class="font-fun text-white tracking-widest text-base">SYNTAXIA</span>
-        <p class="text-xs text-center sm:text-right">
-          &copy; 2025 Ebad Yasser. All Rights Reserved.
-        </p>
-      </div>
-    </footer>
+    <div class="max-w-7xl mx-auto px-4">
+      <AppFooter />
+    </div>
   </div>
 </template>

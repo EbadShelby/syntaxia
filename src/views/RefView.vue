@@ -5,6 +5,7 @@ import { refTopics } from '@/data/refContent'
 import AppHeader from '@/components/AppHeader.vue'
 import AppSidebar from '@/components/AppSidebar.vue'
 import CodeBlock from '@/components/CodeBlock.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -187,11 +188,7 @@ function scrollToSection(id: string) {
         </div>
 
         <!-- Footer -->
-        <footer
-          class="mt-12 pt-6 border-t border-neutral-gray text-center text-xs text-neutral-500 pb-8"
-        >
-          <p>&copy; 2025 Ebad Yasser. All Rights Reserved.</p>
-        </footer>
+        <AppFooter />
       </main>
 
       <!-- ─── Sidebar TOC (desktop only) ──────────────── -->
