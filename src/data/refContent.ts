@@ -2280,22 +2280,22 @@ export const refTopics: Record<string, RefTopic> = {
   motion: {
     lang: 'motion',
     label: 'Motion',
-    title: 'Framer Motion',
+    title: 'Motion',
     icon: '/motion_dark.svg',
     color: '#FF00A2',
     sections: [
       {
         id: 'setup',
         title: 'Setup',
-        description: 'Install Framer Motion:',
+        description: 'Install Motion (formerly Framer Motion):',
         snippets: [
           {
             language: 'bash',
-            code: 'npm install framer-motion',
+            code: '# React / Vanilla JS\nnpm install motion\n\n# Vue\nnpm install motion-v',
           },
           {
-            language: 'jsx',
-            code: "import { motion } from 'framer-motion'",
+            language: 'javascript',
+            code: "// React\nimport { motion } from 'motion/react'\n\n// Vue\nimport { Motion } from 'motion-v'\n\n// Vanilla\nimport { animate } from 'motion'",
           },
         ],
       },
@@ -2306,7 +2306,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: 'import { motion } from \'framer-motion\';\n\n// Basic fade in\nfunction App() {\n    return (\n        <motion.div\n            initial={{ opacity: 0 }}\n            animate={{ opacity: 1 }}\n        >\n            Hello World\n        </motion.div>\n    );\n}\n\n// Any HTML element can be a motion component\n<motion.h1>Title</motion.h1>\n<motion.p>Paragraph</motion.p>\n<motion.button>Button</motion.button>\n<motion.img src="image.jpg" />\n<motion.ul>List</motion.ul>',
+            code: 'import { motion } from \'motion/react\';\n\n// Basic fade in\nfunction App() {\n    return (\n        <motion.div\n            initial={{ opacity: 0 }}\n            animate={{ opacity: 1 }}\n        >\n            Hello World\n        </motion.div>\n    );\n}\n\n// Any HTML element can be a motion component\n<motion.h1>Title</motion.h1>\n<motion.p>Paragraph</motion.p>\n<motion.button>Button</motion.button>\n<motion.img src="image.jpg" />\n<motion.ul>List</motion.ul>',
           },
         ],
       },
@@ -2339,7 +2339,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: 'import { motion, AnimatePresence } from \'framer-motion\';\nimport { useState } from \'react\';\n\nfunction App() {\n    const [isVisible, setIsVisible] = useState(true);\n\n    return (\n        <div>\n            <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>\n\n            <AnimatePresence>\n                {isVisible && (\n                    <motion.div\n                        initial={{ opacity: 0 }}\n                        animate={{ opacity: 1 }}\n                        exit={{ opacity: 0 }}\n                    >\n                        Content\n                    </motion.div>\n                )}\n            </AnimatePresence>\n        </div>\n    );\n}\n\n// AnimatePresence with lists\nfunction List({ items }) {\n    return (\n        <AnimatePresence>\n            {items.map(item => (\n                <motion.li\n                    key={item.id}\n                    initial={{ opacity: 0, x: -50 }}\n                    animate={{ opacity: 1, x: 0 }}\n                    exit={{ opacity: 0, x: 50 }}\n                >\n                    {item.text}\n                </motion.li>\n            ))}\n        </AnimatePresence>\n    );\n}\n\n// Mode options for AnimatePresence\n<AnimatePresence mode="wait">\n    {/* Waits for exit to finish before next enters */}\n</AnimatePresence>\n\n<AnimatePresence mode="popLayout">\n    {/* Removes element from layout flow during exit */}\n</AnimatePresence>',
+            code: 'import { motion, AnimatePresence } from \'motion/react\';\nimport { useState } from \'react\';\n\nfunction App() {\n    const [isVisible, setIsVisible] = useState(true);\n\n    return (\n        <div>\n            <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>\n\n            <AnimatePresence>\n                {isVisible && (\n                    <motion.div\n                        initial={{ opacity: 0 }}\n                        animate={{ opacity: 1 }}\n                        exit={{ opacity: 0 }}\n                    >\n                        Content\n                    </motion.div>\n                )}\n            </AnimatePresence>\n        </div>\n    );\n}\n\n// AnimatePresence with lists\nfunction List({ items }) {\n    return (\n        <AnimatePresence>\n            {items.map(item => (\n                <motion.li\n                    key={item.id}\n                    initial={{ opacity: 0, x: -50 }}\n                    animate={{ opacity: 1, x: 0 }}\n                    exit={{ opacity: 0, x: 50 }}\n                >\n                    {item.text}\n                </motion.li>\n            ))}\n        </AnimatePresence>\n    );\n}\n\n// Mode options for AnimatePresence\n<AnimatePresence mode="wait">\n    {/* Waits for exit to finish before next enters */}\n</AnimatePresence>\n\n<AnimatePresence mode="popLayout">\n    {/* Removes element from layout flow during exit */}\n</AnimatePresence>',
           },
         ],
       },
@@ -2405,7 +2405,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: "import { motion, useScroll, useTransform } from 'framer-motion';\n\n// Whileinview (trigger animation when scrolled into view)\n<motion.div\n    initial={{ opacity: 0, y: 50 }}\n    whileInView={{ opacity: 1, y: 0 }}\n    viewport={{ once: true }}                          // Only animate once\n>\n    Content\n</motion.div>\n\n// Viewport options\n<motion.div\n    whileInView={{ opacity: 1 }}\n    viewport={{\n        once: true,                                    // Animate only once\n        amount: 0.5,                                   // Trigger when 50% visible\n        margin: '0px 0px -100px 0px'                   // Adjust trigger area\n    }}\n/>\n\n// useScroll hook (track scroll progress)\nfunction ScrollProgress() {\n    const { scrollYProgress } = useScroll();\n\n    return (\n        <motion.div\n            style={{\n                scaleX: scrollYProgress,\n                position: 'fixed',\n                top: 0,\n                left: 0,\n                right: 0,\n                height: 4,\n                background: 'blue',\n                transformOrigin: '0%'\n            }}\n        />\n    );\n}\n\n// Transform values based on scroll\nfunction ParallaxSection() {\n    const { scrollYProgress } = useScroll();\n    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);\n\n    return <motion.div style={{ y }}>Content</motion.div>;\n}\n\n// Scroll within a specific element\nfunction Component() {\n    const ref = useRef(null);\n    const { scrollYProgress } = useScroll({\n        target: ref,\n        offset: ['start end', 'end start']\n    });\n\n    return (\n        <div ref={ref}>\n            <motion.div style={{ opacity: scrollYProgress }} />\n        </div>\n    );\n}",
+            code: "import { motion, useScroll, useTransform } from 'motion/react';\n\n// Whileinview (trigger animation when scrolled into view)\n<motion.div\n    initial={{ opacity: 0, y: 50 }}\n    whileInView={{ opacity: 1, y: 0 }}\n    viewport={{ once: true }}                          // Only animate once\n>\n    Content\n</motion.div>\n\n// Viewport options\n<motion.div\n    whileInView={{ opacity: 1 }}\n    viewport={{\n        once: true,                                    // Animate only once\n        amount: 0.5,                                   // Trigger when 50% visible\n        margin: '0px 0px -100px 0px'                   // Adjust trigger area\n    }}\n/>\n\n// useScroll hook (track scroll progress)\nfunction ScrollProgress() {\n    const { scrollYProgress } = useScroll();\n\n    return (\n        <motion.div\n            style={{\n                scaleX: scrollYProgress,\n                position: 'fixed',\n                top: 0,\n                left: 0,\n                right: 0,\n                height: 4,\n                background: 'blue',\n                transformOrigin: '0%'\n            }}\n        />\n    );\n}\n\n// Transform values based on scroll\nfunction ParallaxSection() {\n    const { scrollYProgress } = useScroll();\n    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);\n\n    return <motion.div style={{ y }}>Content</motion.div>;\n}\n\n// Scroll within a specific element\nfunction Component() {\n    const ref = useRef(null);\n    const { scrollYProgress } = useScroll({\n        target: ref,\n        offset: ['start end', 'end start']\n    });\n\n    return (\n        <div ref={ref}>\n            <motion.div style={{ opacity: scrollYProgress }} />\n        </div>\n    );\n}",
           },
         ],
       },
@@ -2416,7 +2416,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: "import { motion, useAnimation } from 'framer-motion'\n\nfunction Component() {\n  const controls = useAnimation()\n\n  async function handleClick() {\n    await controls.start({ x: 100 })\n    await controls.start({ y: 100 })\n  }\n\n  return (\n    <div>\n      <motion.div animate={controls} />\n      <button onClick={handleClick}>Animate</button>\n    </div>\n  )\n}\n\n// Start with variants\nconst controls = useAnimation()\ncontrols.start('visible') // Uses variant name\n\n// Sequence of animations\nasync function sequence() {\n  await controls.start({ opacity: 1 })\n  await controls.start({ x: 100 })\n  await controls.start({ scale: 1.2 })\n}\n\n// Stop animation\ncontrols.stop()",
+            code: "import { motion, useAnimation } from 'motion/react'\n\nfunction Component() {\n  const controls = useAnimation()\n\n  async function handleClick() {\n    await controls.start({ x: 100 })\n    await controls.start({ y: 100 })\n  }\n\n  return (\n    <div>\n      <motion.div animate={controls} />\n      <button onClick={handleClick}>Animate</button>\n    </div>\n  )\n}\n\n// Start with variants\nconst controls = useAnimation()\ncontrols.start('visible') // Uses variant name\n\n// Sequence of animations\nasync function sequence() {\n  await controls.start({ opacity: 1 })\n  await controls.start({ x: 100 })\n  await controls.start({ scale: 1.2 })\n}\n\n// Stop animation\ncontrols.stop()",
           },
         ],
       },
@@ -2427,7 +2427,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: "import { motion, useMotionValue, useTransform, animate } from 'framer-motion'\nimport { useEffect } from 'react'\n\nfunction Counter({ value }) {\n  const count = useMotionValue(0)\n  const rounded = useTransform(count, (latest) => Math.round(latest))\n\n  useEffect(() => {\n    const controls = animate(count, value, { duration: 2 })\n    return controls.stop\n  }, [value])\n\n  return <motion.p>{rounded}</motion.p>\n}",
+            code: "import { motion, useMotionValue, useTransform, animate } from 'motion/react'\nimport { useEffect } from 'react'\n\nfunction Counter({ value }) {\n  const count = useMotionValue(0)\n  const rounded = useTransform(count, (latest) => Math.round(latest))\n\n  useEffect(() => {\n    const controls = animate(count, value, { duration: 2 })\n    return controls.stop\n  }, [value])\n\n  return <motion.p>{rounded}</motion.p>\n}",
           },
         ],
       },
@@ -2438,7 +2438,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: 'import { motion, useMotionValue, useTransform } from \'framer-motion\'\n\n// Track a value without triggering re-render\nfunction Component() {\n  const x = useMotionValue(0)\n\n  return <motion.div drag="x" style={{ x }} onDrag={() => console.log(x.get())} />\n}\n\n// Transform one value based on another\nfunction Component() {\n  const x = useMotionValue(0)\n  const opacity = useTransform(x, [-200, 0, 200], [0, 1, 0])\n\n  return <motion.div drag="x" style={{ x, opacity }} />\n}\n\n// Multiple input/output ranges\nconst scale = useTransform(x, [-200, 0, 200], [0.5, 1, 0.5])\nconst rotate = useTransform(x, [-200, 200], [-45, 45])',
+            code: 'import { motion, useMotionValue, useTransform } from \'motion/react\'\n\n// Track a value without triggering re-render\nfunction Component() {\n  const x = useMotionValue(0)\n\n  return <motion.div drag="x" style={{ x }} onDrag={() => console.log(x.get())} />\n}\n\n// Transform one value based on another\nfunction Component() {\n  const x = useMotionValue(0)\n  const opacity = useTransform(x, [-200, 0, 200], [0, 1, 0])\n\n  return <motion.div drag="x" style={{ x, opacity }} />\n}\n\n// Multiple input/output ranges\nconst scale = useTransform(x, [-200, 0, 200], [0.5, 1, 0.5])\nconst rotate = useTransform(x, [-200, 200], [-45, 45])',
           },
         ],
       },
@@ -2471,7 +2471,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'jsx',
-            code: "// Use transform properties (x, y, scale, rotate) instead of top/left/width/height\n// Good (GPU accelerated)\n<motion.div animate={{ x: 100 }} />\n\n// Avoid (triggers layout recalculation)\n<motion.div animate={{ left: 100 }} />\n\n// Use layout prop sparingly (can be expensive)\n<motion.div layout />\n\n// Reduce motion for accessibility\nimport { useReducedMotion } from 'framer-motion';\n\nfunction Component() {\n    const shouldReduceMotion = useReducedMotion();\n\n    return (\n        <motion.div\n            animate={{ x: shouldReduceMotion ? 0 : 100 }}\n        />\n    );\n}",
+            code: "// Use transform properties (x, y, scale, rotate) instead of top/left/width/height\n// Good (GPU accelerated)\n<motion.div animate={{ x: 100 }} />\n\n// Avoid (triggers layout recalculation)\n<motion.div animate={{ left: 100 }} />\n\n// Use layout prop sparingly (can be expensive)\n<motion.div layout />\n\n// Reduce motion for accessibility\nimport { useReducedMotion } from 'motion/react';\n\nfunction Component() {\n    const shouldReduceMotion = useReducedMotion();\n\n    return (\n        <motion.div\n            animate={{ x: shouldReduceMotion ? 0 : 100 }}\n        />\n    );\n}",
           },
         ],
       },
@@ -2491,7 +2491,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'html',
-            code: '<!-- CSS (in head) -->\n<link\n  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"\n  rel="stylesheet"\n/>\n\n<!-- JS (before closing body tag, needed for interactive components) -->\n<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>',
+            code: '<!-- CSS (in head) -->\n<link\n  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"\n  rel="stylesheet"\n/>\n\n<!-- JS (before closing body tag, needed for interactive components) -->\n<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>',
           },
           {
             language: 'bash',
@@ -3398,7 +3398,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'bash',
-            code: '# Install Angular CLI globally\nnpm install -g @angular/cli\n\n# Create new project\nng new my-app\ncd my-app\n\n# Start development server\nng serve\n\n# Generate components, services, etc.\nng generate component my-component\nng g c my-component                                    # Shorthand\n\nng generate service my-service\nng g s my-service',
+            code: '# Install Angular CLI globally\nnpm install -g @angular/cli\n\n# Create new project\nng new my-app\ncd my-app\n\n# Start development server\nng serve --open\n\n# Generate components, services, etc.\nng generate component my-component\nng g c my-component                                    # Shorthand\n\nng generate service my-service\nng g s my-service',
           },
         ],
       },
@@ -7932,7 +7932,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'bash',
-            code: 'pip install pandas',
+            code: '# Using pip\npip install pandas\n\n# Or using conda\nconda install -c conda-forge pandas',
           },
           {
             language: 'python',
@@ -8961,7 +8961,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'bash',
-            code: '# Install Flask\npip install flask\n\n# Set environment variables (optional)\nexport FLASK_APP=app.py\nexport FLASK_ENV=development\n\n# Run the app\nflask run\npython app.py',
+            code: '# Install Flask\npip install flask\n\n# Run the app (looks for app.py or wsgi.py)\nflask run\n\n# Run with debug mode enabled\nflask run --debug',
           },
           {
             language: 'python',
@@ -9580,7 +9580,7 @@ export const refTopics: Record<string, RefTopic> = {
         snippets: [
           {
             language: 'bash',
-            code: 'pip install numpy',
+            code: '# Using pip\npip install numpy\n\n# Or using conda\nconda install numpy',
           },
           {
             language: 'python',
