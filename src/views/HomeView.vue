@@ -564,7 +564,7 @@ const scrollRight = () => {
           v-for="item in filteredLanguages"
           :key="item.lang"
           :to="`/ref/${item.lang}`"
-          class="group relative rounded-xl p-4 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
+          class="group relative rounded-xl p-3 sm:p-4 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
           :style="{ '--theme-color': item.color }"
         >
           <!-- Border Highlight -->
@@ -573,27 +573,27 @@ const scrollRight = () => {
             :style="{ borderColor: 'var(--theme-color)' }"
           ></div>
 
-          <div class="relative z-10 flex items-center gap-4 h-full">
+          <div class="relative z-10 flex items-center gap-3 sm:gap-4 h-full">
             <!-- Icon -->
             <div
-              class="w-12 h-12 shrink-0 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
+              class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
             >
               <img
                 :src="item.icon"
                 :alt="item.label"
-                class="w-6 h-6 object-contain relative z-10"
+                class="w-5 h-5 sm:w-6 sm:h-6 object-contain relative z-10"
               />
             </div>
 
             <!-- Title & Badge -->
-            <div class="flex flex-col items-start gap-1">
+            <div class="flex flex-col items-start gap-1 min-w-0 flex-1">
               <h3
-                class="text-lg font-bold text-white transition-colors duration-300 group-hover:text-(--theme-color)"
+                class="text-sm sm:text-lg font-bold text-white transition-colors duration-300 group-hover:text-(--theme-color) truncate w-full"
               >
                 {{ item.label }}
               </h3>
               <span
-                class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-(--theme-color)"
+                class="px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest rounded-full border border-neutral-gray/50 bg-neutral-black/50 text-neutral-400 transition-colors duration-300 group-hover:text-white group-hover:border-(--theme-color) truncate max-w-full"
               >
                 {{ item.badge }}
               </span>
