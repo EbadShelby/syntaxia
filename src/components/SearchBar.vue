@@ -162,7 +162,11 @@ const handleBlur = () => {
         v-if="isFocused && query.trim().length > 0"
         class="absolute top-full left-0 mt-2 w-full bg-neutral-black border border-neutral-gray rounded-md shadow-lg overflow-hidden z-50"
       >
-        <ul ref="resultsListRef" v-if="searchResults.length > 0" class="max-h-60 overflow-y-auto no-scrollbar">
+        <ul
+          ref="resultsListRef"
+          v-if="searchResults.length > 0"
+          class="max-h-60 overflow-y-auto no-scrollbar"
+        >
           <li v-for="(item, index) in searchResults" :key="item.lang">
             <button
               @click="navigateTo(item.lang)"

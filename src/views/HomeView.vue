@@ -292,6 +292,46 @@ const languages = [
     badge: 'Framework',
     desc: 'The React Framework for the Web with built-in SSR and routing.',
   },
+  {
+    lang: 'express',
+    label: 'Express',
+    icon: '/expressjs_dark.svg',
+    color: '#FFFFFF',
+    badge: 'Framework',
+    desc: 'Fast, unopinionated, minimalist web framework for Node.js.',
+  },
+  {
+    lang: 'flask',
+    label: 'Flask',
+    icon: '/flask-dark.svg',
+    color: '#FFFFFF',
+    badge: 'Framework',
+    desc: 'A lightweight WSGI web application framework for Python.',
+  },
+  {
+    lang: 'django',
+    label: 'Django',
+    icon: '/django.svg',
+    color: '#092E20',
+    badge: 'Framework',
+    desc: 'The web framework for perfectionists with deadlines.',
+  },
+  {
+    lang: 'numpy',
+    label: 'NumPy',
+    icon: '/numpy-svgrepo-com.svg',
+    color: '#4DABCF',
+    badge: 'Library',
+    desc: 'The fundamental package for scientific computing with Python.',
+  },
+  {
+    lang: 'redis',
+    label: 'Redis',
+    icon: '/redis.svg',
+    color: '#DC382D',
+    badge: 'Database',
+    desc: 'The open source, in-memory data store used by millions of developers.',
+  },
 ]
 
 const categoryCounts = languages.reduce(
