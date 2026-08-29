@@ -9979,7 +9979,7 @@ export const refNavItems = [
   },
   {
     lang: 'js',
-    label: 'JS',
+    label: 'JavaScript',
   },
   {
     lang: 'php',
