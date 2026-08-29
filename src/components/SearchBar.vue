@@ -610,63 +610,6 @@ const sectionResults = computed(() =>
   searchResults.value.filter((r): r is SectionResult => r.type === 'section'),
 )
 
-// ── Ghost / Inline Autocomplete Suggestion ────────────────────────────────────
-/**
- * Find the first section title that starts with (or closely matches) the query,
- * so we can show a "ghost" completion hint inside the input box.
- */
-const ghostSuggestion = computed<string>(() => {
-  const q = query.value.trim().toLowerCase()
-  if (!q || q.length < 2) return ''
-
-  // Look for a section title that starts with the query
-  for (const s of sectionIndex) {
-    const t = s.sectionTitle.toLowerCase()
-    if (t.startsWith(q) && t !== q) return s.sectionTitle
-  }
-
-  // Look for topic label that starts with the query
-  for (const item of refNavItems) {
-    const label = item.label.toLowerCase()
-    if (label.startsWith(q) && label !== q) return item.label
-  }
-
-  // No prefix match — suggest top result if available
-  if (searchResults.value.length > 0) {
-    const top = searchResults.value[0]
-    if (top && top.type === 'section') return top.sectionTitle
-    if (top && top.type === 'topic') return top.label
-  }
-
-  return ''
-})
-
-// The portion of the ghost that comes after the user's typed text
-const ghostSuffix = computed<string>(() => {
-  const q = query.value
-  const suggestion = ghostSuggestion.value
-  if (!suggestion || !q) return ''
-
-  // If the suggestion starts with what the user typed (case-insensitive), show the rest
-  if (suggestion.toLowerCase().startsWith(q.toLowerCase())) {
-    return suggestion.slice(q.length)
-  }
-  return ''
-})
-
-// Accept the ghost suggestion on Tab or ArrowRight at end of input
-const acceptGhost = () => {
-  if (ghostSuggestion.value) {
-    query.value = ghostSuggestion.value
-    nextTick(() => {
-      if (searchInput.value) {
-        const len = query.value.length
-        searchInput.value.setSelectionRange(len, len)
-      }
-    })
-  }
-}
-
 // ── Keyboard navigation ───────────────────────────────────────────────────────
 const selectedIndex = ref(0)
 const resultsListRef = ref<HTMLElement | null>(null)
@@ -713,17 +656,6 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 }
 
-const handleInputKeydown = (e: KeyboardEvent) => {
-  // Tab or ArrowRight at end of input → accept ghost suggestion
-  if (
-    (e.key === 'Tab' || e.key === 'ArrowRight') &&
-    ghostSuffix.value &&
-    searchInput.value?.selectionStart === query.value.length
-  ) {
-    e.preventDefault()
-    acceptGhost()
-  }
-}
 
 onMounted(() => window.addEventListener('keydown', handleKeydown))
 onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
@@ -780,27 +712,7 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
   })
 }
 
-// ── Match badge label ─────────────────────────────────────────────────────────
-/** Returns a short label explaining WHY this result matched (e.g. "via synonym") */
-function getMatchBadge(item: SectionResult): string | null {
-  const q = query.value.trim().toLowerCase()
-  const tokens = q.split(/\s+/).filter(Boolean)
-  const titleLower = item.sectionTitle.toLowerCase()
 
-  for (const token of tokens) {
-    // Exact or prefix match → no badge needed
-    if (titleLower.includes(token)) return null
-
-    // Stem match
-    const stemmedToken = stem(token)
-    const titleWords = titleLower.split(/[\s\-&/()]+/)
-    if (titleWords.some((w) => stem(w) === stemmedToken)) return 'similar'
-
-    // Synonym match
-    if (SYNONYMS[token]?.some((syn) => titleLower.includes(syn))) return 'related'
-  }
-  return null
-}
 </script>
 
 <template>
@@ -834,55 +746,26 @@ function getMatchBadge(item: SectionResult): string | null {
         />
       </svg>
 
-      <!-- Input with ghost overlay -->
-      <div
-        class="relative transition-all duration-300"
+      <input
+        ref="searchInput"
+        v-model="query"
+        type="text"
+        placeholder="Search topics & sections..."
+        class="bg-transparent text-sm text-white placeholder-neutral-500 outline-none transition-all duration-300"
         :class="
           isFocused
             ? 'w-40 md:w-56 lg:w-72 opacity-100'
             : 'w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100'
         "
-      >
-        <!-- Ghost/autocomplete overlay (rendered behind the real input text) -->
-        <div
-          v-if="ghostSuffix && isFocused"
-          class="absolute inset-0 flex items-center pointer-events-none"
-          aria-hidden="true"
-        >
-          <span class="text-sm invisible whitespace-pre">{{ query }}</span>
-          <span class="text-sm text-neutral-600 whitespace-pre">{{ ghostSuffix }}</span>
-        </div>
-
-        <input
-          ref="searchInput"
-          v-model="query"
-          type="text"
-          placeholder="Search topics & sections..."
-          class="w-full bg-transparent text-sm text-white placeholder-neutral-500 outline-none relative z-10"
-          @focus="isFocused = true"
-          @blur="handleBlur"
-          @keydown.enter="handleEnter"
-          @keydown.down="handleArrowDown"
-          @keydown.up="handleArrowUp"
-          @keydown.esc="searchInput?.blur()"
-          @keydown="handleInputKeydown"
-        />
-      </div>
-
-      <!-- Ghost hint indicator (Tab key) -->
-      <div
-        v-if="ghostSuffix && isFocused"
-        class="hidden md:flex items-center gap-0.5 ml-1 shrink-0"
-        title="Press Tab to complete"
-      >
-        <kbd
-          class="px-1 py-0.5 rounded border border-neutral-gray/40 bg-neutral-gray/10 text-[9px] text-neutral-600 font-mono"
-          >Tab</kbd
-        >
-      </div>
+        @focus="isFocused = true"
+        @blur="handleBlur"
+        @keydown.enter="handleEnter"
+        @keydown.down="handleArrowDown"
+        @keydown.up="handleArrowUp"
+        @keydown.esc="searchInput?.blur()"
+      />
 
       <div
-        v-else
         class="hidden md:flex items-center justify-center w-5 h-5 rounded border border-neutral-gray bg-neutral-gray/20 text-[10px] text-neutral-400 ml-2 shrink-0"
         title="Press / to search"
       >
@@ -1037,30 +920,15 @@ function getMatchBadge(item: SectionResult): string | null {
                   </div>
                 </div>
                 <div class="flex-1 min-w-0">
-                  <div class="flex items-center gap-1.5">
-                    <div
-                      class="font-medium truncate transition-colors"
-                      :class="
-                        selectedIndex === getItemIndex('section', item.lang, item.sectionId)
-                          ? 'text-primary-lightgreen'
-                          : 'text-neutral-200'
-                      "
-                      v-html="highlight(item.sectionTitle, query.trim())"
-                    />
-                    <!-- Match-reason badge -->
-                    <span
-                      v-if="getMatchBadge(item) === 'similar'"
-                      class="shrink-0 text-[9px] px-1 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium leading-none"
-                    >
-                      ~similar
-                    </span>
-                    <span
-                      v-else-if="getMatchBadge(item) === 'related'"
-                      class="shrink-0 text-[9px] px-1 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20 font-medium leading-none"
-                    >
-                      related
-                    </span>
-                  </div>
+                  <div
+                    class="font-medium truncate transition-colors"
+                    :class="
+                      selectedIndex === getItemIndex('section', item.lang, item.sectionId)
+                        ? 'text-primary-lightgreen'
+                        : 'text-neutral-200'
+                    "
+                    v-html="highlight(item.sectionTitle, query.trim())"
+                  />
                   <div class="text-xs text-neutral-500 truncate mt-0.5">
                     <span
                       class="text-neutral-600 mr-1"
@@ -1104,13 +972,7 @@ function getMatchBadge(item: SectionResult): string | null {
                 >
                 open
               </span>
-              <span class="flex items-center gap-1">
-                <kbd
-                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
-                  >Tab</kbd
-                >
-                complete
-              </span>
+
               <span class="flex items-center gap-1">
                 <kbd
                   class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
