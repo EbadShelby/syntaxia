@@ -396,11 +396,9 @@ const scrollRight = () => {
           </span>
         </RouterLink>
 
-        <!-- Right section: Search + GitHub -->
         <div class="flex items-center gap-4 md:gap-6">
           <SearchBar />
 
-          <!-- GitHub Star -->
           <a
             href="https://github.com/EbadShelby/syntaxia"
             target="_blank"
@@ -428,7 +426,6 @@ const scrollRight = () => {
 
     <!-- ─── Hero ─────────────────────────────────────────── -->
     <section class="relative overflow-hidden border-b border-neutral-gray">
-      <!-- Grid overlay -->
       <div
         class="absolute inset-0 opacity-[0.04]"
         style="
@@ -439,14 +436,12 @@ const scrollRight = () => {
         "
       ></div>
 
-      <!-- Glow orb -->
       <div
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 md:w-96 h-72 md:h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
         style="background: radial-gradient(circle, #008170 0%, transparent 70%)"
       ></div>
 
       <div class="relative max-w-7xl mx-auto px-4 py-16 md:py-28 text-center">
-        <!-- Label -->
         <div
           class="inline-flex items-center gap-2 border border-neutral-gray bg-neutral-gray/30 px-3 py-1 rounded-full text-xs text-neutral-400 mb-6 md:mb-8 font-base"
         >
@@ -454,21 +449,18 @@ const scrollRight = () => {
           Your personal coding cheatsheet
         </div>
 
-        <!-- Main headline -->
         <h1
           class="text-4xl sm:text-5xl md:text-7xl font-bold font-fun tracking-widest mb-4 md:mb-6 leading-none"
         >
           <span class="glow-text">SYNTAXIA</span>
         </h1>
 
-        <!-- Tagline -->
         <p
           class="text-neutral-400 text-base md:text-xl max-w-sm md:max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed"
         >
           A quick cheatsheet for the things you always look up.
         </p>
 
-        <!-- CTA -->
         <a
           href="#topics"
           class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-gray text-neutral-300 text-sm rounded hover:border-primary-lightgreen hover:text-primary-lightgreen transition-all active:scale-95"
@@ -567,14 +559,12 @@ const scrollRight = () => {
           class="group relative rounded-xl p-3 sm:p-4 bg-neutral-gray/10 border border-neutral-gray block overflow-hidden"
           :style="{ '--theme-color': item.color }"
         >
-          <!-- Border Highlight -->
           <div
             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl border pointer-events-none"
             :style="{ borderColor: 'var(--theme-color)' }"
           ></div>
 
           <div class="relative z-10 flex items-center gap-3 sm:gap-4 h-full">
-            <!-- Icon -->
             <div
               class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center rounded-xl bg-neutral-black border border-neutral-gray/50 transition-colors duration-300 group-hover:border-(--theme-color) shadow-md relative"
             >
@@ -585,7 +575,6 @@ const scrollRight = () => {
               />
             </div>
 
-            <!-- Title & Badge -->
             <div class="flex flex-col items-start gap-1 min-w-0 flex-1">
               <h3
                 class="text-sm sm:text-lg font-bold text-white transition-colors duration-300 group-hover:text-(--theme-color) truncate w-full"

@@ -50,14 +50,14 @@ function scrollTo(id: string) {
     if (scrollTimeout) clearTimeout(scrollTimeout)
     scrollTimeout = setTimeout(() => {
       isScrolling = false
-    }, 1000) // 1 second should be enough for smooth scroll to finish
+    }, 1000) // allow smooth scroll to complete before re-enabling observer
   }
 }
 </script>
 
 <template>
   <aside
-    class="hidden lg:block no-scrollbar w-64 xl:w-72 shrink-0 border-l border-neutral-gray p-5 sticky top-[4rem] h-[calc(100vh-4rem)] overflow-y-auto bg-neutral-black/50"
+    class="hidden lg:block no-scrollbar w-64 xl:w-72 shrink-0 border-l border-neutral-gray p-5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-neutral-black/50"
   >
     <div>
       <h3 class="font-bold text-sm text-primary-lightgreen mb-4 uppercase tracking-wider">
