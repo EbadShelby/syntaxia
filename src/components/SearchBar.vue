@@ -47,405 +47,720 @@ const sectionIndex: SectionResult[] = Object.values(refTopics).flatMap((topic) =
  * that will be injected into the haystack match.
  */
 const SYNONYMS: Record<string, string[]> = {
-  // ── Loops ────────────────────────────────────────────────────────────────
-  for: ['loops', 'loop'],
-  'for loop': ['loops'],
-  'for of': ['loops'],
-  'for in': ['loops'],
-  foreach: ['loops'],
-  while: ['loops', 'loop'],
-  'while loop': ['loops'],
-  'do while': ['loops'],
-  do: ['loops'],
-  loop: ['loops'],
-  iterate: ['loops'],
-  iteration: ['loops'],
-  repeat: ['loops'],
-  break: ['loops'],
-  continue: ['loops'],
-  // ── Conditionals ─────────────────────────────────────────────────────────
-  if: ['conditionals'],
-  else: ['conditionals'],
-  'if else': ['conditionals'],
-  ifelse: ['conditionals'],
-  switch: ['conditionals'],
-  case: ['conditionals'],
-  ternary: ['conditionals'],
-  condition: ['conditionals'],
-  comparison: ['conditionals'],
-  // ── Functions ─────────────────────────────────────────────────────────────
-  function: ['functions'],
-  func: ['functions'],
-  fn: ['functions'],
-  arrow: ['functions', 'arrow function'],
-  'arrow function': ['functions'],
-  lambda: ['functions'],
-  callback: ['functions'],
-  closure: ['functions'],
-  closures: ['functions'],
-  return: ['functions'],
-  parameter: ['functions'],
-  argument: ['functions'],
-  iife: ['functions'],
-  generator: ['functions'],
-  yield: ['functions'],
-  // ── Classes / OOP ─────────────────────────────────────────────────────────
-  class: ['classes'],
-  oop: ['classes', 'object-oriented'],
-  'object oriented': ['classes'],
-  inheritance: ['classes'],
-  constructor: ['classes'],
-  extends: ['classes'],
-  super: ['classes'],
-  new: ['classes'],
-  instance: ['classes'],
-  static: ['classes'],
-  private: ['classes'],
-  getter: ['classes'],
-  setter: ['classes'],
-  // ── Error Handling ────────────────────────────────────────────────────────
-  try: ['error handling'],
-  catch: ['error handling'],
-  throw: ['error handling'],
-  finally: ['error handling'],
-  error: ['error handling'],
-  exception: ['error handling'],
-  // ── Async / Promises ──────────────────────────────────────────────────────
-  async: ['promises', 'async/await'],
-  await: ['promises', 'async/await'],
-  promise: ['promises', 'async/await'],
-  'promise.then': ['promises', 'async/await'],
-  resolve: ['promises', 'async/await'],
-  reject: ['promises', 'async/await'],
-  fetch: ['promises', 'async/await'],
-  ajax: ['promises', 'async/await'],
-  http: ['promises', 'async/await'],
-  request: ['promises', 'async/await'],
-  // ── Regex ─────────────────────────────────────────────────────────────────
-  regex: ['regular expressions'],
-  regexp: ['regular expressions'],
-  match: ['regular expressions'],
-  replace: ['regular expressions'],
-  // ── Modules ───────────────────────────────────────────────────────────────
-  import: ['modules'],
-  export: ['modules'],
-  module: ['modules'],
-  require: ['modules'],
-  // ── Variables / Types ─────────────────────────────────────────────────────
-  var: ['variables'],
-  let: ['variables'],
-  const: ['variables'],
-  constant: ['variables'],
-  scope: ['variables'],
-  type: ['data types'],
-  typeof: ['data types'],
-  cast: ['data types'],
-  convert: ['data types'],
-  boolean: ['data types'],
-  bool: ['data types'],
-  null: ['data types'],
-  undefined: ['data types'],
-  // ── Strings ───────────────────────────────────────────────────────────────
-  string: ['strings'],
-  text: ['strings'],
-  str: ['strings'],
-  char: ['strings', 'special characters'],
-  template: ['strings', 'templates'],
-  literal: ['strings'],
-  concatenate: ['strings'],
-  concat: ['strings'],
-  trim: ['strings'],
-  split: ['strings'],
-  join: ['strings', 'joins'],
-  // ── Numbers ───────────────────────────────────────────────────────────────
-  number: ['numbers'],
-  num: ['numbers'],
-  int: ['numbers'],
-  integer: ['numbers'],
-  float: ['numbers'],
-  decimal: ['numbers'],
-  math: ['numbers'],
-  round: ['numbers'],
-  floor: ['numbers'],
-  ceil: ['numbers'],
-  random: ['numbers'],
-  // ── Arrays ────────────────────────────────────────────────────────────────
-  array: ['arrays'],
-  list: ['arrays', 'lists'],
-  push: ['arrays', 'push & pull'],
-  pop: ['arrays'],
-  shift: ['arrays'],
-  unshift: ['arrays'],
-  splice: ['arrays'],
-  slice: ['arrays', 'array indexing & slicing'],
-  map: ['arrays', 'maps & sets'],
-  filter: ['arrays'],
-  reduce: ['arrays'],
-  find: ['arrays'],
-  includes: ['arrays'],
-  sort: ['arrays', 'order by — sort results'],
-  flat: ['arrays'],
-  // ── Objects ───────────────────────────────────────────────────────────────
-  object: ['objects'],
-  obj: ['objects'],
-  dict: ['objects', 'hashes'],
-  key: ['objects', 'basic key operations'],
-  value: ['objects'],
-  property: ['objects', 'attributes'],
-  spread: ['objects'],
-  destructure: ['objects'],
-  // ── Maps & Sets ───────────────────────────────────────────────────────────
-  set: ['maps & sets', 'sets'],
-  weakmap: ['maps & sets'],
-  weakset: ['maps & sets'],
-  // ── JSON ──────────────────────────────────────────────────────────────────
-  json: ['json'],
-  parse: ['json'],
-  stringify: ['json'],
-  serialize: ['json'],
-  // ── DOM / Events ──────────────────────────────────────────────────────────
-  dom: ['dom manipulation'],
-  element: ['dom manipulation'],
-  event: ['dom manipulation', 'event handling'],
-  click: ['dom manipulation', 'event handling'],
-  listener: ['dom manipulation', 'event handling'],
-  query: ['dom manipulation', 'querysets (orm)', 'select — read data'],
-  selector: ['dom manipulation', 'selectors'],
-  // ── Timing ────────────────────────────────────────────────────────────────
-  timeout: ['timing functions'],
-  interval: ['timing functions'],
-  settimeout: ['timing functions'],
-  setinterval: ['timing functions'],
-  delay: ['timing functions'],
-  timer: ['timing functions'],
-  // ── Console / Debug ───────────────────────────────────────────────────────
-  console: ['console methods'],
-  log: ['console methods', 'logging', 'viewing history'],
-  print: ['console methods'],
-  debug: ['console methods', 'error handling'],
-  warn: ['console methods'],
-  // ── Git ───────────────────────────────────────────────────────────────────
-  git: ['git version control'],
-  merge: ['merging'],
-  merging: ['merging'],
-  rebase: ['rebasing'],
-  branch: ['branches'],
-  commit: ['committing'],
-  stash: ['stashing'],
-  pull: ['push & pull'],
-  undo: ['undoing changes'],
-  reset: ['undoing changes'],
-  revert: ['undoing changes'],
-  tag: ['tags'],
-  ignore: ['ignoring files'],
-  gitignore: ['ignoring files'],
-  remote: ['push & pull'],
-  clone: ['creating a repository'],
-  init: ['creating a repository', 'setup'],
-  history: ['viewing history'],
-  diff: ['staging changes'],
-  stage: ['staging changes'],
-  add: ['staging changes', 'insert — add data'],
-  submodule: ['submodules'],
-  alias: ['aliases'],
-  workflow: ['basic workflow', 'common workflow example'],
-  // ── CSS Layout ────────────────────────────────────────────────────────────
-  flex: ['flexbox'],
-  flexbox: ['flexbox'],
-  grid: ['grid layout'],
-  responsive: ['responsive design'],
-  media: ['responsive design'],
-  animation: ['animations'],
-  transition: ['transitions'],
-  transform: ['transforms'],
-  hover: ['pseudo-classes'],
-  focus: ['pseudo-classes'],
-  active: ['pseudo-classes'],
-  before: ['pseudo-elements'],
-  after: ['pseudo-elements'],
-  padding: ['spacing (padding & margin)', 'box model'],
-  margin: ['spacing (padding & margin)', 'box model'],
-  width: ['width & height', 'box model'],
-  height: ['width & height', 'box model'],
-  overflow: ['sizing overflow'],
-  position: ['position property'],
-  display: ['display property'],
-  border: ['borders', 'box model'],
-  shadow: ['shadows'],
-  background: ['background properties'],
-  gradient: ['background properties'],
-  font: ['fonts', 'typography'],
-  color: ['colors'],
-  unit: ['units'],
-  variable: ['variables', 'variables (custom properties)'],
-  'variable-css': ['variables (custom properties)'],
-  'custom property': ['variables (custom properties)'],
-  // ── SQL ───────────────────────────────────────────────────────────────────
-  sql: ['mysql', 'basic syntax'],
-  select: ['select — read data'],
-  insert: ['insert — add data'],
-  update: ['update — modify data'],
-  delete: ['delete — remove data'],
-  where: ['where — filter data'],
-  'order by': ['order by — sort results'],
-  orderby: ['order by — sort results'],
-  aggregate: ['aggregate functions'],
-  count: ['aggregate functions'],
-  sum: ['aggregate functions'],
-  avg: ['aggregate functions'],
-  'group by': ['aggregate functions'],
-  // ── Vue ───────────────────────────────────────────────────────────────────
-  prop: ['props'],
-  emit: ['emits'],
-  slot: ['slots'],
-  lifecycle: ['lifecycle hooks'],
-  hook: ['lifecycle hooks'],
-  mounted: ['lifecycle hooks'],
-  created: ['lifecycle hooks'],
-  watcher: ['watchers'],
-  watch: ['watchers'],
-  compute: ['computed properties'],
-  computed: ['computed properties'],
-  inject: ['provide/inject'],
-  provide: ['provide/inject'],
-  ref: ['refs (dom access)'],
-  reactive: ['data & reactivity'],
-  reactivity: ['data & reactivity'],
-  directive: ['directives'],
-  vmodel: ['forms & v-model'],
-  'v-model': ['forms & v-model'],
-  'v-if': ['conditional rendering'],
-  'v-for': ['list rendering'],
-  component: ['component registration'],
-  route: ['routing', 'vue router'],
-  router: ['vue router (navigation)', 'routing'],
-  navigate: ['navigation', 'routing'],
-  store: ['pinia', 'state management'],
-  state: ['pinia', 'state management'],
-  pinia: ['pinia (state management)'],
-  // ── Auth / Security ───────────────────────────────────────────────────────
-  auth: ['authentication', 'user authentication'],
-  login: ['user authentication', 'flask-login'],
-  logout: ['user authentication'],
-  password: ['password hashing', 'security'],
-  security: ['security', 'password hashing'],
-  token: ['jwt authentication'],
-  jwt: ['jwt authentication'],
-  hash: ['password hashing', 'hashes'],
-  // ── APIs / Routing ────────────────────────────────────────────────────────
-  api: ['rest api', 'route handlers'],
-  rest: ['rest api patterns'],
-  endpoint: ['rest api', 'route handlers', 'basic routing'],
-  middleware: ['middleware'],
-  cors: ['cors'],
-  rate: ['rate limiting'],
-  validation: ['validation', 'forms & validation'],
-  // ── Server / Backend ──────────────────────────────────────────────────────
-  server: ['setup', 'rest api example'],
-  install: ['setup'],
-  setup: ['setup'],
-  config: ['settings', 'application context & config', 'configuration properties'],
-  settings: ['settings'],
-  env: ['environment variables'],
-  environment: ['environment variables'],
-  // ── Database / ORM ────────────────────────────────────────────────────────
-  database: ['database'],
-  db: ['database', 'database (pdo)'],
-  orm: ['querysets (orm)', 'database (flask-sqlalchemy)'],
-  model: ['models', 'entity (jpa model)'],
-  migration: ['migrations', 'flask-migrate'],
-  session: ['sessions & cookies'],
-  cookie: ['sessions & cookies'],
-  // ── File Operations ───────────────────────────────────────────────────────
-  file: ['file handling', 'file uploads'],
-  upload: ['file uploads', 'file uploads (multer)'],
-  read: ['file handling'],
-  write: ['file handling'],
-  // ── Vue / React / Templates ───────────────────────────────────────────────
-  layout: ['layouts', 'grid layout'],
-  page: ['pages & routing (app router)'],
-  render: ['server vs client components', 'static & dynamic rendering'],
-  // ── Redis ─────────────────────────────────────────────────────────────────
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC / LANGUAGE ALIASES
+  // ═══════════════════════════════════════════════════════════
+
+  html: ['html'], markup: ['html'], webpage: ['html'],
+  css: ['css'], stylesheet: ['css'], styling: ['css', 'css & styling'], styles: ['css'],
+  js: ['javascript'], javascript: ['javascript'], ecmascript: ['javascript'], es6: ['javascript'], vanilla: ['javascript'],
+  ts: ['typescript'], typescript: ['typescript'], tsc: ['setup', 'configuration (tsconfig.json)'], tsconfig: ['configuration (tsconfig.json)'],
+  php: ['php'],
+  mysql: ['mysql'], sql: ['mysql', 'basic syntax'], relational: ['mysql', 'postgresql'], rdbms: ['mysql', 'postgresql'],
+  postgresql: ['postgresql'], postgres: ['postgresql'], psql: ['postgresql', 'useful commands (psql)'],
+  mongodb: ['mongodb'], mongo: ['mongodb'], nosql: ['mongodb'],
   redis: ['redis'],
-  cache: ['common patterns', 'persistence'],
-  pub: ['pub/sub'],
-  subscribe: ['pub/sub'],
-  expire: ['expiration & ttl'],
-  ttl: ['expiration & ttl'],
-  transaction: ['transactions'],
-  // ── NumPy ─────────────────────────────────────────────────────────────────
-  numpy: ['numpy'],
-  matrix: ['linear algebra'],
-  reshape: ['array reshaping'],
-  broadcast: ['broadcasting'],
-  // ── HTML ─────────────────────────────────────────────────────────────────
-  image: ['images'],
-  icon: ['images'],
-  comment: ['comments'],
-  semantic: ['semantic elements'],
-  accessibility: ['semantic elements'],
-  meta: ['meta tags', 'metadata & seo'],
-  seo: ['metadata & seo', 'meta tags'],
-  heading: ['headings'],
-  link: ['links'],
-  button: ['button element'],
-  form: ['forms'],
-  input: ['input types', 'forms'],
-  table: ['tables'],
-  attribute: ['attributes'],
-  script: ['script and style'],
-  style: ['script and style', 'css & styling'],
-  entity: ['special characters'],
-  character: ['special characters'],
-  symbol: ['special characters'],
-  structure: ['basic structure'],
-  doctype: ['basic structure'],
-  // ── TypeScript ────────────────────────────────────────────────────────────
-  ts: ['typescript'],
-  typescript: ['typescript'],
-  tsc: ['setup', 'configuration (tsconfig.json)'],
-  tsconfig: ['configuration (tsconfig.json)'],
-  interface: ['interfaces'],
-  generic: ['generics'],
-  generics: ['generics'],
-  enum: ['enums'],
-  enums: ['enums'],
-  tuple: ['basic types'],
-  union: ['type aliases'],
-  intersection: ['type aliases', 'advanced types'],
-  'type alias': ['type aliases'],
-  utility: ['utility types'],
-  partial: ['utility types'],
-  readonly: ['utility types'],
-  record: ['utility types'],
-  pick: ['utility types'],
-  omit: ['utility types'],
-  exclude: ['utility types'],
-  extract: ['utility types'],
-  nonnullable: ['utility types'],
-  keyof: ['advanced types'],
-  mapped: ['advanced types'],
-  conditional: ['advanced types', 'conditionals'],
-  'type guard': ['advanced types'],
-  assertion: ['type assertions'],
-  'type assertion': ['type assertions'],
-  'any type': ['basic types'],
-  unknown: ['basic types'],
-  void: ['basic types'],
-  never: ['advanced types'],
-  // ── Misc ──────────────────────────────────────────────────────────────────
-  signal: ['signals'],
-  admin: ['admin panel'],
-  test: ['testing', 'regular expressions'],
-  testing: ['testing'],
-  pattern: ['common patterns', 'regular expressions'],
-  logging: ['logging'],
-  dto: ['dtos & mapping'],
-  dependency: ['dependency injection'],
-  injection: ['dependency injection'],
-  blueprint: ['blueprints'],
-  profile: ['profiles'],
-  job: ['common patterns'],
+  tailwind: ['tailwind'], 'tailwind css': ['tailwind'], 'utility first': ['tailwind'],
+  bootstrap: ['bootstrap'], 'bootstrap css': ['bootstrap'],
+  vue: ['vue'], vuejs: ['vue'], 'vue.js': ['vue'],
+  react: ['react'], reactjs: ['react'], 'react.js': ['react'],
+  'react native': ['react native'], reactnative: ['react native'], rn: ['react native'], expo: ['react native'], mobile: ['react native'],
+  angular: ['angular'], ng: ['angular'],
+  next: ['next.js'], nextjs: ['next.js'], ssr: ['next.js', 'server vs client components'], ssg: ['next.js', 'static & dynamic rendering'],
+  node: ['node.js'], nodejs: ['node.js'], 'node.js': ['node.js'], npm: ['node.js', 'npm scripts & nodemon', 'common npm packages'], npx: ['node.js'],
+  express: ['express'], expressjs: ['express'],
+  flask: ['flask'],
+  django: ['django'],
+  laravel: ['laravel'],
+  spring: ['spring boot'], springboot: ['spring boot'], 'spring boot': ['spring boot'],
+  python: ['python'], py: ['python'],
+  pandas: ['pandas'], dataframe: ['pandas', 'creating dataframes & series'], 'data frame': ['pandas'],
+  numpy: ['numpy'], ndarray: ['numpy', 'creating arrays'],
+  go: ['go'], golang: ['go'],
+  kotlin: ['kotlin'],
+  rust: ['rust'],
+  swift: ['swift'], ios: ['swift'], swiftui: ['swift'],
+  dart: ['dart'], flutter: ['dart'],
+  ruby: ['ruby'], rails: ['ruby'],
+  lua: ['lua'],
+  cpp: ['c++'], cplusplus: ['c++'],
+  csharp: ['c#'], dotnet: ['c#'],
+  java: ['java'], jvm: ['java'],
+  jquery: ['jquery'],
+  docker: ['docker'], container: ['docker', 'running containers'], containers: ['docker'], dockerfile: ['dockerfile'],
+  compose: ['docker compose'], 'docker compose': ['docker compose'],
+  git: ['git version control'], github: ['github-specific workflow'], vcs: ['git version control'], 'version control': ['git version control'],
+  linux: ['linux commands'], bash: ['linux commands'], shell: ['linux commands'], terminal: ['linux commands'], unix: ['linux commands'],
+  cli: ['linux commands', 'angular cli commands', 'artisan commands'],
+  windows: ['windows commands'], cmd: ['windows commands'], powershell: ['windows commands'], 'command prompt': ['windows commands'],
+  motion: ['motion'], framer: ['motion'], 'framer motion': ['motion'], variant: ['variants'], variants: ['variants'],
+  gesture: ['hover & tap', 'drag'], drag: ['drag'],
+
+  // ═══════════════════════════════════════════════════════════
+  // LOOPS
+  // ═══════════════════════════════════════════════════════════
+
+  for: ['loops', 'loop'], 'for loop': ['loops'], 'for of': ['loops'], 'for in': ['loops'],
+  foreach: ['loops'], 'for each': ['loops'], while: ['loops', 'loop'], 'while loop': ['loops'],
+  'do while': ['loops'], do: ['loops'], loop: ['loops'], iterate: ['loops'], iteration: ['loops'],
+  repeat: ['loops'], break: ['loops'], continue: ['loops'], range: ['loops'], looping: ['loops'],
+
+  // ═══════════════════════════════════════════════════════════
+  // CONDITIONALS
+  // ═══════════════════════════════════════════════════════════
+
+  if: ['conditionals'], else: ['conditionals'], 'if else': ['conditionals'], ifelse: ['conditionals'],
+  switch: ['conditionals'], case: ['conditionals'], ternary: ['conditionals'], condition: ['conditionals'],
+  comparison: ['conditionals'], when: ['conditionals'], guard: ['conditionals', 'guards'],
+  'if statement': ['conditionals'], branching: ['conditionals', 'branches'], 'boolean logic': ['conditionals'],
+
+  // ═══════════════════════════════════════════════════════════
+  // FUNCTIONS
+  // ═══════════════════════════════════════════════════════════
+
+  function: ['functions'], func: ['functions'], fn: ['functions'],
+  method: ['functions', 'methods (functions)', 'methods'], arrow: ['functions'], 'arrow function': ['functions'],
+  lambda: ['functions', 'blocks, procs & lambdas'], callback: ['functions'],
+  closure: ['functions', 'closures & higher-order functions'], closures: ['functions', 'closures & higher-order functions'],
+  return: ['functions'], parameter: ['functions'], argument: ['functions'], iife: ['functions'],
+  generator: ['functions'], yield: ['functions'], higher: ['functions', 'closures & higher-order functions'],
+  'higher order': ['functions', 'closures & higher-order functions'], currying: ['functions'],
+  overload: ['functions'], 'default parameter': ['functions'], 'rest parameter': ['functions'],
+  spread: ['functions', 'objects'], variadic: ['functions'],
+
+  // ═══════════════════════════════════════════════════════════
+  // CLASSES / OOP
+  // ═══════════════════════════════════════════════════════════
+
+  class: ['classes'], oop: ['classes', 'classes & oop', 'classes & objects'],
+  'object oriented': ['classes', 'classes & oop'], inheritance: ['classes'], constructor: ['classes'],
+  extends: ['classes'], super: ['classes'], new: ['classes'], instance: ['classes'], static: ['classes'],
+  private: ['classes'], public: ['classes'], protected: ['classes'], getter: ['classes'], setter: ['classes'],
+  abstract: ['classes'], interface: ['interfaces', 'interfaces & functional interfaces'], trait: ['traits'],
+  protocol: ['protocols'], mixin: ['tables as objects (oop)'], struct: ['structs'], enum: ['enums'], enums: ['enums'],
+  sealed: ['classes'], data_class: ['classes & objects'], record: ['records (c# 9+)', 'records & pattern matching (dart 3+)'],
+  singleton: ['classes', 'common patterns'], polymorphism: ['classes'], encapsulation: ['classes'],
+
+  // ═══════════════════════════════════════════════════════════
+  // ERROR HANDLING
+  // ═══════════════════════════════════════════════════════════
+
+  try: ['error handling', 'exception handling'], catch: ['error handling', 'exception handling'],
+  throw: ['error handling', 'exception handling'], finally: ['error handling', 'exception handling'],
+  error: ['error handling', 'exception handling'], exception: ['error handling', 'exception handling'],
+  'error boundary': ['error boundaries'], panic: ['error handling'], unwrap: ['error handling'],
+  'try catch': ['error handling', 'exception handling'],
+
+  // ═══════════════════════════════════════════════════════════
+  // ASYNC / PROMISES
+  // ═══════════════════════════════════════════════════════════
+
+  async: ['promises', 'async/await', 'async programming'], await: ['promises', 'async/await'],
+  promise: ['promises', 'async/await'], then: ['promises', 'async/await'],
+  resolve: ['promises', 'async/await'], reject: ['promises', 'async/await'],
+  fetch: ['promises', 'async/await', 'fetching data (api calls)'], ajax: ['promises', 'async/await', 'ajax'],
+  http: ['promises', 'async/await', 'http server (built-in)', 'http client'],
+  request: ['promises', 'async/await', 'request object', 'request & response'],
+  response: ['response methods', 'request & response', 'response handling'],
+  goroutine: ['goroutines & channels'], channel: ['goroutines & channels'], coroutine: ['coroutines'],
+  future: ['async programming'], observable: ['observables & rxjs'], rxjs: ['observables & rxjs'],
+  stream: ['streams', 'streams (java 8+)'], 'async await': ['promises', 'async/await'],
+  concurrent: ['goroutines & channels'], parallel: ['goroutines & channels'],
+  'event loop': ['promises'], microtask: ['promises'],
+
+  // ═══════════════════════════════════════════════════════════
+  // VARIABLES / TYPES
+  // ═══════════════════════════════════════════════════════════
+
+  var: ['variables'], let: ['variables'], const: ['variables'], constant: ['variables'],
+  scope: ['variables'], variable: ['variables'], declare: ['variables'],
+  type: ['data types'], typeof: ['data types'], cast: ['data types'], convert: ['data types'],
+  boolean: ['data types'], bool: ['data types'], null: ['data types', 'nullable reference types'],
+  undefined: ['data types'], nullable: ['null safety', 'nullable reference types'], 'null safety': ['null safety'],
+  optional: ['optionals', 'optional'], any: ['data types', 'basic types'], unknown: ['basic types'],
+  void: ['basic types'], never: ['advanced types'], 'type annotation': ['basic types'],
+  'type inference': ['basic types'], 'static typing': ['basic types'],
+
+  // ═══════════════════════════════════════════════════════════
+  // STRINGS
+  // ═══════════════════════════════════════════════════════════
+
+  string: ['strings'], text: ['strings'], str: ['strings'], char: ['strings', 'special characters'],
+  template: ['strings', 'templates', 'blade templates', 'template syntax (interpolation)'],
+  literal: ['strings'], concatenate: ['strings'], concat: ['strings'], trim: ['strings'], split: ['strings'],
+  format: ['strings'], interpolation: ['strings', 'template syntax (interpolation)'],
+  'string method': ['strings'], substring: ['strings'], 'regular expression': ['regular expressions'],
+  lowercase: ['strings'], uppercase: ['strings'], 'string formatting': ['strings'],
+  join: ['strings', 'joins', 'merging & joining'],
+
+  // ═══════════════════════════════════════════════════════════
+  // NUMBERS
+  // ═══════════════════════════════════════════════════════════
+
+  number: ['numbers', 'numbers & math'], num: ['numbers'], int: ['numbers'], integer: ['numbers'],
+  float: ['numbers'], decimal: ['numbers'], math: ['numbers', 'mathematical functions', 'numbers & math'],
+  round: ['numbers'], floor: ['numbers'], ceil: ['numbers'], random: ['numbers'],
+  arithmetic: ['numbers'], modulo: ['numbers'], exponent: ['numbers'], 'math function': ['mathematical functions', 'numbers'],
+
+  // ═══════════════════════════════════════════════════════════
+  // ARRAYS / LISTS / COLLECTIONS
+  // ═══════════════════════════════════════════════════════════
+
+  array: ['arrays', 'creating arrays'],
+  list: ['arrays', 'lists', 'lists (collections)', 'collections (lists, sets, maps)'],
+  push: ['arrays', 'push & pull'], pop: ['arrays'], shift: ['arrays'], unshift: ['arrays'],
+  splice: ['arrays'], slice: ['arrays', 'array indexing & slicing'],
+  map: ['arrays', 'maps & sets', 'maps'], filter: ['arrays'], reduce: ['arrays'],
+  find: ['arrays', 'sorting & searching', 'find documents'], includes: ['arrays'],
+  sort: ['arrays', 'sorting & searching', 'order by — sort results', 'sorting & ranking'],
+  flat: ['arrays'], vector: ['vectors'],
+  collection: ['collections (lists, sets, maps)', 'mongodb', 'database & collection basics'],
+  tuple: ['basic types', 'tuples'], stack: ['arrays'], queue: ['arrays'], deque: ['arrays'],
+  'array method': ['arrays'], flatten: ['arrays'], 'array slicing': ['array indexing & slicing'],
+  'list comprehension': ['list/dict comprehensions'], 'dict comprehension': ['list/dict comprehensions'],
+  comprehension: ['list/dict comprehensions'],
+
+  // ═══════════════════════════════════════════════════════════
+  // OBJECTS / DICTIONARIES
+  // ═══════════════════════════════════════════════════════════
+
+  object: ['objects', 'classes & objects'], obj: ['objects'],
+  dict: ['objects', 'hashes', 'dictionaries'], dictionary: ['objects', 'hashes', 'dictionaries'],
+  hash: ['objects', 'hashes', 'hashmaps'], hashmap: ['hashmaps'], key: ['objects', 'basic key operations'],
+  value: ['objects'], property: ['objects', 'attributes'], destructure: ['objects'], destructuring: ['objects'],
+  'object spread': ['objects'], 'object method': ['objects'], 'key value': ['objects'], entry: ['objects'],
+
+  // ═══════════════════════════════════════════════════════════
+  // SETS / MAPS / JSON
+  // ═══════════════════════════════════════════════════════════
+
+  set: ['maps & sets', 'sets', 'set operations'], weakmap: ['maps & sets'], weakset: ['maps & sets'],
+  'sorted set': ['sorted sets'],
+  json: ['json', 'json handling', 'json & jsonb'], parse: ['json'], stringify: ['json'],
+  serialize: ['json'], deserialize: ['json'], jsonb: ['json & jsonb'], 'json parse': ['json'],
+
+  // ═══════════════════════════════════════════════════════════
+  // MODULES / IMPORTS
+  // ═══════════════════════════════════════════════════════════
+
+  import: ['modules', 'modules & imports', 'packages & imports'], export: ['modules'],
+  module: ['modules', 'modules (commonjs)', 'modules (es modules)'], require: ['modules', 'modules (commonjs)'],
+  package: ['package.json', 'packages & imports'], namespace: ['packages & imports'],
+  commonjs: ['modules (commonjs)'], esm: ['modules (es modules)'], 'es module': ['modules (es modules)'],
+
+  // ═══════════════════════════════════════════════════════════
+  // REGEX / GENERICS / DOM / TIMING / CONSOLE
+  // ═══════════════════════════════════════════════════════════
+
+  regex: ['regular expressions'], regexp: ['regular expressions'], pattern: ['regular expressions', 'common patterns'],
+  match: ['regular expressions'], 'regex match': ['regular expressions'], 'find and replace': ['regular expressions'],
+  generic: ['generics'], generics: ['generics'], 'type parameter': ['generics'],
+  'generic function': ['generics'], 'generic class': ['generics'], 'generic constraint': ['generics'],
+  dom: ['dom manipulation'], element: ['dom manipulation'],
+  event: ['dom manipulation', 'event handling', 'events'], click: ['dom manipulation', 'event handling'],
+  listener: ['dom manipulation', 'event handling'], 'event listener': ['dom manipulation', 'event handling'],
+  query: ['dom manipulation', 'querysets (orm)', 'find documents'], selector: ['dom manipulation', 'selectors'],
+  create: ['dom manipulation', 'creating & inserting elements'],
+  insert: ['dom manipulation', 'insert documents', 'insert — add data', 'insert data'],
+  remove: ['dom manipulation', 'removing elements', 'delete documents'], traverse: ['traversing dom'],
+  append: ['dom manipulation', 'creating & inserting elements'], 'query selector': ['dom manipulation'],
+  'get element': ['dom manipulation'], innerhtml: ['dom manipulation'],
+  timeout: ['timing functions'], interval: ['timing functions'], settimeout: ['timing functions'],
+  setinterval: ['timing functions'], delay: ['timing functions'], timer: ['timing functions'],
+  debounce: ['common patterns'], throttle: ['common patterns'],
+  console: ['console methods'], log: ['console methods', 'logging'], print: ['console methods'],
+  debug: ['console methods', 'error handling'], warn: ['console methods'], inspect: ['console methods'],
+  'console log': ['console methods'],
+
+  // ═══════════════════════════════════════════════════════════
+  // GIT
+  // ═══════════════════════════════════════════════════════════
+
+  merge: ['merging'], merging: ['merging'], rebase: ['rebasing'], branch: ['branches'],
+  commit: ['committing changes'], committing: ['committing changes'], stash: ['stashing'],
+  pull: ['push & pull'], remote: ['remote repositories', 'push & pull'],
+  undo: ['undoing changes'], reset: ['undoing changes'], revert: ['undoing changes'], rollback: ['undoing changes'],
+  tag: ['tags'], ignore: ['ignoring files'], gitignore: ['ignoring files'],
+  clone: ['creating a repository'], init: ['creating a repository', 'setup'],
+  history: ['viewing history'], diff: ['comparing changes (diff)'], stage: ['staging changes'],
+  conflict: ['working with conflicts'], 'cherry pick': ['cherry pick'], cherrypick: ['cherry pick'],
+  submodule: ['submodules'], alias: ['aliases', 'aliases & shell customization'],
+  workflow: ['basic workflow', 'common workflow example', 'github-specific workflow'],
+  blame: ['viewing history'], amend: ['committing changes'], squash: ['rebasing'],
+  fork: ['github-specific workflow'], 'pull request': ['github-specific workflow'], pr: ['github-specific workflow'],
+  'git log': ['viewing history'], 'git diff': ['comparing changes (diff)'], 'git status': ['staging changes'],
+  'git add': ['staging changes'], 'git commit': ['committing changes'], 'git push': ['push & pull'],
+  'git pull': ['push & pull'], 'git merge': ['merging'], 'git branch': ['branches'],
+  'git checkout': ['branches'], 'git rebase': ['rebasing'], 'git stash': ['stashing'],
+  'git clone': ['creating a repository'], 'git init': ['creating a repository'], 'git tag': ['tags'],
+  'git reset': ['undoing changes'], 'git revert': ['undoing changes'],
+  'working tree': ['staging changes'], 'staging area': ['staging changes'],
+
+  // ═══════════════════════════════════════════════════════════
+  // CSS / STYLING
+  // ═══════════════════════════════════════════════════════════
+
+  flex: ['flexbox', 'display & flexbox utilities'], flexbox: ['flexbox'],
+  'flex container': ['flexbox'], 'flex item': ['flexbox'], 'justify content': ['flexbox'],
+  'align items': ['flexbox'], 'flex direction': ['flexbox'],
+  grid: ['grid layout', 'grid system'], 'css grid': ['grid layout'], 'grid template': ['grid layout'],
+  responsive: ['responsive design', 'dimensions & responsive design'], media: ['responsive design'],
+  'media query': ['responsive design'], breakpoint: ['responsive design'],
+  transition: ['transitions'], transform: ['transforms'], hover: ['pseudo-classes'], focus: ['pseudo-classes'],
+  active: ['pseudo-classes'], before: ['pseudo-elements'], after: ['pseudo-elements'],
+  pseudo: ['pseudo-classes', 'pseudo-elements'],
+  padding: ['spacing (padding & margin)', 'box model', 'spacing utilities'],
+  margin: ['spacing (padding & margin)', 'box model', 'spacing utilities'],
+  width: ['width & height', 'box model'], height: ['width & height', 'box model'],
+  overflow: ['sizing overflow', 'sizing utilities'], position: ['position property'],
+  display: ['display property', 'display & flexbox utilities'],
+  border: ['borders', 'box model', 'border utilities'], 'border radius': ['borders'],
+  shadow: ['shadows'], 'box shadow': ['shadows'],
+  background: ['background properties', 'colors & backgrounds'], gradient: ['background properties'],
+  font: ['fonts', 'typography'], 'font size': ['fonts', 'typography'], 'font weight': ['fonts'],
+  color: ['colors', 'colors & backgrounds'], unit: ['units'],
+  variable: ['variables', 'variables (custom properties)'], 'custom property': ['variables (custom properties)'],
+  'css variable': ['variables (custom properties)'], animation: ['animations', 'basic animation'],
+  keyframe: ['animations'], specificity: ['selectors'], 'box model': ['box model'],
+  'z index': ['position property'], opacity: ['colors'], 'text align': ['typography'],
+  'line height': ['typography'], 'letter spacing': ['typography'],
+
+  // ═══════════════════════════════════════════════════════════
+  // SQL / DATABASE QUERIES
+  // ═══════════════════════════════════════════════════════════
+
+  select: ['select — read data', 'select data'], 'select data': ['select data', 'select — read data'],
+  'insert data': ['insert — add data', 'insert data'], update: ['update — modify data', 'update data'],
+  delete: ['delete — remove data', 'delete data'], where: ['where — filter data', 'where clause'],
+  'inner join': ['joins'], 'left join': ['joins'], 'right join': ['joins'], 'outer join': ['joins'],
+  'order by': ['order by — sort results', 'order by'], orderby: ['order by — sort results'],
+  'group by': ['aggregate functions', 'group by'], groupby: ['aggregate functions'],
+  aggregate: ['aggregate functions', 'aggregation & statistics', 'aggregation pipeline'],
+  count: ['aggregate functions'], sum: ['aggregate functions'], avg: ['aggregate functions'],
+  min: ['aggregate functions'], max: ['aggregate functions'], 'alter table': ['alter table'],
+  index: ['indexes'], constraint: ['constraints'], 'foreign key': ['constraints', 'relationships'],
+  'primary key': ['constraints'], transaction: ['transactions'], view: ['views'],
+  subquery: ['subqueries'], cte: ['common table expressions (cte)'], 'window function': ['window functions'],
+  backup: ['backup and restore'], restore: ['backup and restore'], privilege: ['users and privileges'],
+  permission: ['users and privileges', 'file permissions'], distinct: ['select — read data'],
+  limit: ['select — read data', 'select data'], offset: ['select — read data'],
+
+  // ═══════════════════════════════════════════════════════════
+  // REACT
+  // ═══════════════════════════════════════════════════════════
+
+  component: ['basic component', 'component registration', 'components'],
+  jsx: ['jsx syntax'], tsx: ['jsx syntax'], usestate: ['state with usestate'],
+  useeffect: ['useeffect hook'], useref: ['useref hook'], usecontext: ['usecontext hook'],
+  usememo: ['usememo & usecallback'], usecallback: ['usememo & usecallback'],
+  'custom hook': ['custom hooks'], 'react hook': ['custom hooks'],
+  hook: ['lifecycle hooks', 'custom hooks'], lifecycle: ['lifecycle hooks', 'component lifecycle (with hooks)'],
+  context: ['usecontext hook'], 'react router': ['react router'], 'error boundary': ['error boundaries'],
+  'controlled input': ['forms & controlled inputs'], keys: ['lists & keys'],
+  'list rendering': ['list rendering', 'lists & keys'], 'conditional rendering': ['conditional rendering'],
+  memo: ['usememo & usecallback'], ref: ['useref hook', 'refs (dom access)'],
+  'react state': ['state with usestate'], 'react props': ['basic component'],
+  'react form': ['forms & controlled inputs'], 'react list': ['lists & keys'],
+  'component lifecycle': ['component lifecycle (with hooks)', 'lifecycle hooks'],
+  'react context': ['usecontext hook'], 'react router dom': ['react router'],
+
+  // ═══════════════════════════════════════════════════════════
+  // VUE
+  // ═══════════════════════════════════════════════════════════
+
+  prop: ['props'], emit: ['emits (child to parent)'], slot: ['slots'],
+  mounted: ['lifecycle hooks'], created: ['lifecycle hooks'], watcher: ['watchers'], watch: ['watchers'],
+  computed: ['computed properties'], compute: ['computed properties'],
+  inject: ['provide/inject'], provide: ['provide/inject'],
+  reactive: ['data & reactivity (options api)', 'composition api (modern way)'],
+  reactivity: ['data & reactivity (options api)'], directive: ['directives'],
+  'v-model': ['forms & v-model'], vmodel: ['forms & v-model'], 'v-if': ['conditional rendering'],
+  'v-for': ['list rendering'], 'v-bind': ['directives', 'class & style binding'],
+  'v-on': ['directives', 'event handling'], 'composition api': ['composition api (modern way)'],
+  'options api': ['data & reactivity (options api)'], pinia: ['pinia (state management)'],
+  vuex: ['pinia (state management)'], store: ['pinia (state management)'],
+  state: ['pinia (state management)', 'state with usestate'], 'vue router': ['vue router (navigation)'],
+  router: ['vue router (navigation)', 'routing'], route: ['routing', 'vue router (navigation)'],
+  navigate: ['navigation', 'routing'], navigation: ['navigation', 'routing', 'vue router (navigation)'],
+  'vue emit': ['emits (child to parent)'], 'vue slot': ['slots'], 'vue prop': ['props'],
+  teleport: ['component registration'], 'vue lifecycle': ['lifecycle hooks'],
+  'vue computed': ['computed properties'], 'vue watcher': ['watchers'],
+
+  // ═══════════════════════════════════════════════════════════
+  // ANGULAR
+  // ═══════════════════════════════════════════════════════════
+
+  pipe: ['pipes'], interceptor: ['interceptors'], viewchild: ['viewchild & elementref'],
+  elementref: ['viewchild & elementref'], 'data binding': ['data binding'],
+  binding: ['data binding', 'class & style binding'], 'template driven': ['forms (template-driven)'],
+  'reactive form': ['forms (reactive)'], 'http client': ['http client'],
+  'ng-content': ['content projection (ng-content)'], 'content projection': ['content projection (ng-content)'],
+  'angular service': ['services'], 'angular guard': ['guards'], 'angular module': ['components'],
+  'angular pipe': ['pipes'], 'angular directive': ['directives'], 'angular component': ['components'],
+  'angular interceptor': ['interceptors'], 'angular form': ['forms (template-driven)', 'forms (reactive)'],
+  'angular cli': ['angular cli commands'], 'ng generate': ['angular cli commands'],
+
+  // ═══════════════════════════════════════════════════════════
+  // NODE.JS
+  // ═══════════════════════════════════════════════════════════
+
+  'package.json': ['package.json'], 'file system': ['file system (fs)', 'file & directory operations'],
+  fs: ['file system (fs)', 'file handling'], path: ['path module'], 'http server': ['http server (built-in)'],
+  'event emitter': ['events (eventemitter)'], eventemitter: ['events (eventemitter)'],
+  process: ['process & os'], nodemon: ['npm scripts & nodemon'], 'npm script': ['npm scripts & nodemon'],
+  mongoose: ['mongodb with mongoose'], multer: ['file uploads (multer)', 'file uploads'],
+  'node stream': ['streams'], 'node event': ['events (eventemitter)'],
+  'node module': ['modules (commonjs)', 'modules (es modules)'],
+  'node http': ['http server (built-in)'], 'node process': ['process & os'],
+  'node path': ['path module'], 'node fs': ['file system (fs)'],
+
+  // ═══════════════════════════════════════════════════════════
+  // EXPRESS
+  // ═══════════════════════════════════════════════════════════
+
+  'body parsing': ['body parsing'], 'body parser': ['body parsing'], 'serve static': ['serving static files'],
+  cors: ['cors'], 'rate limit': ['rate limiting'], 'rate limiting': ['rate limiting'],
+  validation: ['validation', 'forms & validation'], 'express route': ['basic routing'],
+  'express middleware': ['express middleware', 'middleware'], 'express router': ['express router'],
+  'express request': ['express request & response'], 'express response': ['express request & response', 'response methods'],
+  'express static': ['serving static files'], 'template engine': ['template engines'],
+  'view engine': ['template engines'], ejs: ['template engines'], handlebars: ['template engines'],
+
+  // ═══════════════════════════════════════════════════════════
+  // AUTH / SECURITY
+  // ═══════════════════════════════════════════════════════════
+
+  auth: ['authentication', 'user authentication', 'authentication (jwt example)'],
+  authentication: ['authentication', 'user authentication'], login: ['user authentication', 'flask-login'],
+  logout: ['user authentication'], signup: ['user authentication'], register: ['user authentication'],
+  password: ['password hashing', 'security'], security: ['security', 'password hashing'],
+  token: ['jwt authentication', 'authentication (jwt example)'],
+  jwt: ['jwt authentication', 'authentication (jwt example)'], 'bearer token': ['jwt authentication'],
+  oauth: ['authentication'], session: ['sessions & cookies', 'sessions & flash messages'],
+  cookie: ['sessions & cookies'], hashing: ['password hashing'], bcrypt: ['password hashing'],
+  'jwt token': ['jwt authentication'], 'access token': ['jwt authentication'], 'refresh token': ['jwt authentication'],
+  'user auth': ['user authentication'], 'sign in': ['user authentication'], 'sign up': ['user authentication'],
+
+  // ═══════════════════════════════════════════════════════════
+  // API / REST / BACKEND
+  // ═══════════════════════════════════════════════════════════
+
+  api: ['rest api', 'route handlers (api routes)', 'rest api example'],
+  rest: ['rest api patterns', 'rest api example'], restful: ['rest api patterns'],
+  endpoint: ['rest api', 'route handlers (api routes)', 'basic routing'], middleware: ['middleware'],
+  server: ['setup', 'rest api example', 'http server (built-in)'], 'server action': ['server actions'],
+  'api route': ['route handlers (api routes)'], webhook: ['rest api patterns'],
+  'rest api': ['rest api patterns', 'rest api example'], 'api endpoint': ['basic routing', 'route handlers (api routes)'],
+  'api request': ['request object', 'request & response'], 'api response': ['response methods', 'response handling'],
+  'status code': ['response methods', 'response handling'], 'http method': ['rest api patterns', 'basic routing'],
+  'get request': ['rest api patterns'], 'post request': ['rest api patterns'],
+  'put request': ['rest api patterns'], 'delete request': ['rest api patterns'], 'patch request': ['rest api patterns'],
+
+  // ═══════════════════════════════════════════════════════════
+  // LARAVEL
+  // ═══════════════════════════════════════════════════════════
+
+  blade: ['blade templates'], eloquent: ['eloquent models', 'eloquent queries'], artisan: ['artisan commands'],
+  seeder: ['seeders & factories'], factory: ['seeders & factories'], relationship: ['relationships'],
+  'has many': ['relationships'], 'belongs to': ['relationships'], 'has one': ['relationships'],
+  'many to many': ['relationships'], facade: ['common helper functions'], helper: ['common helper functions'],
+  flash: ['sessions & flash messages', 'flash messages'], 'laravel route': ['routing'],
+  'laravel controller': ['controllers'], 'laravel model': ['eloquent models'],
+  'laravel migration': ['migrations'], 'laravel validation': ['validation'],
+  'laravel middleware': ['middleware'], 'laravel auth': ['authentication'], 'laravel blade': ['blade templates'],
+  'laravel eloquent': ['eloquent models', 'eloquent queries'], 'laravel seeder': ['seeders & factories'],
+  'laravel artisan': ['artisan commands'], 'laravel session': ['sessions & flash messages'],
+
+  // ═══════════════════════════════════════════════════════════
+  // DJANGO / FLASK
+  // ═══════════════════════════════════════════════════════════
+
+  jinja: ['templates (jinja2)'], jinja2: ['templates (jinja2)'], 'flask login': ['flask-login'],
+  blueprint: ['blueprints'], 'flask form': ['flask-wtf (form validation)'],
+  sqlalchemy: ['database (flask-sqlalchemy)'], 'flask migrate': ['flask-migrate'],
+  'flask restful': ['flask-restful / flask-cors'], queryset: ['querysets (orm)'],
+  orm: ['querysets (orm)', 'database (flask-sqlalchemy)'], signal: ['signals'], admin: ['admin panel'],
+  'django shell': ['django shell'], 'django rest': ['django rest framework (api)'], drf: ['django rest framework (api)'],
+  'class based view': ['views (class-based)', 'class-based view mixins'],
+  'function based view': ['views (function-based)'], 'django model': ['models'],
+  'django view': ['views (function-based)', 'views (class-based)'], 'django url': ['urls'],
+  'django admin': ['admin panel'], 'django auth': ['user authentication'], 'django signal': ['signals'],
+  'django migration': ['migrations'], 'django static': ['static & media files'],
+  'flask route': ['basic routing', 'routing'], 'flask template': ['templates (jinja2)'],
+  'flask db': ['database (flask-sqlalchemy)'], 'flask api': ['rest api patterns'],
+  'flask blueprint': ['blueprints'], 'flask config': ['application context & config'],
+
+  // ═══════════════════════════════════════════════════════════
+  // DATABASE & ORM
+  // ═══════════════════════════════════════════════════════════
+
+  database: ['database', 'database & collection basics'], db: ['database'],
+  model: ['models', 'entity (jpa model)', 'eloquent models'], migration: ['migrations', 'flask-migrate'],
+  relation: ['relationships', 'entity relationships'],
+  schema: ['schema design (embedding vs referencing)', 'models'],
+
+  // ═══════════════════════════════════════════════════════════
+  // CONFIG / ENV / FILES
+  // ═══════════════════════════════════════════════════════════
+
+  install: ['setup', 'installation & setup'], setup: ['setup'],
+  config: ['settings', 'application context & config', 'configuration properties'],
+  settings: ['settings'], env: ['environment variables', 'environment configuration'],
+  environment: ['environment variables', 'environment configuration'], dotenv: ['environment variables'],
+  profile: ['profiles'], 'env variable': ['environment variables', 'environment configuration'],
+  file: ['file handling', 'file uploads', 'file system (fs)', 'file & directory operations'],
+  upload: ['file uploads', 'file uploads (multer)'],
+  read: ['file handling', 'reading & writing data', 'viewing file contents'],
+  write: ['file handling', 'reading & writing data'], directory: ['file & directory operations'],
+  folder: ['file & directory operations'], 'file read': ['file handling', 'file system (fs)'],
+  'file write': ['file handling', 'file system (fs)'], 'file upload': ['file uploads', 'file uploads (multer)'],
+  'read file': ['file handling', 'file system (fs)'], 'write file': ['file handling', 'file system (fs)'],
+  'file io': ['file handling', 'file system (fs)'],
+
+  // ═══════════════════════════════════════════════════════════
+  // SPRING BOOT
+  // ═══════════════════════════════════════════════════════════
+
+  controller: ['rest controllers', 'controllers'], 'rest controller': ['rest controllers'],
+  entity: ['entity (jpa model)'], jpa: ['entity (jpa model)', 'repository (spring data jpa)'],
+  repository: ['repository (spring data jpa)'], 'service layer': ['service layer'],
+  'spring security': ['spring security'], testing: ['testing'], dto: ['dtos & mapping'],
+  mapping: ['dtos & mapping'], logging: ['logging'], 'request mapping': ['request mapping annotations'],
+  '@getmapping': ['request mapping annotations'], '@postmapping': ['request mapping annotations'],
+  '@restcontroller': ['rest controllers'], '@entity': ['entity (jpa model)'],
+  '@repository': ['repository (spring data jpa)'], '@service': ['service layer'],
+  '@autowired': ['dependency injection'], 'spring jwt': ['jwt authentication'],
+  'spring auth': ['spring security'], 'spring config': ['configuration properties'],
+  'spring profile': ['profiles'], 'spring logging': ['logging'], 'spring test': ['testing'],
+
+  // ═══════════════════════════════════════════════════════════
+  // NEXT.JS
+  // ═══════════════════════════════════════════════════════════
+
+  layout: ['layouts', 'grid layout', 'flexbox layout'], page: ['pages & routing (app router)'],
+  render: ['server vs client components', 'static & dynamic rendering'], 'data fetching': ['data fetching'],
+  swr: ['client-side data fetching (swr)'], 'app router': ['pages & routing (app router)'],
+  'server component': ['server vs client components'], 'client component': ['server vs client components'],
+  metadata: ['metadata & seo', 'meta tags'], loading: ['loading & error states'],
+  'next layout': ['layouts'], 'next page': ['pages & routing (app router)'],
+  'next api': ['route handlers (api routes)'], 'next font': ['fonts'], 'next image': ['static assets'],
+  'next metadata': ['metadata & seo'], 'next ssr': ['server vs client components'],
+  'next ssg': ['static & dynamic rendering'], 'use client': ['server vs client components'],
+  'use server': ['server vs client components', 'server actions'],
+
+  // ═══════════════════════════════════════════════════════════
+  // DOCKER
+  // ═══════════════════════════════════════════════════════════
+
+  image: ['images', 'working with images', 'building images'], 'docker image': ['working with images'],
+  'docker container': ['running containers'], volume: ['volumes'], network: ['networks', 'networking'],
+  registry: ['registry & pushing images'], 'docker build': ['building images'],
+  'docker run': ['running containers'], 'docker push': ['registry & pushing images'],
+  cleanup: ['cleaning up'], prune: ['cleaning up'], 'docker volume': ['volumes'],
+  'docker network': ['networks'], 'docker ps': ['managing containers'],
+  'docker exec': ['executing commands in containers'], 'docker inspect': ['inspecting containers'],
+  'docker logs': ['inspecting containers'], 'docker stop': ['managing containers'],
+  'docker rm': ['managing containers'], 'docker rmi': ['cleaning up'], 'docker pull': ['working with images'],
+  'docker tag': ['registry & pushing images'],
+
+  // ═══════════════════════════════════════════════════════════
+  // BOOTSTRAP
+  // ═══════════════════════════════════════════════════════════
+
+  navbar: ['navbar'], modal: ['modal'], card: ['cards'], button: ['button element', 'buttons'],
+  alert: ['alerts'], badge: ['badges'], dropdown: ['dropdowns'], spinner: ['spinners'],
+  toast: ['toast'], tooltip: ['tooltips & popovers'], popover: ['tooltips & popovers'],
+  accordion: ['accordion'], carousel: ['carousel'], pagination: ['pagination'],
+  breadcrumb: ['breadcrumb'], progress: ['progress bars'], 'list group': ['list group'],
+  'grid system': ['grid system'], 'bs grid': ['grid system'], 'bs flex': ['display & flexbox utilities'],
+  tab: ['tabs'],
+
+  // ═══════════════════════════════════════════════════════════
+  // JQUERY
+  // ═══════════════════════════════════════════════════════════
+
+  'jquery selector': ['selectors'], 'jquery event': ['events'], 'jquery animation': ['effects & animation'],
+  'jquery ajax': ['ajax'], chaining: ['chaining'], effect: ['effects & animation'],
+  'jquery dom': ['dom manipulation'], 'jquery form': ['form handling'],
+
+  // ═══════════════════════════════════════════════════════════
+  // PYTHON
+  // ═══════════════════════════════════════════════════════════
+
+  pip: ['setup'], venv: ['setup'], virtualenv: ['setup'], builtin: ['common built-in functions'],
+  'built-in': ['common built-in functions'], datetime: ['working with dates', 'date and time'],
+  unpacking: ['working with multiple values'], decorator: ['classes & oop'],
+  'python list': ['arrays', 'lists'], 'python dict': ['dictionaries'], 'python set': ['sets'],
+  'python tuple': ['tuples'], 'python class': ['classes & oop'], 'python function': ['functions'],
+  'python loop': ['loops'], 'python string': ['strings'], 'python import': ['modules & imports'],
+  'python exception': ['error handling'], 'python file': ['file handling'],
+  enumerate: ['loops'], 'list comprehension': ['list/dict comprehensions'],
+  'dict comprehension': ['list/dict comprehensions'], comprehension: ['list/dict comprehensions'],
+
+  // ═══════════════════════════════════════════════════════════
+  // PANDAS
+  // ═══════════════════════════════════════════════════════════
+
+  'read csv': ['reading & writing data'], read_csv: ['reading & writing data'],
+  loc: ['selecting data'], iloc: ['selecting data'], 'missing data': ['handling missing data'],
+  nan: ['handling missing data', 'nan & infinity handling'], dropna: ['handling missing data'],
+  fillna: ['handling missing data'], groupby: ['groupby'], 'pivot table': ['pivot tables & reshaping'],
+  pivot: ['pivot tables & reshaping'], melt: ['pivot tables & reshaping'],
+  'pandas merge': ['merging & joining'], duplicate: ['duplicate handling'], dtype: ['data types & conversion'],
+  'pandas groupby': ['groupby'], 'pandas sort': ['sorting & ranking'], 'pandas filter': ['selecting data'],
+  'pandas apply': ['modifying data'], 'pandas concat': ['merging & joining'],
+  describe: ['aggregation & statistics'], 'head tail': ['viewing data'],
+  'value counts': ['aggregation & statistics'], 'reset index': ['modifying data'],
+  'rename column': ['modifying data'], 'drop column': ['modifying data'],
+  'pandas datetime': ['date/time operations'],
+
+  // ═══════════════════════════════════════════════════════════
+  // NUMPY
+  // ═══════════════════════════════════════════════════════════
+
+  matrix: ['linear algebra'], reshape: ['array reshaping'], broadcast: ['broadcasting'],
+  'linear algebra': ['linear algebra'], 'dot product': ['linear algebra'],
+  'element wise': ['array operations (element-wise)'], 'numpy array': ['creating arrays'],
+  'numpy math': ['mathematical functions'], arange: ['creating arrays'], linspace: ['creating arrays'],
+  zeros: ['creating arrays'], ones: ['creating arrays'], 'numpy sort': ['sorting & searching'],
+  concatenate: ['combining & splitting arrays'], vstack: ['combining & splitting arrays'],
+  hstack: ['combining & splitting arrays'], 'numpy nan': ['nan & infinity handling'],
+
+  // ═══════════════════════════════════════════════════════════
+  // MONGODB
+  // ═══════════════════════════════════════════════════════════
+
+  'find documents': ['find documents'], 'insert documents': ['insert documents'],
+  'update documents': ['update documents'], 'delete documents': ['delete documents'],
+  aggregation: ['aggregation pipeline', 'aggregation & statistics'], pipeline: ['aggregation pipeline'],
+  'text search': ['text search'], 'schema design': ['schema design (embedding vs referencing)'],
+  embedding: ['schema design (embedding vs referencing)'], referencing: ['schema design (embedding vs referencing)'],
+  'native driver': ['node.js mongodb driver (native)'], 'mongo find': ['find documents'],
+  'mongo insert': ['insert documents'], 'mongo update': ['update documents'],
+  'mongo delete': ['delete documents'], 'mongo aggregate': ['aggregation pipeline'],
+  'query operator': ['query operators'],
+
+  // ═══════════════════════════════════════════════════════════
+  // REDIS
+  // ═══════════════════════════════════════════════════════════
+
+  cache: ['common patterns', 'persistence'], pub: ['pub/sub'], subscribe: ['pub/sub'],
+  'pub sub': ['pub/sub'], pubsub: ['pub/sub'], expire: ['expiration & ttl'], ttl: ['expiration & ttl'],
+  'sorted set': ['sorted sets'], 'key naming': ['key naming conventions'], persistence: ['persistence'],
+
+  // ═══════════════════════════════════════════════════════════
+  // C# / JAVA / GO / KOTLIN / RUST / SWIFT / DART / RUBY / LUA
+  // ═══════════════════════════════════════════════════════════
+
+  linq: ['linq'], delegate: ['classes'], 'nullable types': ['nullable reference types'],
+  records: ['records (c# 9+)'], 'csharp async': ['async/await'], 'csharp generic': ['generics'],
+  annotation: ['entity (jpa model)', 'request mapping annotations'], maven: ['setup'], gradle: ['setup'],
+  'java stream': ['streams (java 8+)'], 'java optional': ['optional'],
+  'functional interface': ['interfaces & functional interfaces'],
+  defer: ['functions'], 'go interface': ['interfaces'], 'go struct': ['structs'],
+  'go goroutine': ['goroutines & channels'], 'go channel': ['goroutines & channels'],
+  'go slice': ['arrays & slices'], 'go map': ['maps'], 'go error': ['error handling'],
+  'go json': ['json handling'], 'go http': ['http server'], 'go package': ['packages & imports'],
+  'kotlin coroutine': ['coroutines'], 'scope function': ['scope functions'],
+  'null check': ['null safety'], 'elvis operator': ['null safety'], 'data class': ['classes & objects'],
+  ownership: ['ownership & borrowing'], borrow: ['ownership & borrowing'], borrowing: ['ownership & borrowing'],
+  lifetime: ['ownership & borrowing'], 'rust trait': ['traits'], iterator: ['iterators & closures'],
+  cargo: ['setup'], 'rust struct': ['structs'], 'rust match': ['conditionals'],
+  'swift optional': ['optionals'], 'swift protocol': ['protocols'], 'swift class': ['classes'],
+  'swift struct': ['structs'], 'swift enum': ['enums'], 'swift closure': ['closures & higher-order functions'],
+  widget: ['dart', 'core components'], 'dart async': ['async programming'], 'dart future': ['async programming'],
+  gem: ['setup'], 'ruby block': ['blocks, procs & lambdas'], proc: ['blocks, procs & lambdas'],
+  'ruby hash': ['hashes'], 'lua table': ['tables as objects (oop)'], metatables: ['tables as objects (oop)'],
+
+  // ═══════════════════════════════════════════════════════════
+  // REACT NATIVE
+  // ═══════════════════════════════════════════════════════════
+
+  flatlist: ['lists (flatlist & sectionlist)'], sectionlist: ['lists (flatlist & sectionlist)'],
+  'react navigation': ['navigation (react navigation)'], asyncstorage: ['asyncstorage'],
+  keyboard: ['keyboard handling'], platform: ['platform-specific code'], 'text input': ['text input'],
+  stylesheet: ['styling'], 'activity indicator': ['activityindicator & loading states'],
+  touchable: ['buttons & touchables'], 'react native style': ['styling'],
+  'react native flex': ['flexbox layout'], 'react native nav': ['navigation (react navigation)'],
+  'react native list': ['lists (flatlist & sectionlist)'],
+  'react native image': ['images & icons'], 'react native button': ['buttons & touchables'],
+  dimensions: ['dimensions & responsive design'],
+
+  // ═══════════════════════════════════════════════════════════
+  // LINUX / WINDOWS COMMANDS
+  // ═══════════════════════════════════════════════════════════
+
+  ls: ['navigation', 'file & directory operations'], cd: ['navigation'],
+  mkdir: ['file & directory operations'], rm: ['file & directory operations'],
+  cp: ['file & directory operations'], mv: ['file & directory operations'],
+  grep: ['searching', 'text processing'], chmod: ['file permissions'], chown: ['file permissions'],
+  ps: ['process management'], kill: ['process management'], top: ['process management', 'server & monitoring commands'],
+  ssh: ['networking'], curl: ['networking'], wget: ['networking'], ping: ['networking'],
+  ifconfig: ['networking'], netstat: ['networking'], tar: ['archives & compression'],
+  zip: ['archives & compression'], unzip: ['archives & compression'], apt: ['package management'],
+  'apt-get': ['package management'], brew: ['package management'], yum: ['package management'],
+  awk: ['text processing'], sed: ['text processing'], cat: ['viewing file contents'],
+  less: ['viewing file contents'], head: ['viewing file contents'], tail: ['viewing file contents'],
+  nano: ['file editing (nano & vim basics)'], vim: ['file editing (nano & vim basics)'],
+  vi: ['file editing (nano & vim basics)'], systemctl: ['system services (systemd)'],
+  service: ['system services (systemd)'], useradd: ['user management'], passwd: ['user management'],
+  df: ['disk & system info'], du: ['disk & system info'], echo: ['redirection & pipes'],
+  'pipe operator': ['redirection & pipes'], xargs: ['redirection & pipes'],
+  cron: ['system services (systemd)'], 'cron job': ['system services (systemd)'],
+  'list files': ['file & directory operations', 'navigation'], 'change directory': ['navigation'],
+  'search file': ['searching'], 'find file': ['searching'], 'linux permission': ['file permissions'],
+  'process list': ['process management'], 'kill process': ['process management'],
+  'check disk': ['disk & system info'], network: ['networking'],
+  compress: ['archives & compression'], 'install package': ['package management'],
+
+  // ═══════════════════════════════════════════════════════════
+  // HTML
+  // ═══════════════════════════════════════════════════════════
+
+  structure: ['basic structure'], doctype: ['basic structure'], comment: ['comments'],
+  semantic: ['semantic elements'], accessibility: ['semantic elements'], meta: ['meta tags', 'metadata & seo'],
+  seo: ['metadata & seo', 'meta tags'], heading: ['headings'], link: ['links'],
+  form: ['forms', 'forms & v-model', 'forms & validation'], input: ['input types', 'forms', 'text input'],
+  table: ['tables'], entity: ['special characters'], character: ['special characters'],
+  symbol: ['special characters'], script: ['script and style'], style: ['script and style', 'css & styling'],
+  'html form': ['forms'], 'html table': ['tables'], 'html link': ['links'], 'html input': ['input types'],
+  section: ['semantic elements'], article: ['semantic elements'], header: ['semantic elements'],
+  footer: ['semantic elements'], paragraph: ['basic structure'],
+
+  // ═══════════════════════════════════════════════════════════
+  // TYPESCRIPT
+  // ═══════════════════════════════════════════════════════════
+
+  'type alias': ['type aliases'], 'utility type': ['utility types'], partial: ['utility types'],
+  readonly: ['utility types'], pick: ['utility types'], omit: ['utility types'],
+  exclude: ['utility types'], nonnullable: ['utility types'], keyof: ['advanced types'],
+  mapped: ['advanced types'], conditional: ['advanced types', 'conditionals'],
+  'type guard': ['advanced types'], assertion: ['type assertions'], 'type assertion': ['type assertions'],
+  'ts interface': ['interfaces'], 'ts generic': ['generics'], 'ts enum': ['enums'],
+  'ts type': ['type aliases', 'basic types'], 'ts utility': ['utility types'],
+  'ts config': ['configuration (tsconfig.json)'],
+
+  // ═══════════════════════════════════════════════════════════
+  // MOTION / TAILWIND / MISC
+  // ═══════════════════════════════════════════════════════════
+
+  animate: ['basic animation', 'animate prop'], 'initial animate': ['initial & animate'],
+  exit: ['exit animations'], 'exit animation': ['exit animations'],
+  scroll: ['scroll animations'], 'animation control': ['animation controls'],
+  'motion value': ['usemotionvalue & usetransform'],
+  'hover animation': ['hover & tap'], 'tap animation': ['hover & tap'],
+  'arbitrary value': ['custom values (arbitrary values)'],
+  test: ['testing'], unittest: ['testing'], 'unit test': ['testing'], mock: ['testing'],
+  deploy: ['setup', 'static & dynamic rendering'], build: ['setup', 'building images'],
+  'project structure': ['project structure'], scaffold: ['setup', 'project structure'],
+  boilerplate: ['setup', 'basic structure'], 'design pattern': ['common patterns'],
+  observer: ['signals', 'observables & rxjs'], mvc: ['controllers', 'views (function-based)'],
+  mvvm: ['data binding'], 'getting started': ['setup'], beginner: ['setup', 'basic syntax'],
+  basics: ['basic syntax', 'basic structure'], example: ['common patterns', 'rest api example', 'common workflow example'],
+  'cheat sheet': ['common patterns'], 'best practice': ['common patterns'],
+  optimization: ['performance tips'], performance: ['performance tips'],
+  dependency: ['dependency injection'], injection: ['dependency injection'],
 }
 
 /**
@@ -556,13 +871,24 @@ function matchesToken(haystack: string, token: string): boolean {
 const MAX_TOPICS = 3
 const MAX_SECTIONS = 8
 
+/**
+ * Minimum number of tokens that must match for a result to appear.
+ * - 1–2 tokens: ALL must match (strict)
+ * - 3+ tokens: all-but-one must match (soft AND — tolerates one unrecognised word)
+ */
+function matchThreshold(tokenCount: number): number {
+  if (tokenCount <= 2) return tokenCount
+  return tokenCount - 1
+}
+
 const searchResults = computed<SearchResult[]>(() => {
   const q = query.value.trim().toLowerCase()
   if (!q) return []
 
   const tokens = q.split(/\s+/).filter(Boolean)
+  const threshold = matchThreshold(tokens.length)
 
-  // Topics: must match ALL tokens
+  // Topics: still require ALL tokens (keeps topic results precise)
   const topicMatches: (TopicResult & { _score: number })[] = refNavItems
     .filter((item) => {
       const haystack =
@@ -576,7 +902,7 @@ const searchResults = computed<SearchResult[]>(() => {
     .sort((a, b) => b._score - a._score)
     .slice(0, MAX_TOPICS)
 
-  // Sections: at least ONE token must match meaningfully
+  // Sections: soft AND — at least `threshold` tokens must match
   const sectionMatches: (SectionResult & { _score: number })[] = sectionIndex
     .map((s) => {
       const titleLower = s.sectionTitle.toLowerCase()
@@ -584,11 +910,13 @@ const searchResults = computed<SearchResult[]>(() => {
       const langHaystack = `${s.lang} ${s.langLabel} ${s.langTitle}`.toLowerCase()
       const fullHaystack = `${langHaystack} ${titleLower} ${descLower}`
 
-      // All tokens must match somewhere (AND logic, but extended with stemming/synonyms)
-      const allMatch = tokens.every((t) => matchesToken(fullHaystack, t))
-      if (!allMatch) return null
+      const matchedCount = tokens.filter((t) => matchesToken(fullHaystack, t)).length
+      if (matchedCount < threshold) return null
 
-      return { ...s, _score: scoreSection(s, tokens) }
+      // Multiply by coverage so full-match results always rank above partial ones
+      const coverage = matchedCount / tokens.length
+      const rawScore = scoreSection(s, tokens)
+      return { ...s, _score: rawScore * coverage }
     })
     .filter((s): s is SectionResult & { _score: number } => s !== null && s._score > 0)
     .sort((a, b) => b._score - a._score)
@@ -602,6 +930,7 @@ const searchResults = computed<SearchResult[]>(() => {
 
   return [...topics, ...sections]
 })
+
 
 const topicResults = computed(() =>
   searchResults.value.filter((r): r is TopicResult => r.type === 'topic'),
