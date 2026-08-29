@@ -53,7 +53,7 @@ const SYNONYMS: Record<string, string[]> = {
   // ═══════════════════════════════════════════════════════════
 
   html: ['html'], markup: ['html'], webpage: ['html'],
-  css: ['css'], stylesheet: ['css'], styling: ['css', 'css & styling'], styles: ['css'],
+  css: ['css'], stylesheet: ['css', 'styling'], styling: ['css', 'css & styling'], styles: ['css'],
   js: ['javascript'], javascript: ['javascript'], ecmascript: ['javascript'], es6: ['javascript'], vanilla: ['javascript'],
   ts: ['typescript'], typescript: ['typescript'], tsc: ['setup', 'configuration (tsconfig.json)'], tsconfig: ['configuration (tsconfig.json)'],
   php: ['php'],
@@ -174,7 +174,7 @@ const SYNONYMS: Record<string, string[]> = {
   // ═══════════════════════════════════════════════════════════
 
   var: ['variables'], let: ['variables'], const: ['variables'], constant: ['variables'],
-  scope: ['variables'], variable: ['variables'], declare: ['variables'],
+  scope: ['variables'], variable: ['variables', 'variables (custom properties)'], declare: ['variables'],
   type: ['data types'], typeof: ['data types'], cast: ['data types'], convert: ['data types'],
   boolean: ['data types'], bool: ['data types'], null: ['data types', 'nullable reference types'],
   undefined: ['data types'], nullable: ['null safety', 'nullable reference types'], 'null safety': ['null safety'],
@@ -188,7 +188,7 @@ const SYNONYMS: Record<string, string[]> = {
 
   string: ['strings'], text: ['strings'], str: ['strings'], char: ['strings', 'special characters'],
   template: ['strings', 'templates', 'blade templates', 'template syntax (interpolation)'],
-  literal: ['strings'], concatenate: ['strings'], concat: ['strings'], trim: ['strings'], split: ['strings'],
+  literal: ['strings'], concatenate: ['strings', 'combining & splitting arrays'], concat: ['strings'], trim: ['strings'], split: ['strings'],
   format: ['strings'], interpolation: ['strings', 'template syntax (interpolation)'],
   'string method': ['strings'], substring: ['strings'], 'regular expression': ['regular expressions'],
   lowercase: ['strings'], uppercase: ['strings'], 'string formatting': ['strings'],
@@ -320,7 +320,7 @@ const SYNONYMS: Record<string, string[]> = {
   background: ['background properties', 'colors & backgrounds'], gradient: ['background properties'],
   font: ['fonts', 'typography'], 'font size': ['fonts', 'typography'], 'font weight': ['fonts'],
   color: ['colors', 'colors & backgrounds'], unit: ['units'],
-  variable: ['variables', 'variables (custom properties)'], 'custom property': ['variables (custom properties)'],
+  'custom property': ['variables (custom properties)'],
   'css variable': ['variables (custom properties)'], animation: ['animations', 'basic animation'],
   keyframe: ['animations'], specificity: ['selectors'], 'box model': ['box model'],
   'z index': ['position property'], opacity: ['colors'], 'text align': ['typography'],
@@ -335,7 +335,7 @@ const SYNONYMS: Record<string, string[]> = {
   delete: ['delete — remove data', 'delete data'], where: ['where — filter data', 'where clause'],
   'inner join': ['joins'], 'left join': ['joins'], 'right join': ['joins'], 'outer join': ['joins'],
   'order by': ['order by — sort results', 'order by'], orderby: ['order by — sort results'],
-  'group by': ['aggregate functions', 'group by'], groupby: ['aggregate functions'],
+  'group by': ['aggregate functions', 'group by'], groupby: ['aggregate functions', 'groupby'],
   aggregate: ['aggregate functions', 'aggregation & statistics', 'aggregation pipeline'],
   count: ['aggregate functions'], sum: ['aggregate functions'], avg: ['aggregate functions'],
   min: ['aggregate functions'], max: ['aggregate functions'], 'alter table': ['alter table'],
@@ -356,7 +356,7 @@ const SYNONYMS: Record<string, string[]> = {
   usememo: ['usememo & usecallback'], usecallback: ['usememo & usecallback'],
   'custom hook': ['custom hooks'], 'react hook': ['custom hooks'],
   hook: ['lifecycle hooks', 'custom hooks'], lifecycle: ['lifecycle hooks', 'component lifecycle (with hooks)'],
-  context: ['usecontext hook'], 'react router': ['react router'], 'error boundary': ['error boundaries'],
+  context: ['usecontext hook'], 'react router': ['react router'],
   'controlled input': ['forms & controlled inputs'], keys: ['lists & keys'],
   'list rendering': ['list rendering', 'lists & keys'], 'conditional rendering': ['conditional rendering'],
   memo: ['usememo & usecallback'], ref: ['useref hook', 'refs (dom access)'],
@@ -523,7 +523,7 @@ const SYNONYMS: Record<string, string[]> = {
   // ═══════════════════════════════════════════════════════════
 
   controller: ['rest controllers', 'controllers'], 'rest controller': ['rest controllers'],
-  entity: ['entity (jpa model)'], jpa: ['entity (jpa model)', 'repository (spring data jpa)'],
+  entity: ['entity (jpa model)', 'special characters'], jpa: ['entity (jpa model)', 'repository (spring data jpa)'],
   repository: ['repository (spring data jpa)'], 'service layer': ['service layer'],
   'spring security': ['spring security'], testing: ['testing'], dto: ['dtos & mapping'],
   mapping: ['dtos & mapping'], logging: ['logging'], 'request mapping': ['request mapping annotations'],
@@ -595,8 +595,7 @@ const SYNONYMS: Record<string, string[]> = {
   'python tuple': ['tuples'], 'python class': ['classes & oop'], 'python function': ['functions'],
   'python loop': ['loops'], 'python string': ['strings'], 'python import': ['modules & imports'],
   'python exception': ['error handling'], 'python file': ['file handling'],
-  enumerate: ['loops'], 'list comprehension': ['list/dict comprehensions'],
-  'dict comprehension': ['list/dict comprehensions'], comprehension: ['list/dict comprehensions'],
+  enumerate: ['loops'],
 
   // ═══════════════════════════════════════════════════════════
   // PANDAS
@@ -605,7 +604,7 @@ const SYNONYMS: Record<string, string[]> = {
   'read csv': ['reading & writing data'], read_csv: ['reading & writing data'],
   loc: ['selecting data'], iloc: ['selecting data'], 'missing data': ['handling missing data'],
   nan: ['handling missing data', 'nan & infinity handling'], dropna: ['handling missing data'],
-  fillna: ['handling missing data'], groupby: ['groupby'], 'pivot table': ['pivot tables & reshaping'],
+  fillna: ['handling missing data'], 'pivot table': ['pivot tables & reshaping'],
   pivot: ['pivot tables & reshaping'], melt: ['pivot tables & reshaping'],
   'pandas merge': ['merging & joining'], duplicate: ['duplicate handling'], dtype: ['data types & conversion'],
   'pandas groupby': ['groupby'], 'pandas sort': ['sorting & ranking'], 'pandas filter': ['selecting data'],
@@ -624,7 +623,7 @@ const SYNONYMS: Record<string, string[]> = {
   'element wise': ['array operations (element-wise)'], 'numpy array': ['creating arrays'],
   'numpy math': ['mathematical functions'], arange: ['creating arrays'], linspace: ['creating arrays'],
   zeros: ['creating arrays'], ones: ['creating arrays'], 'numpy sort': ['sorting & searching'],
-  concatenate: ['combining & splitting arrays'], vstack: ['combining & splitting arrays'],
+  vstack: ['combining & splitting arrays'],
   hstack: ['combining & splitting arrays'], 'numpy nan': ['nan & infinity handling'],
 
   // ═══════════════════════════════════════════════════════════
@@ -647,7 +646,7 @@ const SYNONYMS: Record<string, string[]> = {
 
   cache: ['common patterns', 'persistence'], pub: ['pub/sub'], subscribe: ['pub/sub'],
   'pub sub': ['pub/sub'], pubsub: ['pub/sub'], expire: ['expiration & ttl'], ttl: ['expiration & ttl'],
-  'sorted set': ['sorted sets'], 'key naming': ['key naming conventions'], persistence: ['persistence'],
+  'key naming': ['key naming conventions'], persistence: ['persistence'],
 
   // ═══════════════════════════════════════════════════════════
   // C# / JAVA / GO / KOTLIN / RUST / SWIFT / DART / RUBY / LUA
@@ -680,7 +679,7 @@ const SYNONYMS: Record<string, string[]> = {
   flatlist: ['lists (flatlist & sectionlist)'], sectionlist: ['lists (flatlist & sectionlist)'],
   'react navigation': ['navigation (react navigation)'], asyncstorage: ['asyncstorage'],
   keyboard: ['keyboard handling'], platform: ['platform-specific code'], 'text input': ['text input'],
-  stylesheet: ['styling'], 'activity indicator': ['activityindicator & loading states'],
+  'activity indicator': ['activityindicator & loading states'],
   touchable: ['buttons & touchables'], 'react native style': ['styling'],
   'react native flex': ['flexbox layout'], 'react native nav': ['navigation (react navigation)'],
   'react native list': ['lists (flatlist & sectionlist)'],
@@ -711,7 +710,7 @@ const SYNONYMS: Record<string, string[]> = {
   'list files': ['file & directory operations', 'navigation'], 'change directory': ['navigation'],
   'search file': ['searching'], 'find file': ['searching'], 'linux permission': ['file permissions'],
   'process list': ['process management'], 'kill process': ['process management'],
-  'check disk': ['disk & system info'], network: ['networking'],
+  'check disk': ['disk & system info'],
   compress: ['archives & compression'], 'install package': ['package management'],
 
   // ═══════════════════════════════════════════════════════════
@@ -722,7 +721,7 @@ const SYNONYMS: Record<string, string[]> = {
   semantic: ['semantic elements'], accessibility: ['semantic elements'], meta: ['meta tags', 'metadata & seo'],
   seo: ['metadata & seo', 'meta tags'], heading: ['headings'], link: ['links'],
   form: ['forms', 'forms & v-model', 'forms & validation'], input: ['input types', 'forms', 'text input'],
-  table: ['tables'], entity: ['special characters'], character: ['special characters'],
+  table: ['tables'], character: ['special characters'],
   symbol: ['special characters'], script: ['script and style'], style: ['script and style', 'css & styling'],
   'html form': ['forms'], 'html table': ['tables'], 'html link': ['links'], 'html input': ['input types'],
   section: ['semantic elements'], article: ['semantic elements'], header: ['semantic elements'],
