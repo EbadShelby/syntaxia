@@ -282,7 +282,7 @@ const SYNONYMS: Record<string, string[]> = {
   'custom property': ['variables (custom properties)'],
   // ── SQL ───────────────────────────────────────────────────────────────────
   sql: ['mysql', 'basic syntax'],
-  'select': ['select — read data'],
+  select: ['select — read data'],
   insert: ['insert — add data'],
   update: ['update — modify data'],
   delete: ['delete — remove data'],
@@ -400,6 +400,39 @@ const SYNONYMS: Record<string, string[]> = {
   symbol: ['special characters'],
   structure: ['basic structure'],
   doctype: ['basic structure'],
+  // ── TypeScript ────────────────────────────────────────────────────────────
+  ts: ['typescript'],
+  typescript: ['typescript'],
+  tsc: ['setup', 'configuration (tsconfig.json)'],
+  tsconfig: ['configuration (tsconfig.json)'],
+  interface: ['interfaces'],
+  generic: ['generics'],
+  generics: ['generics'],
+  enum: ['enums'],
+  enums: ['enums'],
+  tuple: ['basic types'],
+  union: ['type aliases'],
+  intersection: ['type aliases', 'advanced types'],
+  'type alias': ['type aliases'],
+  utility: ['utility types'],
+  partial: ['utility types'],
+  readonly: ['utility types'],
+  record: ['utility types'],
+  pick: ['utility types'],
+  omit: ['utility types'],
+  exclude: ['utility types'],
+  extract: ['utility types'],
+  nonnullable: ['utility types'],
+  keyof: ['advanced types'],
+  mapped: ['advanced types'],
+  conditional: ['advanced types', 'conditionals'],
+  'type guard': ['advanced types'],
+  assertion: ['type assertions'],
+  'type assertion': ['type assertions'],
+  'any type': ['basic types'],
+  unknown: ['basic types'],
+  void: ['basic types'],
+  never: ['advanced types'],
   // ── Misc ──────────────────────────────────────────────────────────────────
   signal: ['signals'],
   admin: ['admin panel'],
@@ -734,10 +767,7 @@ const handleBlur = () => {
 function highlight(text: string, q: string): string {
   if (!q) return text
   const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return text.replace(
-    new RegExp(`(${escaped})`, 'gi'),
-    '<mark class="search-highlight">$1</mark>',
-  )
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark class="search-highlight">$1</mark>')
 }
 
 // Maps a result item back to its flat selectedIndex position (topics before sections)
@@ -893,7 +923,9 @@ function getMatchBadge(item: SectionResult): string | null {
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
-            <span>No results for <strong class="text-neutral-300">"{{ query }}"</strong></span>
+            <span
+              >No results for <strong class="text-neutral-300">"{{ query }}"</strong></span
+            >
           </div>
 
           <template v-else>
@@ -962,7 +994,9 @@ function getMatchBadge(item: SectionResult): string | null {
             <div v-if="sectionResults.length > 0">
               <div
                 class="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
-                :class="topicResults.length > 0 ? 'pt-3 border-t border-neutral-gray/50 mt-1' : 'pt-3'"
+                :class="
+                  topicResults.length > 0 ? 'pt-3 border-t border-neutral-gray/50 mt-1' : 'pt-3'
+                "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1057,19 +1091,31 @@ function getMatchBadge(item: SectionResult): string | null {
               class="px-3 py-2 border-t border-neutral-gray/50 flex items-center gap-3 text-[10px] text-neutral-600"
             >
               <span class="flex items-center gap-1">
-                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">↑↓</kbd>
+                <kbd
+                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
+                  >↑↓</kbd
+                >
                 navigate
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">↵</kbd>
+                <kbd
+                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
+                  >↵</kbd
+                >
                 open
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">Tab</kbd>
+                <kbd
+                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
+                  >Tab</kbd
+                >
                 complete
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">esc</kbd>
+                <kbd
+                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
+                  >esc</kbd
+                >
                 close
               </span>
             </div>

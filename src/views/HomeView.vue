@@ -333,6 +333,14 @@ const languages = [
     badge: 'Database',
     desc: 'The open source, in-memory data store used by millions of developers.',
   },
+  {
+    lang: 'typescript',
+    label: 'TypeScript',
+    icon: '/typescript.svg',
+    color: '#3178C6',
+    badge: 'Language',
+    desc: 'JavaScript with syntax for types.',
+  },
 ]
 
 const categoryCounts = languages.reduce(

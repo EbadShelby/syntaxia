@@ -932,7 +932,7 @@ export const refTopics: Record<string, RefTopic> = {
           {
             language: 'html',
             code: '<!-- CDN (quick start without build tool) -->\n<script src="https://unpkg.com/@tailwindcss/browser@4"></script>',
-          }
+          },
         ],
       },
       {
@@ -1154,7 +1154,7 @@ export const refTopics: Record<string, RefTopic> = {
           {
             language: 'html',
             code: '<!-- Without Build Tools (CDN via Import Maps) -->\n<script type="importmap">\n  {\n    "imports": {\n      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"\n    }\n  }\n</script>\n\n<div id="app">{{ message }}</div>\n\n<script type="module">\n  import { createApp } from \'vue\'\n\n  createApp({\n    data() {\n      return {\n        message: \'Hello Vue!\'\n      }\n    }\n  }).mount(\'#app\')\n</script>',
-          }
+          },
         ],
       },
       {
@@ -2043,7 +2043,8 @@ export const refTopics: Record<string, RefTopic> = {
       {
         id: 'setup',
         title: 'Setup',
-        description: 'React recommends using a framework for new projects (or Vite for a simple SPA):',
+        description:
+          'React recommends using a framework for new projects (or Vite for a simple SPA):',
         snippets: [
           {
             language: 'bash',
@@ -9966,6 +9967,100 @@ export const refTopics: Record<string, RefTopic> = {
       },
     ],
   },
+
+  typescript: {
+    lang: 'typescript',
+    label: 'TypeScript',
+    title: 'TypeScript',
+    icon: '/typescript.svg',
+    color: '#3178C6',
+    sections: [
+      {
+        id: 'setup',
+        title: 'Setup',
+        description: 'Install and configure TypeScript:',
+        language: 'bash',
+        code: '# Global installation\nnpm install -g typescript\n\n# Project installation\nnpm install typescript --save-dev\n\n# Initialize configuration (creates tsconfig.json)\ntsc --init\n\n# Compile a file\ntsc file.ts\n\n# Compile all files based on tsconfig.json\ntsc\n\n# Compile and watch for changes\ntsc --watch',
+      },
+      {
+        id: 'basic-types',
+        title: 'Basic Types',
+        description: 'TypeScript supports all JavaScript types with additional static typing:',
+        language: 'typescript',
+        code: '// Primitives\nlet isDone: boolean = false;\nlet age: number = 25;\nlet hex: number = 0xf00d;\nlet name: string = "Alice";\n\n// Arrays\nlet list: number[] = [1, 2, 3];\nlet names: Array<string> = ["Alice", "Bob"]; // Generic syntax\n\n// Tuples (fixed length and types)\nlet person: [string, number];\nperson = ["Alice", 25]; // OK\n// person = [25, "Alice"]; // Error\n\n// Any (disables type checking - use sparingly)\nlet looselyTyped: any = 4;\nlooselyTyped = "maybe a string instead";\nlooselyTyped = false;\n\n// Unknown (safer than any, requires type checking before use)\nlet notSure: unknown = 4;\nif (typeof notSure === "number") {\n  let aNumber: number = notSure;\n}\n\n// Void (usually for functions that don\'t return a value)\nfunction logMessage(msg: string): void {\n  console.log(msg);\n}\n\n// Null and Undefined\nlet u: undefined = undefined;\nlet n: null = null;',
+      },
+      {
+        id: 'interfaces',
+        title: 'Interfaces',
+        description: 'Define the shape of objects:',
+        language: 'typescript',
+        code: 'interface User {\n  name: string;\n  age: number;\n  email?: string;       // Optional property\n  readonly id: number;  // Cannot be changed after creation\n}\n\nconst user: User = {\n  name: "Alice",\n  age: 25,\n  id: 1\n};\n\n// user.id = 2; // Error: Cannot assign to \'id\' because it is a read-only property.\n\n// Extending Interfaces\ninterface Employee extends User {\n  department: string;\n}\n\nconst emp: Employee = {\n  name: "Bob",\n  age: 30,\n  id: 2,\n  department: "Engineering"\n};\n\n// Function Types in Interfaces\ninterface MathFunc {\n  (x: number, y: number): number;\n}\nconst add: MathFunc = (a, b) => a + b;',
+      },
+      {
+        id: 'type-aliases',
+        title: 'Type Aliases',
+        description: 'Create names for types (similar to interfaces but more flexible):',
+        language: 'typescript',
+        code: '// Basic alias\ntype ID = string | number;\n\n// Object alias\ntype Point = {\n  x: number;\n  y: number;\n};\n\n// Union types\ntype Status = "pending" | "approved" | "rejected";\nlet currentStatus: Status = "pending";\n\n// Intersection types\ntype Person = { name: string };\ntype Contact = { email: string; phone: string };\ntype EmployeeInfo = Person & Contact;\n\nconst employee: EmployeeInfo = {\n  name: "Alice",\n  email: "alice@example.com",\n  phone: "123-456-7890"\n};',
+      },
+      {
+        id: 'functions',
+        title: 'Functions',
+        description: 'Type annotations for parameters and return values:',
+        language: 'typescript',
+        code: '// Named function\nfunction add(x: number, y: number): number {\n  return x + y;\n}\n\n// Arrow function\nconst multiply = (x: number, y: number): number => x * y;\n\n// Optional parameters (must be at the end)\nfunction buildName(first: string, last?: string): string {\n  if (last) return `${first} ${last}`;\n  return first;\n}\n\n// Default parameters\nfunction greet(name: string = "Guest"): string {\n  return `Hello, ${name}`;\n}\n\n// Rest parameters\nfunction sum(...numbers: number[]): number {\n  return numbers.reduce((a, b) => a + b, 0);\n}',
+      },
+      {
+        id: 'classes',
+        title: 'Classes',
+        description: 'Object-oriented programming features:',
+        language: 'typescript',
+        code: 'class Animal {\n  // Access modifiers\n  public name: string;        // Accessible anywhere (default)\n  private age: number;        // Only accessible within this class\n  protected type: string;     // Accessible within this class and subclasses\n  readonly species: string;   // Can only be set in constructor\n\n  constructor(name: string, age: number) {\n    this.name = name;\n    this.age = age;\n    this.species = "Animal";\n  }\n\n  public makeSound(): void {\n    console.log("Some sound");\n  }\n}\n\n// Parameter properties (shorthand for declaring and assigning properties)\nclass Person {\n  constructor(public name: string, private age: number) {}\n}\n\nclass Dog extends Animal {\n  constructor(name: string, age: number) {\n    super(name, age); // Call parent constructor\n  }\n\n  public makeSound(): void {\n    console.log("Woof!");\n  }\n}',
+      },
+      {
+        id: 'generics',
+        title: 'Generics',
+        description: 'Reusable components that work with a variety of types:',
+        language: 'typescript',
+        code: '// Generic function\nfunction identity<T>(arg: T): T {\n  return arg;\n}\n\nlet output1 = identity<string>("myString");\nlet output2 = identity(42); // Type argument inference\n\n// Generic Interfaces\ninterface Box<T> {\n  value: T;\n}\nlet stringBox: Box<string> = { value: "Hello" };\nlet numberBox: Box<number> = { value: 123 };\n\n// Generic Classes\nclass Queue<T> {\n  private data: T[] = [];\n  push(item: T) { this.data.push(item); }\n  pop(): T | undefined { return this.data.shift(); }\n}\n\n// Generic Constraints\ninterface HasLength {\n  length: number;\n}\nfunction logLength<T extends HasLength>(arg: T): T {\n  console.log(arg.length);\n  return arg;\n}\nlogLength("Hello"); // OK\nlogLength([1, 2, 3]); // OK\n// logLength(42); // Error',
+      },
+      {
+        id: 'enums',
+        title: 'Enums',
+        description: 'Define a set of named constants:',
+        language: 'typescript',
+        code: '// Numeric enums (auto-incrementing from 0)\nenum Direction {\n  Up,    // 0\n  Down,  // 1\n  Left,  // 2\n  Right  // 3\n}\n\n// String enums\nenum LogLevel {\n  Error = "ERROR",\n  Warn = "WARN",\n  Info = "INFO",\n  Debug = "DEBUG"\n}\n\nlet level: LogLevel = LogLevel.Info;',
+      },
+      {
+        id: 'utility-types',
+        title: 'Utility Types',
+        description: 'Built-in types for common transformations:',
+        language: 'typescript',
+        code: 'interface Todo {\n  title: string;\n  description: string;\n  completed: boolean;\n}\n\n// Partial: Makes all properties optional\ntype PartialTodo = Partial<Todo>;\n\n// Required: Makes all properties required\ntype RequiredTodo = Required<PartialTodo>;\n\n// Readonly: Makes all properties readonly\ntype ReadonlyTodo = Readonly<Todo>;\n\n// Record: Constructs an object type with specific keys and value types\nconst users: Record<string, number> = {\n  Alice: 25,\n  Bob: 30\n};\n\n// Pick: Extracts a set of properties\ntype TodoPreview = Pick<Todo, "title" | "completed">;\n\n// Omit: Removes a set of properties\ntype TodoInfo = Omit<Todo, "completed">;\n\n// Exclude: Excludes types from a union\ntype T0 = Exclude<"a" | "b" | "c", "a">; // "b" | "c"\n\n// Extract: Extracts types from a union that are assignable to another\ntype T1 = Extract<"a" | "b" | "c", "a" | "f">; // "a"\n\n// NonNullable: Removes null and undefined\ntype T2 = NonNullable<string | number | undefined>; // string | number',
+      },
+      {
+        id: 'type-assertions',
+        title: 'Type Assertions',
+        description: "Override the compiler's inferred type:",
+        language: 'typescript',
+        code: 'let someValue: unknown = "this is a string";\n\n// \'as\' syntax (preferred)\nlet strLength1: number = (someValue as string).length;\n\n// Angle-bracket syntax (not compatible with JSX)\nlet strLength2: number = (<string>someValue).length;\n\n// Non-null assertion operator (!)\nfunction processElement(el: HTMLElement | null) {\n  // Tell TypeScript we know this isn\'t null\n  el!.style.color = "red";\n}',
+      },
+      {
+        id: 'advanced-types',
+        title: 'Advanced Types',
+        description: 'Powerful type system features:',
+        language: 'typescript',
+        code: '// Type Guards\nfunction isString(test: any): test is string {\n  return typeof test === "string";\n}\n\n// Keyof Operator\ntype Point = { x: number; y: number };\ntype P = keyof Point; // "x" | "y"\n\n// Mapped Types\ntype OptionsFlags<Type> = {\n  [Property in keyof Type]: boolean;\n};\n\ntype FeatureFlags = {\n  darkMode: () => void;\n  newUserProfile: () => void;\n};\ntype FeatureOptions = OptionsFlags<FeatureFlags>;\n// { darkMode: boolean; newUserProfile: boolean; }\n\n// Conditional Types\ntype IsString<T> = T extends string ? true : false;\ntype A = IsString<string>; // true\ntype B = IsString<number>; // false',
+      },
+      {
+        id: 'configuration-tsconfig-json',
+        title: 'Configuration (tsconfig.json)',
+        description: 'Common compiler options:',
+        language: 'json',
+        code: '{\n  "compilerOptions": {\n    "target": "ES2022",           // JavaScript language version\n    "module": "CommonJS",         // Module system\n    "strict": true,               // Enable all strict type-checking options\n    "esModuleInterop": true,      // Easier imports from CommonJS modules\n    "skipLibCheck": true,         // Skip type checking of declaration files\n    "forceConsistentCasingInFileNames": true,\n    "outDir": "./dist",           // Output directory\n    "rootDir": "./src",           // Root directory of input files\n    "noImplicitAny": true,        // Error on \'any\' type\n    "strictNullChecks": true      // Check for null/undefined\n  },\n  "include": ["src/**/*"],        // Files to compile\n  "exclude": ["node_modules"]     // Files to ignore\n}',
+      },
+    ],
+  },
 }
 
 export const refNavItems = [
@@ -10133,4 +10228,5 @@ export const refNavItems = [
     lang: 'redis',
     label: 'Redis',
   },
+  { lang: 'typescript', label: 'TypeScript' },
 ]
