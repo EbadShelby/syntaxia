@@ -8,6 +8,33 @@ const isFocused = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
 const router = useRouter()
 
+// ── Visual viewport (keyboard-aware height on mobile) ─────────────────────────
+const dropdownMaxHeight = ref('26rem') // default (desktop)
+
+function updateDropdownHeight() {
+  const vv = window.visualViewport
+  if (!vv) return
+  // Header is ~60px tall; 8px breathing room below dropdown
+  const available = vv.height - 60 - 8
+  dropdownMaxHeight.value = `${Math.max(available, 120)}px`
+}
+
+// ── Mobile full-screen search overlay ──────────────────────────────────────────
+const mobileOpen = ref(false)
+const mobileInput = ref<HTMLInputElement | null>(null)
+
+function openMobileSearch() {
+  mobileOpen.value = true
+  nextTick(() => mobileInput.value?.focus())
+}
+
+function closeMobileSearch() {
+  mobileOpen.value = false
+  query.value = ''
+  selectedIndex.value = 0
+  mobileInput.value?.blur()
+}
+
 // ── Search index ──────────────────────────────────────────────────────────────
 interface SectionResult {
   type: 'section'
@@ -157,7 +184,7 @@ const SYNONYMS: Record<string, string[]> = {
   // ═══════════════════════════════════════════════════════════
 
   async: ['promises', 'async/await', 'async programming'], await: ['promises', 'async/await'],
-  promise: ['promises', 'async/await'], then: ['promises', 'async/await'],
+  promise: ['promises', 'async/await', 'then'],
   resolve: ['promises', 'async/await'], reject: ['promises', 'async/await'],
   fetch: ['promises', 'async/await', 'fetching data (api calls)'], ajax: ['promises', 'async/await', 'ajax'],
   http: ['promises', 'async/await', 'http server (built-in)', 'http client'],
@@ -985,21 +1012,32 @@ const handleKeydown = (e: KeyboardEvent) => {
 }
 
 
-onMounted(() => window.addEventListener('keydown', handleKeydown))
-onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+  window.visualViewport?.addEventListener('resize', updateDropdownHeight)
+  updateDropdownHeight()
+})
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  window.visualViewport?.removeEventListener('resize', updateDropdownHeight)
+})
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 const navigateToTopic = (lang: string) => {
   query.value = ''
   isFocused.value = false
+  mobileOpen.value = false
   searchInput.value?.blur()
+  mobileInput.value?.blur()
   router.push(`/ref/${lang}`)
 }
 
 const navigateToSection = (lang: string, sectionId: string) => {
   query.value = ''
   isFocused.value = false
+  mobileOpen.value = false
   searchInput.value?.blur()
+  mobileInput.value?.blur()
   router.push(`/ref/${lang}`).then(() => {
     nextTick(() => {
       setTimeout(() => {
@@ -1044,13 +1082,281 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
 </script>
 
 <template>
-  <div class="relative group">
+  <!-- ─── Mobile: Search icon trigger ──────────────────────────────────────── -->
+  <button
+    id="mobile-search-btn"
+    class="md:hidden flex items-center justify-center w-9 h-9 rounded-md border border-neutral-gray bg-neutral-black text-neutral-400 hover:text-primary-lightgreen hover:border-primary-lightgreen/40 active:scale-95 transition-all duration-150 cursor-pointer"
+    @click="openMobileSearch"
+    aria-label="Open search"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      class="w-4.5 h-4.5"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+      />
+    </svg>
+  </button>
+
+  <!-- ─── Mobile: Full-screen search overlay ────────────────────────────────── -->
+  <Teleport to="body">
+    <Transition name="mobile-search">
+      <div
+        v-if="mobileOpen"
+        id="mobile-search-overlay"
+        class="md:hidden fixed inset-0 z-[100] bg-neutral-black flex flex-col"
+      >
+        <!-- ── Top bar: input + cancel ── -->
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-neutral-gray shrink-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-5 h-5 text-primary-lightgreen shrink-0"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+          <input
+            ref="mobileInput"
+            v-model="query"
+            type="search"
+            placeholder="Search cheatsheets & sections..."
+            class="flex-1 bg-transparent text-white text-base outline-none placeholder-neutral-500 min-w-0"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            @keydown.enter="handleEnter"
+            @keydown.esc="closeMobileSearch"
+            @keydown.down="handleArrowDown"
+            @keydown.up="handleArrowUp"
+          />
+          <button
+            @click="closeMobileSearch"
+            class="shrink-0 text-sm font-semibold text-primary-lightgreen py-1 px-1 -mr-1 cursor-pointer active:opacity-70 transition-opacity"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <!-- ── Results body ── -->
+        <div class="flex-1 overflow-y-auto no-scrollbar">
+          <!-- Empty state -->
+          <div
+            v-if="!query.trim()"
+            class="flex flex-col items-center justify-center gap-3 pt-20 pb-8 px-6 text-center select-none"
+          >
+            <div class="w-14 h-14 rounded-full bg-neutral-gray/20 flex items-center justify-center mb-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7 text-neutral-600"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-500 leading-relaxed">
+              Search across all cheatsheets,<br />sections, and topics.
+            </p>
+          </div>
+
+          <!-- No results -->
+          <div
+            v-else-if="searchResults.length === 0"
+            class="flex flex-col items-center justify-center gap-3 pt-20 pb-8 px-6 text-center select-none"
+          >
+            <div class="w-14 h-14 rounded-full bg-neutral-gray/20 flex items-center justify-center mb-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7 text-neutral-700"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-500">
+              No results for
+              <strong class="text-neutral-300 font-semibold">"{{ query }}"</strong>
+            </p>
+          </div>
+
+          <!-- Results -->
+          <template v-else>
+            <!-- Cheatsheets group -->
+            <div v-if="topicResults.length > 0">
+              <div
+                class="px-4 pt-5 pb-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-3 h-3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25z"
+                  />
+                </svg>
+                Cheatsheets
+              </div>
+              <button
+                v-for="item in topicResults"
+                :key="item.lang"
+                data-result-item
+                @click="navigateToTopic(item.lang)"
+                @touchstart="selectedIndex = getItemIndex('topic', item.lang)"
+                class="w-full text-left px-4 py-4 text-sm transition-colors focus:outline-none flex items-center gap-4 active:bg-neutral-gray/20"
+                :class="
+                  selectedIndex === getItemIndex('topic', item.lang)
+                    ? 'text-primary-lightgreen bg-neutral-gray/20'
+                    : 'text-neutral-300'
+                "
+              >
+                <div
+                  class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-neutral-gray/30"
+                >
+                  <img
+                    :src="refTopics[item.lang]?.icon"
+                    :alt="item.label"
+                    class="w-5 h-5 object-contain"
+                  />
+                </div>
+                <span class="flex-1 font-medium" v-html="highlight(item.label, query.trim())" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-4 h-4 opacity-30 shrink-0"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Sections group -->
+            <div v-if="sectionResults.length > 0">
+              <div
+                class="px-4 pb-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
+                :class="topicResults.length > 0 ? 'pt-5 border-t border-neutral-gray/50 mt-2' : 'pt-5'"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-3 h-3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"
+                  />
+                </svg>
+                Sections
+              </div>
+              <button
+                v-for="item in sectionResults"
+                :key="`${item.lang}-${item.sectionId}`"
+                data-result-item
+                @click="navigateToSection(item.lang, item.sectionId)"
+                @touchstart="selectedIndex = getItemIndex('section', item.lang, item.sectionId)"
+                class="w-full text-left px-4 py-3.5 text-sm transition-colors focus:outline-none flex items-start gap-4 active:bg-neutral-gray/20"
+                :class="
+                  selectedIndex === getItemIndex('section', item.lang, item.sectionId)
+                    ? 'bg-neutral-gray/20'
+                    : ''
+                "
+              >
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-neutral-gray/30 mt-0.5"
+                >
+                  <img
+                    :src="refTopics[item.lang]?.icon"
+                    :alt="item.langLabel"
+                    class="w-4.5 h-4.5 object-contain"
+                  />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div
+                    class="font-medium truncate transition-colors"
+                    :class="
+                      selectedIndex === getItemIndex('section', item.lang, item.sectionId)
+                        ? 'text-primary-lightgreen'
+                        : 'text-neutral-200'
+                    "
+                    v-html="highlight(item.sectionTitle, query.trim())"
+                  />
+                  <div class="text-xs text-neutral-500 truncate mt-0.5">
+                    <span
+                      class="text-neutral-600 mr-1"
+                      v-html="highlight(item.langLabel, query.trim())"
+                    />
+                    <span v-html="highlight(item.description, query.trim())" />
+                  </div>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-4 h-4 mt-0.5 opacity-25 shrink-0"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Bottom padding so last item isn't right at edge -->
+            <div class="h-10" />
+          </template>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
+
+  <!-- ─── Desktop: Inline search + dropdown ──────────────────────────────────── -->
+  <div class="hidden md:block relative group">
     <div
-      class="flex items-center rounded-md transition-all duration-300 overflow-hidden"
+      class="flex items-center rounded-md transition-all duration-300 overflow-hidden px-3 py-1.5 cursor-text"
       :class="
         isFocused
-          ? 'bg-neutral-black border border-primary-lightgreen px-3 py-1.5 cursor-text'
-          : 'bg-transparent border border-transparent md:bg-neutral-black md:border-neutral-gray p-2 md:px-3 md:py-1.5 cursor-pointer md:cursor-text'
+          ? 'bg-neutral-black border border-primary-lightgreen'
+          : 'bg-neutral-black border border-neutral-gray'
       "
       @click="searchInput?.focus()"
     >
@@ -1060,12 +1366,8 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
         viewBox="0 0 24 24"
         stroke-width="2"
         stroke="currentColor"
-        class="w-5 h-5 md:w-4 md:h-4 transition-colors shrink-0"
-        :class="
-          isFocused
-            ? 'text-primary-lightgreen mr-2'
-            : 'text-neutral-400 hover:text-white md:hover:text-neutral-400 md:mr-2'
-        "
+        class="w-4 h-4 transition-colors shrink-0 mr-2"
+        :class="isFocused ? 'text-primary-lightgreen' : 'text-neutral-400'"
       >
         <path
           stroke-linecap="round"
@@ -1078,13 +1380,8 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
         ref="searchInput"
         v-model="query"
         type="text"
-        placeholder="Search cheatsheets & sections..."
-        class="bg-transparent text-sm text-white placeholder-neutral-500 outline-none transition-all duration-300"
-        :class="
-          isFocused
-            ? 'w-40 md:w-56 lg:w-72 opacity-100'
-            : 'w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100'
-        "
+        placeholder="Search..."
+        class="bg-transparent text-sm text-white placeholder-neutral-500 outline-none w-40 lg:w-56 opacity-100"
         @focus="isFocused = true"
         @blur="handleBlur"
         @keydown.enter="handleEnter"
@@ -1094,14 +1391,14 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
       />
 
       <div
-        class="hidden md:flex items-center justify-center w-5 h-5 rounded border border-neutral-gray bg-neutral-gray/20 text-[10px] text-neutral-400 ml-2 shrink-0"
+        class="flex items-center justify-center w-5 h-5 rounded border border-neutral-gray bg-neutral-gray/20 text-[10px] text-neutral-400 ml-2 shrink-0"
         title="Press / to search"
       >
         /
       </div>
     </div>
 
-    <!-- Search dropdown -->
+    <!-- Desktop dropdown -->
     <Transition
       enter-active-class="transition duration-100 ease-out"
       enter-from-class="transform scale-95 opacity-0"
@@ -1112,9 +1409,13 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
     >
       <div
         v-if="isFocused && query.trim().length > 0"
-        class="absolute top-full right-0 mt-2 w-80 md:w-96 bg-neutral-black border border-neutral-gray rounded-lg shadow-2xl overflow-hidden z-50"
+        class="absolute top-full right-0 mt-2 w-96 bg-neutral-black border border-neutral-gray rounded-lg shadow-2xl overflow-hidden z-60"
       >
-        <div ref="resultsListRef" class="max-h-105 overflow-y-auto no-scrollbar">
+        <div
+          ref="resultsListRef"
+          class="overflow-y-auto no-scrollbar"
+          :style="{ maxHeight: dropdownMaxHeight }"
+        >
           <!-- No results -->
           <div
             v-if="searchResults.length === 0"
@@ -1134,13 +1435,11 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
-            <span
-              >No results for <strong class="text-neutral-300">"{{ query }}"</strong></span
-            >
+            <span>No results for <strong class="text-neutral-300">"{{ query }}"</strong></span>
           </div>
 
           <template v-else>
-            <!-- ── Cheatsheets group ── -->
+            <!-- Cheatsheets group -->
             <div v-if="topicResults.length > 0">
               <div
                 class="px-3 pt-3 pb-1.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
@@ -1174,14 +1473,8 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
                     : 'text-neutral-300 hover:text-primary-lightgreen hover:bg-neutral-gray/10'
                 "
               >
-                <div
-                  class="w-6 h-6 rounded flex items-center justify-center shrink-0 bg-neutral-gray/30"
-                >
-                  <img
-                    :src="refTopics[item.lang]?.icon"
-                    :alt="item.label"
-                    class="w-4 h-4 object-contain"
-                  />
+                <div class="w-6 h-6 rounded flex items-center justify-center shrink-0 bg-neutral-gray/30">
+                  <img :src="refTopics[item.lang]?.icon" :alt="item.label" class="w-4 h-4 object-contain" />
                 </div>
                 <span v-html="highlight(item.label, query.trim())" />
                 <svg
@@ -1192,22 +1485,16 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
                   stroke="currentColor"
                   class="w-3 h-3 ml-auto opacity-50 shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
               </button>
             </div>
 
-            <!-- ── Sections group ── -->
+            <!-- Sections group -->
             <div v-if="sectionResults.length > 0">
               <div
                 class="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
-                :class="
-                  topicResults.length > 0 ? 'pt-3 border-t border-neutral-gray/50 mt-1' : 'pt-3'
-                "
+                :class="topicResults.length > 0 ? 'pt-3 border-t border-neutral-gray/50 mt-1' : 'pt-3'"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1273,39 +1560,25 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
                   stroke="currentColor"
                   class="w-3 h-3 mt-1 opacity-30 shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
               </button>
             </div>
 
-            <!-- Footer hint -->
+            <!-- Footer keyboard hints -->
             <div
               class="px-3 py-2 border-t border-neutral-gray/50 flex items-center gap-3 text-[10px] text-neutral-600"
             >
               <span class="flex items-center gap-1">
-                <kbd
-                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
-                  >↑↓</kbd
-                >
+                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">↑↓</kbd>
                 navigate
               </span>
               <span class="flex items-center gap-1">
-                <kbd
-                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
-                  >↵</kbd
-                >
+                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">↵</kbd>
                 open
               </span>
-
               <span class="flex items-center gap-1">
-                <kbd
-                  class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono"
-                  >esc</kbd
-                >
+                <kbd class="px-1 py-0.5 rounded bg-neutral-gray/20 border border-neutral-gray/30 font-mono">esc</kbd>
                 close
               </span>
             </div>
@@ -1321,5 +1594,18 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
   background: transparent;
   color: #4ade80;
   font-weight: 600;
+}
+
+/* Mobile overlay slide-in animation */
+.mobile-search-enter-active {
+  transition: opacity 0.18s ease, transform 0.2s ease;
+}
+.mobile-search-leave-active {
+  transition: opacity 0.14s ease, transform 0.16s ease;
+}
+.mobile-search-enter-from,
+.mobile-search-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
