@@ -470,7 +470,7 @@ const scrollRight = () => {
         </p>
 
         <a
-          href="#topics"
+          href="#cheatsheets"
           class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-gray text-neutral-300 text-sm rounded hover:border-primary-lightgreen hover:text-primary-lightgreen transition-all active:scale-95"
         >
           Browse Cheatsheets
@@ -493,9 +493,9 @@ const scrollRight = () => {
     </section>
 
     <!-- ─── Language Cards ─────────────────── -->
-    <section id="topics" class="max-w-7xl mx-auto px-4 py-10 md:py-20">
+    <section id="cheatsheets" class="max-w-7xl mx-auto px-4 py-10 md:py-20">
       <div class="text-center mb-10 md:mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Topics</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore Cheatsheets</h2>
         <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
           Dive into our comprehensive cheatsheets and master your favorite tools and languages.
         </p>

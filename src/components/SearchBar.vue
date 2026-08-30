@@ -1078,7 +1078,7 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
         ref="searchInput"
         v-model="query"
         type="text"
-        placeholder="Search topics & sections..."
+        placeholder="Search cheatsheets & sections..."
         class="bg-transparent text-sm text-white placeholder-neutral-500 outline-none transition-all duration-300"
         :class="
           isFocused
@@ -1140,7 +1140,7 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
           </div>
 
           <template v-else>
-            <!-- ── Topics group ── -->
+            <!-- ── Cheatsheets group ── -->
             <div v-if="topicResults.length > 0">
               <div
                 class="px-3 pt-3 pb-1.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5"
@@ -1159,7 +1159,7 @@ function getItemIndex(type: 'topic' | 'section', lang: string, sectionId?: strin
                     d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25z"
                   />
                 </svg>
-                Topics
+                Cheatsheets
               </div>
               <button
                 v-for="item in topicResults"
