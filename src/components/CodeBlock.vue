@@ -1,6 +1,12 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue'
+<script lang="ts">
 import { createHighlighter } from 'shiki'
+
+// Lazily create a single shared highlighter instance across all CodeBlock instances
+let sharedHighlighterPromise: ReturnType<typeof createHighlighter> | null = null
+</script>
+
+<script setup lang="ts">
+import { ref, watch, nextTick, onBeforeUnmount } from 'vue'
 
 const props = defineProps<{
   code: string
@@ -9,18 +15,57 @@ const props = defineProps<{
 
 const copied = ref(false)
 const highlighted = ref('')
+const codeContainer = ref<HTMLElement | null>(null)
+const canScroll = ref(false)
 
-// Lazily create a single shared highlighter instance
-let highlighterPromise: ReturnType<typeof createHighlighter> | null = null
+let resizeObserver: ResizeObserver | null = null
+
+function checkScroll() {
+  if (!codeContainer.value) return
+  const pre = codeContainer.value.querySelector('pre')
+  if (!pre) return
+  canScroll.value = pre.scrollWidth > pre.clientWidth && Math.ceil(pre.scrollLeft) < pre.scrollWidth - pre.clientWidth - 1
+}
+
+function cleanupScrollListener() {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+  if (!codeContainer.value) return
+  const pre = codeContainer.value.querySelector('pre')
+  if (pre) {
+    pre.removeEventListener('scroll', checkScroll)
+  }
+}
+
+function setupScrollListener() {
+  cleanupScrollListener()
+  if (!codeContainer.value) return
+  const pre = codeContainer.value.querySelector('pre')
+  if (!pre) return
+  
+  pre.addEventListener('scroll', checkScroll, { passive: true })
+  
+  if (!resizeObserver) {
+    resizeObserver = new ResizeObserver(checkScroll)
+  }
+  resizeObserver.observe(pre)
+  
+  checkScroll()
+}
+
+onBeforeUnmount(() => {
+  cleanupScrollListener()
+})
 
 function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
+  if (!sharedHighlighterPromise) {
+    sharedHighlighterPromise = createHighlighter({
       themes: ['one-dark-pro'],
       langs: [],
     })
   }
-  return highlighterPromise
+  return sharedHighlighterPromise
 }
 
 async function highlight() {
@@ -64,19 +109,24 @@ async function highlight() {
 
   if (!supported.includes(lang)) {
     highlighted.value = `<pre class="shiki-fallback"><code>${props.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
+    await nextTick()
+    setupScrollListener()
     return
   }
 
   const hl = await getHighlighter()
 
   if (!hl.getLoadedLanguages().includes(lang)) {
-    await hl.loadLanguage(lang as any)
+    await hl.loadLanguage(lang as import('shiki').BundledLanguage)
   }
 
   highlighted.value = hl.codeToHtml(props.code, {
     lang,
     theme: 'one-dark-pro',
   })
+  
+  await nextTick()
+  setupScrollListener()
 }
 
 watch(() => [props.code, props.language], highlight, { immediate: true })
@@ -147,7 +197,19 @@ async function copy() {
     </div>
 
     <!-- Highlighted code block -->
-    <div v-else class="shiki-wrapper" v-html="highlighted" />
+    <div v-else class="shiki-wrapper relative" ref="codeContainer">
+      <div v-html="highlighted" />
+      
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute right-0 top-0 bottom-0 w-12 pointer-events-none bg-linear-to-l from-[#0d0d0f] to-transparent flex items-center justify-end pr-2 opacity-0 transition-opacity duration-300 md:hidden"
+        :class="{ 'opacity-100': canScroll }"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-neutral-400 animate-pulse">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </div>
+    </div>
   </div>
 </template>
 
