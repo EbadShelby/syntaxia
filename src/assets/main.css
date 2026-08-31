@@ -15,13 +15,11 @@
 
 /* ─── Base ─────────────────────────────────────────── */
 html {
-  overflow-x: hidden;
 }
 body {
   @apply bg-neutral-black text-white min-h-screen font-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* ─── Ref-page prose styles ───────────────────────── */
