@@ -170,7 +170,12 @@ function scrollToSection(id: string) {
 
         <!-- Content sections -->
         <div class="ref-content">
-          <section v-for="section in topic.sections" :key="section.id" :id="section.id" class="scroll-mt-28 lg:scroll-mt-24">
+          <section
+            v-for="section in topic.sections"
+            :key="section.id"
+            :id="section.id"
+            class="scroll-mt-28 lg:scroll-mt-24"
+          >
             <h2>{{ section.title }}</h2>
             <p>{{ section.description }}</p>
 

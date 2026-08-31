@@ -341,6 +341,14 @@ const languages = [
     badge: 'Language',
     desc: 'JavaScript with syntax for types.',
   },
+  {
+    lang: 'fastapi',
+    label: 'FastAPI',
+    icon: '/fastapi.svg',
+    color: '#009688',
+    badge: 'Framework',
+    desc: 'High performance web framework for building APIs with Python.',
+  },
 ]
 
 const categoryCounts = languages.reduce(

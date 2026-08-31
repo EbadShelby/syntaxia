@@ -5,7 +5,7 @@
 export function smoothScrollTo(element: HTMLElement, duration: number = 300) {
   const style = window.getComputedStyle(element)
   const scrollMarginTop = parseInt(style.scrollMarginTop) || 0
-  
+
   const targetPosition = element.getBoundingClientRect().top + window.scrollY - scrollMarginTop
   const startPosition = window.scrollY
   const distance = targetPosition - startPosition

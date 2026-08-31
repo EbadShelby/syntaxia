@@ -311,7 +311,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -577,7 +577,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'composer init                                          # Initialize project\ncomposer require <package>                             # Install a package\ncomposer require --dev <pkg>                           # Install as dev dependency\ncomposer remove <package>                              # Remove a package\ncomposer update                                        # Update dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -2859,7 +2859,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package (e.g. npm install dotenv)\nnpm install -g <package>                               # Install globally\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -3183,7 +3183,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'pip install <package>                                  # Install a package\npip install -r requirements.txt                        # Install from file\npip uninstall <package>                                # Remove a package\npip freeze > requirements.txt                          # Save dependencies\npip list                                               # List installed packages',
           },
-        ]
+        ],
       },
       {
         id: 'basic-syntax',
@@ -3824,7 +3824,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'dotnet add package <Package>                           # Install a package\ndotnet remove package <Pkg>                            # Remove a package\ndotnet list package                                    # List installed packages\ndotnet restore                                         # Restore dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -4079,9 +4079,9 @@ export const refTopics: Record<string, RefTopic> = {
           {
             language: 'groovy',
             description: 'Gradle (build.gradle):',
-            code: 'dependencies {\n    implementation \'com.google.guava:guava:31.1-jre\'\n}',
+            code: "dependencies {\n    implementation 'com.google.guava:guava:31.1-jre'\n}",
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -4870,7 +4870,7 @@ export const refTopics: Record<string, RefTopic> = {
             description: 'Conan:',
             code: 'conan install .                                        # Install dependencies from conanfile\nconan search <package> -r all                          # Search for a package',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -5772,7 +5772,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'go mod init <module-name>                              # Initialize a new module\ngo get <package>                                       # Install a package\ngo get -u <package>                                    # Update a package\ngo mod tidy                                            # Clean up dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -6030,7 +6030,7 @@ export const refTopics: Record<string, RefTopic> = {
             description: 'Gradle (build.gradle.kts):',
             code: 'dependencies {\n    implementation("com.google.guava:guava:31.1-jre")\n}',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -6252,7 +6252,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'cargo new <project>                                    # Create a new project\ncargo add <crate>                                      # Add a dependency\ncargo remove <crate>                                   # Remove a dependency\ncargo build                                            # Build the project (downloads deps)\ncargo update                                           # Update dependencies in Cargo.lock',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -6496,7 +6496,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'luarocks install <package>                             # Install a package\nluarocks remove <package>                              # Remove a package\nluarocks search <package>                              # Search for a package\nluarocks list                                          # List installed packages',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -6700,7 +6700,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'dart pub add <package>                                 # Add a dependency\ndart pub add dev:<package>                             # Add a dev dependency\ndart pub remove <package>                              # Remove a dependency\ndart pub get                                           # Get dependencies\ndart pub upgrade                                       # Upgrade dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -6922,7 +6922,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'gem install <gem>                                      # Install a gem globally\nbundle init                                            # Create a Gemfile\nbundle add <gem>                                       # Add gem to Gemfile and install\nbundle install                                         # Install gems from Gemfile\nbundle update                                          # Update gems',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -7123,7 +7123,7 @@ export const refTopics: Record<string, RefTopic> = {
             description: 'Swift Package Manager (Package.swift):',
             code: 'dependencies: [\n    .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1"))\n]',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -10157,7 +10157,7 @@ export const refTopics: Record<string, RefTopic> = {
             language: 'bash',
             code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
           },
-        ]
+        ],
       },
       {
         id: 'setup',
@@ -10242,6 +10242,143 @@ export const refTopics: Record<string, RefTopic> = {
         description: 'Common compiler options:',
         language: 'json',
         code: '{\n  "compilerOptions": {\n    "target": "ES2022",           // JavaScript language version\n    "module": "CommonJS",         // Module system\n    "strict": true,               // Enable all strict type-checking options\n    "esModuleInterop": true,      // Easier imports from CommonJS modules\n    "skipLibCheck": true,         // Skip type checking of declaration files\n    "forceConsistentCasingInFileNames": true,\n    "outDir": "./dist",           // Output directory\n    "rootDir": "./src",           // Root directory of input files\n    "noImplicitAny": true,        // Error on \'any\' type\n    "strictNullChecks": true      // Check for null/undefined\n  },\n  "include": ["src/**/*"],        // Files to compile\n  "exclude": ["node_modules"]     // Files to ignore\n}',
+      },
+    ],
+  },
+
+  fastapi: {
+    lang: 'fastapi',
+    label: 'FastAPI',
+    title: 'FastAPI',
+    icon: '/fastapi.svg',
+    color: '#009688',
+    sections: [
+      {
+        id: 'setup',
+        title: 'Setup',
+        description: 'Install FastAPI and an ASGI server:',
+        language: 'bash',
+        code: '# Install FastAPI and Uvicorn\npip install fastapi uvicorn\n\n# Install with all optional dependencies\npip install "fastapi[all]"',
+      },
+      {
+        id: 'first-steps',
+        title: 'First Steps',
+        description:
+          'Create a basic FastAPI application: Run the server: *Visit `http://localhost:8000/docs` for the interactive Swagger UI!*',
+        language: 'python',
+        code: '# main.py\nfrom fastapi import FastAPI\n\napp = FastAPI(title="My API", version="1.0.0")\n\n@app.get("/")\ndef read_root():\n    return {"Hello": "World"}\n\n@app.get("/ping")\ndef ping():\n    return "pong"\n\n# uvicorn main_file_name:app_object_name --reload\nuvicorn main:app --reload',
+      },
+      {
+        id: 'path-parameters',
+        title: 'Path Parameters',
+        description: 'Capture values from the URL path:',
+        language: 'python',
+        code: 'from fastapi import FastAPI\n\napp = FastAPI()\n\n# Basic path parameter\n@app.get("/items/{item_id}")\ndef read_item(item_id: int):\n    return {"item_id": item_id}\n\n# Predefined values (Enum)\nfrom enum import Enum\n\nclass ModelName(str, Enum):\n    alexnet = "alexnet"\n    resnet = "resnet"\n    lenet = "lenet"\n\n@app.get("/models/{model_name}")\ndef get_model(model_name: ModelName):\n    if model_name == ModelName.alexnet:\n        return {"model_name": model_name, "message": "Deep Learning FTW!"}\n    return {"model_name": model_name, "message": "Have some residuals"}',
+      },
+      {
+        id: 'query-parameters',
+        title: 'Query Parameters',
+        description: 'URL parameters that appear after `?`:',
+        language: 'python',
+        code: 'from fastapi import FastAPI\n\napp = FastAPI()\n\n# Required and optional query parameters\n@app.get("/items/")\ndef read_items(skip: int = 0, limit: int = 10, q: str | None = None):\n    return {"skip": skip, "limit": limit, "q": q}\n\n# Multiple path and query parameters\n@app.get("/users/{user_id}/items/{item_id}")\ndef read_user_item(user_id: int, item_id: str, q: str | None = None, short: bool = False):\n    item = {"item_id": item_id, "owner_id": user_id}\n    if q:\n        item.update({"q": q})\n    if not short:\n        item.update({"description": "This is an amazing item that has a long description"})\n    return item',
+      },
+      {
+        id: 'request-body',
+        title: 'Request Body',
+        description: 'Send data in the body of a request using Pydantic:',
+        language: 'python',
+        code: 'from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float | None = None\n\n@app.post("/items/")\ndef create_item(item: Item):\n    item_dict = item.model_dump()\n    if item.tax:\n        price_with_tax = item.price + item.tax\n        item_dict.update({"price_with_tax": price_with_tax})\n    return item_dict',
+      },
+      {
+        id: 'validations-path-and-query',
+        title: 'Validations (Path and Query)',
+        description: 'Add constraints to your parameters:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, Query, Path\n\napp = FastAPI()\n\n# Query parameter validation\n@app.get("/items/")\ndef read_items(\n    q: str | None = Query(\n        default=None,\n        min_length=3,\n        max_length=50,\n        pattern="^fixedquery$",\n        description="Search query string"\n    )\n):\n    return {"q": q}\n\n# Path parameter validation\n@app.get("/items/{item_id}")\ndef read_items(\n    item_id: int = Path(title="The ID of the item to get", ge=1, le=1000),\n    q: str | None = Query(default=None, alias="item-query")\n):\n    return {"item_id": item_id, "q": q}',
+      },
+      {
+        id: 'field-validations',
+        title: 'Field Validations',
+        description: 'Add constraints to your Pydantic models:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, Body\nfrom pydantic import BaseModel, Field\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    name: str = Field(min_length=1, max_length=100)\n    description: str | None = Field(default=None, title="The description of the item", max_length=300)\n    price: float = Field(gt=0, description="The price must be greater than zero")\n    tax: float | None = None\n\n@app.put("/items/{item_id}")\ndef update_item(item_id: int, item: Item = Body(embed=True)):\n    return {"item_id": item_id, "item": item}',
+      },
+      {
+        id: 'form-data-file-uploads',
+        title: 'Form Data & File Uploads',
+        description: 'Handle HTML form submissions and files:',
+        language: 'python',
+        code: 'pip install python-multipart\n\nfrom fastapi import FastAPI, Form, File, UploadFile\n\napp = FastAPI()\n\n@app.post("/login/")\ndef login(username: str = Form(), password: str = Form()):\n    return {"username": username}\n\n@app.post("/files/")\ndef create_file(file: bytes = File()):\n    return {"file_size": len(file)}\n\n@app.post("/uploadfile/")\nasync def create_upload_file(file: UploadFile):\n    contents = await file.read()\n    return {"filename": file.filename, "content_type": file.content_type}',
+      },
+      {
+        id: 'dependency-injection',
+        title: 'Dependency Injection',
+        description: 'Share logic, database connections, and enforce security:',
+        language: 'python',
+        code: 'from fastapi import Depends, FastAPI\n\napp = FastAPI()\n\n# Dependency function\ndef common_parameters(q: str | None = None, skip: int = 0, limit: int = 100):\n    return {"q": q, "skip": skip, "limit": limit}\n\n# Inject dependency\n@app.get("/items/")\ndef read_items(commons: dict = Depends(common_parameters)):\n    return commons\n\n@app.get("/users/")\ndef read_users(commons: dict = Depends(common_parameters)):\n    return commons',
+      },
+      {
+        id: 'headers-and-cookies',
+        title: 'Headers and Cookies',
+        description: 'Read HTTP headers and cookies:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, Header, Cookie\n\napp = FastAPI()\n\n@app.get("/items/")\ndef read_items(\n    user_agent: str | None = Header(default=None),\n    x_token: list[str] | None = Header(default=None),\n    ads_id: str | None = Cookie(default=None)\n):\n    return {"User-Agent": user_agent, "X-Token values": x_token, "ads_id": ads_id}',
+      },
+      {
+        id: 'response-models-and-status-codes',
+        title: 'Response Models and Status Codes',
+        description: 'Control exactly what gets returned and what status code to use:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, status\nfrom pydantic import BaseModel, EmailStr\n\napp = FastAPI()\n\nclass UserIn(BaseModel):\n    username: str\n    password: str\n    email: EmailStr\n    full_name: str | None = None\n\nclass UserOut(BaseModel):\n    username: str\n    email: EmailStr\n    full_name: str | None = None\n\n@app.post("/user/", response_model=UserOut, status_code=status.HTTP_201_CREATED)\ndef create_user(user: UserIn):\n    return user',
+      },
+      {
+        id: 'error-handling',
+        title: 'Error Handling',
+        description: 'Return HTTP errors gracefully:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, HTTPException\n\napp = FastAPI()\n\nitems = {"foo": "The Foo Wrestlers"}\n\n@app.get("/items/{item_id}")\ndef read_item(item_id: str):\n    if item_id not in items:\n        raise HTTPException(status_code=404, detail="Item not found")\n    return {"item": items[item_id]}\n\n# Custom Exception Handlers\nfrom fastapi.responses import JSONResponse\n\nclass UnicornException(Exception):\n    def __init__(self, name: str):\n        self.name = name\n\n@app.exception_handler(UnicornException)\ndef unicorn_exception_handler(request, exc: UnicornException):\n    return JSONResponse(\n        status_code=418,\n        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},\n    )',
+      },
+      {
+        id: 'security-oauth2-with-password',
+        title: 'Security (OAuth2 with Password)',
+        description: 'Basic authentication flow:',
+        language: 'python',
+        code: 'pip install passlib[bcrypt] python-jose\n\nfrom fastapi import Depends, FastAPI\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\n\napp = FastAPI()\noauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")\n\n@app.post("/token")\ndef login(form_data: OAuth2PasswordRequestForm = Depends()):\n    # In a real app, verify username and password here\n    return {"access_token": form_data.username, "token_type": "bearer"}\n\n@app.get("/users/me")\ndef read_users_me(token: str = Depends(oauth2_scheme)):\n    return {"token": token}',
+      },
+      {
+        id: 'cors-cross-origin-resource-sharing',
+        title: 'CORS (Cross-Origin Resource Sharing)',
+        description: 'Allow frontend applications to call your API:',
+        language: 'python',
+        code: 'from fastapi import FastAPI\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp = FastAPI()\n\norigins = [\n    "http://localhost",\n    "http://localhost:8080",\n    "https://myapp.com",\n]\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,\n    allow_credentials=True,\n    allow_methods=["*"],\n    allow_headers=["*"],\n)',
+      },
+      {
+        id: 'background-tasks',
+        title: 'Background Tasks',
+        description: 'Run tasks after returning a response:',
+        language: 'python',
+        code: 'from fastapi import BackgroundTasks, FastAPI\n\napp = FastAPI()\n\ndef write_notification(email: str, message=""):\n    with open("log.txt", mode="w") as email_file:\n        content = f"notification for {email}: {message}"\n        email_file.write(content)\n\n@app.post("/send-notification/{email}")\ndef send_notification(email: str, background_tasks: BackgroundTasks):\n    background_tasks.add_task(write_notification, email, message="some notification")\n    return {"message": "Notification sent in the background"}',
+      },
+      {
+        id: 'middleware',
+        title: 'Middleware',
+        description: 'Execute code before and after every request:',
+        language: 'python',
+        code: 'from fastapi import FastAPI, Request\nimport time\n\napp = FastAPI()\n\n@app.middleware("http")\nasync def add_process_time_header(request: Request, call_next):\n    start_time = time.time()\n    response = await call_next(request)\n    process_time = time.time() - start_time\n    response.headers["X-Process-Time"] = str(process_time)\n    return response',
+      },
+      {
+        id: 'testing',
+        title: 'Testing',
+        description: 'Test your FastAPI application with `pytest`:',
+        language: 'python',
+        code: 'pip install pytest httpx\n\n# test_main.py\nfrom fastapi.testclient import TestClient\nfrom main import app\n\nclient = TestClient(app)\n\ndef test_read_main():\n    response = client.get("/")\n    assert response.status_code == 200\n    assert response.json() == {"Hello": "World"}',
+      },
+      {
+        id: 'routers-multiple-files',
+        title: 'Routers (Multiple Files)',
+        description: 'Organize your application into multiple files:',
+        language: 'python',
+        code: '# routers/users.py\nfrom fastapi import APIRouter\n\nrouter = APIRouter(prefix="/users", tags=["users"])\n\n@router.get("/")\ndef read_users():\n    return [{"username": "Rick"}, {"username": "Morty"}]\n\n# main.py\nfrom fastapi import FastAPI\nfrom routers import users\n\napp = FastAPI()\n\napp.include_router(users.router)',
       },
     ],
   },
@@ -10413,4 +10550,5 @@ export const refNavItems = [
     label: 'Redis',
   },
   { lang: 'typescript', label: 'TypeScript' },
+  { lang: 'fastapi', label: 'FastAPI' },
 ]

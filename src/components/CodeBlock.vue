@@ -24,7 +24,9 @@ function checkScroll() {
   if (!codeContainer.value) return
   const pre = codeContainer.value.querySelector('pre')
   if (!pre) return
-  canScroll.value = pre.scrollWidth > pre.clientWidth && Math.ceil(pre.scrollLeft) < pre.scrollWidth - pre.clientWidth - 1
+  canScroll.value =
+    pre.scrollWidth > pre.clientWidth &&
+    Math.ceil(pre.scrollLeft) < pre.scrollWidth - pre.clientWidth - 1
 }
 
 function cleanupScrollListener() {
@@ -43,14 +45,14 @@ function setupScrollListener() {
   if (!codeContainer.value) return
   const pre = codeContainer.value.querySelector('pre')
   if (!pre) return
-  
+
   pre.addEventListener('scroll', checkScroll, { passive: true })
-  
+
   if (!resizeObserver) {
     resizeObserver = new ResizeObserver(checkScroll)
   }
   resizeObserver.observe(pre)
-  
+
   checkScroll()
 }
 
@@ -124,7 +126,7 @@ async function highlight() {
     lang,
     theme: 'one-dark-pro',
   })
-  
+
   await nextTick()
   setupScrollListener()
 }
@@ -199,13 +201,20 @@ async function copy() {
     <!-- Highlighted code block -->
     <div v-else class="shiki-wrapper relative" ref="codeContainer">
       <div v-html="highlighted" />
-      
+
       <!-- Scroll Indicator -->
       <div
         class="absolute right-0 top-0 bottom-0 w-12 pointer-events-none bg-linear-to-l from-[#0d0d0f] to-transparent flex items-center justify-end pr-2 opacity-0 transition-opacity duration-300 md:hidden"
         :class="{ 'opacity-100': canScroll }"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-neutral-400 animate-pulse">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-5 h-5 text-neutral-400 animate-pulse"
+        >
           <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </div>
