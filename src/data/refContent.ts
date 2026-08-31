@@ -303,6 +303,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#f7df1e',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: npmjs.com):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Run JavaScript code:',
@@ -557,6 +568,17 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/Php_dark.svg',
     color: '#777bb4',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: packagist.org):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'composer init                                          # Initialize project\ncomposer require <package>                             # Install a package\ncomposer require --dev <pkg>                           # Install as dev dependency\ncomposer remove <package>                              # Remove a package\ncomposer update                                        # Update dependencies',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -2829,6 +2851,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#339933',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: npmjs.com):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package (e.g. npm install dotenv)\nnpm install -g <package>                               # Install globally\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Install and run Node.js:',
@@ -3141,6 +3174,17 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/python.svg',
     color: '#3776AB',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: pypi.org):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'pip install <package>                                  # Install a package\npip install -r requirements.txt                        # Install from file\npip uninstall <package>                                # Remove a package\npip freeze > requirements.txt                          # Save dependencies\npip list                                               # List installed packages',
+          },
+        ]
+      },
       {
         id: 'basic-syntax',
         title: 'Basic Syntax',
@@ -3772,6 +3816,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#68217A',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: nuget.org):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'dotnet add package <Package>                           # Install a package\ndotnet remove package <Pkg>                            # Remove a package\ndotnet list package                                    # List installed packages\ndotnet restore                                         # Restore dependencies',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Create a new C# project:',
@@ -4011,6 +4066,23 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/java.svg',
     color: '#5382A1',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: search.maven.org):',
+        snippets: [
+          {
+            language: 'xml',
+            description: 'Maven (pom.xml):',
+            code: '<dependency>\n  <groupId>com.google.guava</groupId>\n  <artifactId>guava</artifactId>\n  <version>31.1-jre</version>\n</dependency>',
+          },
+          {
+            language: 'groovy',
+            description: 'Gradle (build.gradle):',
+            code: 'dependencies {\n    implementation \'com.google.guava:guava:31.1-jre\'\n}',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -4783,6 +4855,23 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/c-plusplus.svg',
     color: '#00599C',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registries: conan.io, vcpkg.io):',
+        snippets: [
+          {
+            language: 'bash',
+            description: 'vcpkg (Microsoft):',
+            code: 'vcpkg install <package>                                # Install a package\nvcpkg search <package>                                 # Search for a package\nvcpkg integrate install                                # Integrate with IDEs',
+          },
+          {
+            language: 'bash',
+            description: 'Conan:',
+            code: 'conan install .                                        # Install dependencies from conanfile\nconan search <package> -r all                          # Search for a package',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -5675,6 +5764,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#00ADD8',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: pkg.go.dev):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'go mod init <module-name>                              # Initialize a new module\ngo get <package>                                       # Install a package\ngo get -u <package>                                    # Update a package\ngo mod tidy                                            # Clean up dependencies',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Create and run a Go program:',
@@ -5916,6 +6016,23 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#7F52FF',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: search.maven.org):',
+        snippets: [
+          {
+            language: 'xml',
+            description: 'Maven (pom.xml):',
+            code: '<dependency>\n  <groupId>com.google.guava</groupId>\n  <artifactId>guava</artifactId>\n  <version>31.1-jre</version>\n</dependency>',
+          },
+          {
+            language: 'groovy',
+            description: 'Gradle (build.gradle.kts):',
+            code: 'dependencies {\n    implementation("com.google.guava:guava:31.1-jre")\n}',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Run a Kotlin program:',
@@ -6126,6 +6243,17 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/rust_dark.svg',
     color: '#DEA584',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: crates.io):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'cargo new <project>                                    # Create a new project\ncargo add <crate>                                      # Add a dependency\ncargo remove <crate>                                   # Remove a dependency\ncargo build                                            # Build the project (downloads deps)\ncargo update                                           # Update dependencies in Cargo.lock',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -6360,6 +6488,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#000080',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: luarocks.org):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'luarocks install <package>                             # Install a package\nluarocks remove <package>                              # Remove a package\nluarocks search <package>                              # Search for a package\nluarocks list                                          # List installed packages',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Run Lua code:',
@@ -6552,6 +6691,17 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/dart.svg',
     color: '#0175C2',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: pub.dev):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'dart pub add <package>                                 # Add a dependency\ndart pub add dev:<package>                             # Add a dev dependency\ndart pub remove <package>                              # Remove a dependency\ndart pub get                                           # Get dependencies\ndart pub upgrade                                       # Upgrade dependencies',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -6764,6 +6914,17 @@ export const refTopics: Record<string, RefTopic> = {
     color: '#CC342D',
     sections: [
       {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: rubygems.org):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'gem install <gem>                                      # Install a gem globally\nbundle init                                            # Create a Gemfile\nbundle add <gem>                                       # Add gem to Gemfile and install\nbundle install                                         # Install gems from Gemfile\nbundle update                                          # Update gems',
+          },
+        ]
+      },
+      {
         id: 'setup',
         title: 'Setup',
         description: 'Run Ruby code:',
@@ -6952,6 +7113,18 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/swift.svg',
     color: '#F05138',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: swiftpackageindex.com):',
+        snippets: [
+          {
+            language: 'swift',
+            description: 'Swift Package Manager (Package.swift):',
+            code: 'dependencies: [\n    .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1"))\n]',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
@@ -9975,6 +10148,17 @@ export const refTopics: Record<string, RefTopic> = {
     icon: '/typescript.svg',
     color: '#3178C6',
     sections: [
+      {
+        id: 'package-management',
+        title: 'Package Management',
+        description: 'Manage dependencies (Registry: npmjs.com):',
+        snippets: [
+          {
+            language: 'bash',
+            code: 'npm init -y                                            # Initialize project\nnpm install <package>                                  # Install a package\nnpm install -D <package>                               # Install as dev dependency\nnpm uninstall <package>                                # Remove a package\nnpm update                                             # Update dependencies',
+          },
+        ]
+      },
       {
         id: 'setup',
         title: 'Setup',
