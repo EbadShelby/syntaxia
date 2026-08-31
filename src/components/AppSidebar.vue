@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { smoothScrollTo } from '@/utils/scroll'
 
 interface SidebarSection {
   id: string
@@ -45,12 +46,12 @@ function scrollTo(id: string) {
   if (el) {
     isScrolling = true
     activeId.value = id
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    smoothScrollTo(el, 300)
 
     if (scrollTimeout) clearTimeout(scrollTimeout)
     scrollTimeout = setTimeout(() => {
       isScrolling = false
-    }, 1000) // allow smooth scroll to complete before re-enabling observer
+    }, 400) // allow smooth scroll to complete before re-enabling observer
   }
 }
 </script>

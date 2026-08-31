@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { refNavItems, refTopics } from '@/data/refContent'
+import { smoothScrollTo } from '@/utils/scroll'
 
 const query = ref('')
 const isFocused = ref(false)
@@ -1042,7 +1043,7 @@ const navigateToSection = (lang: string, sectionId: string) => {
     nextTick(() => {
       setTimeout(() => {
         const el = document.getElementById(sectionId)
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        if (el) smoothScrollTo(el, 300)
       }, 80)
     })
   })

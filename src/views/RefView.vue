@@ -6,6 +6,7 @@ import AppHeader from '@/components/AppHeader.vue'
 import AppSidebar from '@/components/AppSidebar.vue'
 import CodeBlock from '@/components/CodeBlock.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import { smoothScrollTo } from '@/utils/scroll'
 
 const route = useRoute()
 const router = useRouter()
@@ -37,7 +38,7 @@ function closeToc() {
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (el) smoothScrollTo(el, 300)
   closeToc()
 }
 </script>
