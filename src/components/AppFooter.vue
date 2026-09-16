@@ -7,7 +7,7 @@ const hasDismissed = ref(false)
 
 onMounted(() => {
   hasDismissed.value = localStorage.getItem('syntaxia_dismissed_request_popup') === 'true'
-  
+
   if (hasDismissed.value) return
 
   const observer = new IntersectionObserver(
@@ -19,7 +19,7 @@ onMounted(() => {
         showPopup.value = false
       }
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   )
 
   if (footerRef.value) {
@@ -39,7 +39,10 @@ const dismissPopup = () => {
 </script>
 
 <template>
-  <footer ref="footerRef" class="w-full border-t border-neutral-gray mt-8 py-8 relative overflow-hidden">
+  <footer
+    ref="footerRef"
+    class="w-full border-t border-neutral-gray mt-8 py-8 relative overflow-hidden"
+  >
     <div
       class="w-full flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-neutral-500"
     >
@@ -140,16 +143,23 @@ const dismissPopup = () => {
           class="absolute top-2 right-2 text-neutral-400 hover:text-white transition-colors p-1"
           aria-label="Close popup"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        
+
         <div class="pr-6">
           <p class="text-sm text-neutral-200 mb-1 font-semibold">Missing a cheatsheet?</p>
           <p class="text-xs text-neutral-400">Let us know what you'd like to see next!</p>
         </div>
-        
+
         <a
           href="https://github.com/EbadShelby/syntaxia/issues/new?title=[Cheatsheet%20Request]%20"
           target="_blank"

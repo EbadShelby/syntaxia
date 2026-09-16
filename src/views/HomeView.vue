@@ -349,6 +349,22 @@ const languages = [
     badge: 'Framework',
     desc: 'High performance web framework for building APIs with Python.',
   },
+  {
+    lang: 'turbo',
+    label: 'Turbo',
+    icon: '/turbo.svg',
+    color: '#EF4444',
+    badge: 'Library',
+    desc: 'The speed of a single-page web application without having to write any JavaScript.',
+  },
+  {
+    lang: 'htmx',
+    label: 'HTMX',
+    icon: '/Htmx_Logo.svg',
+    color: '#3366CC',
+    badge: 'Library',
+    desc: 'High power tools for HTML.',
+  },
 ]
 
 const categoryCounts = languages.reduce(
